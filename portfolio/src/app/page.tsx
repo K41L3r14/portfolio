@@ -72,13 +72,18 @@ export default function Home() {
         <section className="min-h-screen bg-[#9bb5bd] px-4 py-16">
           <div className="mx-auto flex w-full max-w-5xl flex-col-reverse items-center justify-between gap-10 lg:flex-row">
             <div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
-              <div className="text-4xl font-mono leading-tight text-[#2f1c3a] sm:text-5xl lg:text-6xl chat chat-start">
-                <div className="chat-bubble"> Hi, I&apos;m <br /> Katia Henrriquez</div>
+              <div className="chat chat-start">
+                <div className="chat-bubble hero-chat-bubble text-4xl font-mono font-bold leading-tight text-[#2f1c3a] shadow-lg sm:text-5xl lg:text-6xl">
+                  Hi, I&apos;m <br /> Katia Henrriquez
+                </div>
               </div>
-              <p className="text-base leading-relaxed text-[#2f1c3a] sm:text-lg">
-                Software engineer, lifelong learner, and builder of reliable
-                digital experiences.
-              </p>
+              <div className="chat chat-start">
+                  <div className="chat-bubble bg-white text-base leading-relaxed text-[#2f1c3a] sm:text-lg">
+                  Software engineer, lifelong learner, and builder of reliable
+                  digital experiences.
+                </div>
+              </div>
+
               <div className="relative h-48 w-48 sm:h-56 sm:w-56 md:h-64 md:w-64">
                 <Image
                   src="/profile.png"
