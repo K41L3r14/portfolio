@@ -44,29 +44,4 @@ body {
   color: #653c87;
 }
 
-.hero-chat-bubble {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 2rem;
-  padding: 1.5rem 2.75rem;
-  width: 100%;
-  max-width: 32rem;
-  background-color: #ffffff;
-  overflow: visible;
-}
-
-.hero-chat-bubble::before {
-  display: none;
-}
-
-.hero-chat-bubble::after {
-  content: "";
-  position: absolute;
-  left: 2rem;
-  bottom: -12px;
-  border-width: 12px 12px 0 0;
-  border-style: solid;
-  border-color: #ffffff transparent transparent transparent;
-}
 
