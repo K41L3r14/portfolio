@@ -111,9 +111,9 @@ export default function Home() {
             </h1>
             <div className="pt-8 sm:pt-12">
               <p className="max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
-              I&apos;m a curiosity-driven software engineer who loves tackling
-              tough problems and crafting memorable products. I build resilient
-              backend systems and polished, human-friendly interfaces.
+              I&apos;m a curiosity-driven developer who enjoys learning new technologies and solving real problems.
+               I&apos;m passionate about full-stack development and like working across both front-end and back-end to build complete,
+                reliable applications. I enjoy taking on challenges and continuously improving my skills to deliver better solutions.
               </p>
             </div>
             <div className="mt-6 flex flex-wrap gap-4 sm:mt-8">
