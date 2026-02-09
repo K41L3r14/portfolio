@@ -14,22 +14,6 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "Ripple Effects",
-    stack: "Frontend Project",
-    summary:
-      "Interactive visual effects project focused on smooth motion and polished interface behavior.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    video: "/videos/Ripple-Effects.mp4",
-  },
-  {
-    title: "Buckle Chatbot",
-    stack: "Conversational Interface",
-    summary:
-      "Chatbot experience for Buckle with a guided conversational flow and responsive UI behavior.",
-    technologies: ["Next.js", "TypeScript", "REST APIs", "UI Design"],
-    video: "/videos/chatbot-Buckle.mp4",
-  },
-  {
     title: "Obserra",
     stack: "Audit Management Platform",
     summary:
@@ -45,6 +29,22 @@ const projects: Project[] = [
       "/Obserra-photos/ViewControlsAndTasksCoordinatorRole.png",
       "/Obserra-photos/ProgressOnTasksContributorRole.png",
     ],
+  },
+  {
+    title: "Buckle Chatbot",
+    stack: "Conversational Interface",
+    summary:
+      "Chatbot experience for Buckle with a guided conversational flow and responsive UI behavior.",
+    technologies: ["Next.js", "TypeScript", "REST APIs", "UI Design"],
+    video: "/videos/chatbot-Buckle.mp4",
+  },
+  {
+    title: "Ripple Effects",
+    stack: "Frontend Project",
+    summary:
+      "Interactive visual effects project focused on smooth motion and polished interface behavior.",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    video: "/videos/Ripple-Effects.mp4",
   },
 ];
 
