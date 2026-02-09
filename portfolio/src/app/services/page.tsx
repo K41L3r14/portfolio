@@ -53,7 +53,9 @@ const loopedTechnologies = [...technologies, ...technologies];
 export default function ServicesPage() {
   return (
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
-      <h2 className="text-3xl font-bold sm:text-4xl">Services</h2>
+      <h2 className="font-serif text-4xl text-[#e0584f] sm:text-5xl">
+        What I offer...
+      </h2>
       <ul className="grid gap-6 sm:grid-cols-2">
         {services.map((service) => (
           <li
@@ -69,13 +71,9 @@ export default function ServicesPage() {
       </ul>
 
       <section className="space-y-5">
-        <h3 className="text-2xl font-semibold text-[#2f1c3a] sm:text-3xl">
-          Skills
+        <h3 className="font-serif text-3xl text-[#e0584f] sm:text-4xl">
+          My skills
         </h3>
-        <p className="text-sm leading-relaxed text-[#3b332b] sm:text-base">
-          Technologies from my resume and projects that I use to design, build,
-          and ship production-ready products.
-        </p>
         <div className="relative overflow-hidden rounded-xl border border-[#d3c8b6] bg-[#f5f2ec] px-2 py-3">
           <div className="skills-icon-banner-track">
             {loopedTechnologies.map((technology, index) => (

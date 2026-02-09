@@ -124,7 +124,9 @@ function ObserraSlideshow({
 export default function ProjectsPage() {
   return (
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
-      <h2 className="text-3xl font-bold sm:text-4xl">Projects</h2>
+      <h2 className="font-serif text-4xl text-[#e0584f] sm:text-5xl">
+        Projects I&apos;ve Worked On
+      </h2>
       <div className="grid gap-6 lg:grid-cols-1">
         {projects.map((project) => (
           <article
