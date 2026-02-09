@@ -165,7 +165,7 @@ export default function Home() {
         id="contactMe"
         className="min-h-screen snap-start bg-[#f7f3ec] px-4 py-16 text-[#1f1b17] flex items-center justify-center"
       >
-        <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-center">
           <ContactMePage />
         </div>
       </section>

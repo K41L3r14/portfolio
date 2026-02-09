@@ -1,35 +1,124 @@
-const contactLinks = [
+import Image from "next/image";
+
+const inquiryTypes = [
+  "Web App Development",
+  "Landing Page",
+  "UI/UX Refresh",
+  "API and Backend",
+  "Maintenance and Support",
+  "Fullstack Development",
+  "Other"
+];
+
+const contactMethods = [
   {
+    label: "Email",
+    value: "henrriquezkatia7@gmail.com",
     href: "mailto:henrriquezkatia7@gmail.com",
-    label: "henrriquezkatia7@gmail.com",
+    icon: "/gmail.png",
   },
   {
-    href: "https://www.linkedin.com/in/katia-henrriquez-0783302a9/",
     label: "LinkedIn",
+    value: "linkedin.com/in/katia-henrriquez-0783302a9",
+    href: "https://www.linkedin.com/in/katia-henrriquez-0783302a9/",
+    icon: "/linkedin.png",
+  },
+  {
+    label: "GitHub",
+    value: "github.com/K41L3r14",
+    href: "https://github.com/K41L3r14",
+    icon: "/github.png",
   },
 ];
 
 export default function ContactMePage() {
   return (
-    <div className="w-full max-w-3xl space-y-6 text-center">
-      <h2 className="text-3xl font-bold sm:text-4xl">Let&apos;s Connect</h2>
-      <p className="text-base leading-relaxed sm:text-lg">
-        Have an opportunity, idea, or question? Reach out anytime and I&apos;ll
-        get back to you soon. Email is the fastest way to contact me, but I&apos;m
-        also active on LinkedIn.
-      </p>
-      <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-        {contactLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            target={link.href.startsWith("http") ? "_blank" : undefined}
-            rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-            className="w-full rounded-full border border-[#1b475D] px-6 py-3 text-sm font-semibold tracking-wide text-[#1b475D] transition hover:bg-[#1b475D] hover:text-white sm:w-auto"
-          >
-            {link.label}
-          </a>
-        ))}
+    <div className="w-full max-w-6xl space-y-8">
+      <h2 className="font-serif text-4xl text-[#e0584f] sm:text-5xl">
+        Lets Work together!
+      </h2>
+
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(220px,0.42fr)]">
+        <div className="rounded-3xl border border-[#2d2926] bg-[#f7f3ec]/60 p-4 sm:p-6">
+          <form className="space-y-4">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <input
+                type="text"
+                name="name"
+                placeholder="NAME"
+                className="w-full rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#3b332b]/70 focus:border-[#e0584f]"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="YOUR EMAIL"
+                className="w-full rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#3b332b]/70 focus:border-[#e0584f]"
+              />
+            </div>
+
+            <select
+              name="inquiryType"
+              defaultValue=""
+              className="w-full rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] text-[#1f1b17] outline-none focus:border-[#e0584f]"
+            >
+              <option value="" disabled>
+                INQUIRIES
+              </option>
+              {inquiryTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+
+            <textarea
+              name="message"
+              placeholder="YOUR MESSAGE"
+              rows={7}
+              className="w-full resize-none rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#3b332b]/70 focus:border-[#e0584f]"
+            />
+
+            <a
+              href="mailto:henrriquezkatia7@gmail.com?subject=Portfolio%20Inquiry"
+              className="inline-flex w-full items-center justify-center rounded-full bg-[#1f1b17] px-6 py-3 text-xs font-semibold uppercase tracking-[0.35em] text-[#f7f3ec] transition-colors hover:bg-[#e0584f]"
+            >
+              Send Message
+            </a>
+          </form>
+        </div>
+
+        <aside className="rounded-3xl border border-[#2d2926] bg-[#f7f3ec]/60 p-5 sm:p-6">
+          <p className="mb-6 text-xs uppercase tracking-[0.35em] text-[#3b332b]">
+            Get in Touch
+          </p>
+          <div className="space-y-5">
+            {contactMethods.map((method) => (
+              <a
+                key={method.label}
+                href={method.href}
+                target={method.href.startsWith("http") ? "_blank" : undefined}
+                rel={method.href.startsWith("http") ? "noreferrer" : undefined}
+                className="group flex items-start gap-3"
+              >
+                <Image
+                  src={method.icon}
+                  alt={method.label}
+                  width={18}
+                  height={18}
+                  className="mt-0.5 object-contain opacity-80 transition group-hover:opacity-100"
+                />
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#1f1b17]">
+                    {method.label}
+                  </p>
+                  <p className="text-sm leading-snug text-[#3b332b]">
+                    {method.value}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </aside>
       </div>
     </div>
   );
