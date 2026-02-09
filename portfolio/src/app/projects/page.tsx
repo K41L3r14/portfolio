@@ -17,8 +17,16 @@ const projects: Project[] = [
     title: "Obserra",
     stack: "Audit Management Platform",
     summary:
-      "Role-based workflow platform for managing audits, tasks, and account controls across teams.",
-    technologies: ["React", "TypeScript", "Role-Based Access", "Workflow UI"],
+      "AI-powered audit workflow platform with four roles: Coordinator, Contributor, Auditor, and Admin. Coordinators ingest audits, upload audit files, assign controls and tasks to contributors, complete tasks themselves when needed, and review/approve contributor work. Contributors complete assigned tasks and improve submissions based on coordinator feedback. Auditors track what has been completed and which teams are working each audit. Admins manage all accounts and approve tags submitted during audit intake. OpenAI API integration automatically detects controls and tasks from spreadsheets using intent keywords such as \"provide\" and \"submit,\" making the system resilient to varied spreadsheet formats.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Tailwind CSS",
+      "OpenAI API",
+      "Role-Based Access",
+      "Workflow UI",
+    ],
     slideshow: [
       "/Obserra-photos/WelcomeObserraPage.png",
       "/Obserra-photos/ManageAllAccountsAndRolesAdminRole.png",
@@ -34,16 +42,31 @@ const projects: Project[] = [
     title: "Buckle Chatbot",
     stack: "Conversational Interface",
     summary:
-      "Chatbot experience for Buckle with a guided conversational flow and responsive UI behavior.",
-    technologies: ["Next.js", "TypeScript", "REST APIs", "UI Design"],
+      "Conversational shopping assistant powered by Buckle inventory data and enriched metadata. To improve recommendation quality, we used the Anthropic API to process 50,000+ product images and generate tags across four categories: when to wear, color, descriptors, and aesthetic. The pipeline generated 10 tags per category (40 tags per item), then embedded those tags to power a RAG retrieval flow that returns the top 20 closest products for each user request. This enabled semantic search instead of strict keyword search, so customers can ask prompts like \"Can you give me floral wear for a night out?\" and still get relevant results. The approach improved discoverability by surfacing inventory beyond the first few keyword matches.",
+    technologies: [
+      "Python",
+      "JavaScript",
+      "Anthropic API",
+      "LLMs",
+      "Embeddings",
+      "RAG Pipeline",
+      "Semantic Search",
+    ],
     video: "/videos/chatbot-Buckle.mp4",
   },
   {
     title: "Ripple Effects",
-    stack: "Frontend Project",
+    stack: "Educational Simulation Game",
     summary:
-      "Interactive visual effects project focused on smooth motion and polished interface behavior.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      "Ripple Effects is an immersive simulation game set in fantasy town Aquaville that teaches water management through strategic policy and resource decisions. I designed and implemented two minigames: a Ranch game where cows approach three water troughs at different speeds based on mood, affecting consumption, and players must set an explicit water budget and meet difficulty-based herd targets (easy/medium/hard); and a Field Watering game where players place sensors and apply water only to zones with low moisture and lower crop quality. I also designed a portion of the visual assets used in the game.",
+    technologies: [
+      "Unity",
+      "C#",
+      "Game Design",
+      "Simulation Systems",
+      "UI/UX Design",
+      "Asset Design",
+    ],
     video: "/videos/Ripple-Effects.mp4",
   },
 ];
@@ -127,7 +150,7 @@ export default function ProjectsPage() {
               Hover card to expand details
             </p>
 
-            <div className="mt-4 lg:mt-0 lg:max-h-0 lg:overflow-hidden lg:opacity-0 lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:mt-4 lg:group-hover:max-h-72 lg:group-hover:opacity-100">
+            <div className="mt-4 lg:mt-0 lg:max-h-0 lg:overflow-hidden lg:opacity-0 lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:mt-4 lg:group-hover:max-h-[56rem] lg:group-hover:opacity-100">
               <p className="text-sm leading-relaxed sm:text-base">{project.summary}</p>
               <p className="mt-4 text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#3b332b]">
                 Technologies

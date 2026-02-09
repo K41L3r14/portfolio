@@ -59,3 +59,24 @@ body {
   animation: aboutBannerMoveRight 24s linear infinite;
 }
 
+@keyframes skillsIconSlide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.skills-icon-banner-track {
+  display: flex;
+  width: max-content;
+  animation: skillsIconSlide 22s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-icon-banner-track {
+    animation: none;
+  }
+}
+

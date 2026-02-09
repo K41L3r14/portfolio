@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Kivy">
+  <rect width="64" height="64" rx="14" fill="#5A8A22"/>
+  <path d="M16 15h10v34H16zM28 31l12-16h11L38 31l14 18H40L28 34v15H16V15h12z" fill="#fff"/>
+</svg>
