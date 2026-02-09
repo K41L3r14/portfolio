@@ -138,7 +138,7 @@ export default function Home() {
         id="aboutMe"
         className="min-h-screen snap-start bg-[#f7f3ec] px-4 py-16 text-[#1f1b17] flex items-center justify-center"
       >
-        <div className="mx-auto flex w-full max-w-4xl items-center justify-center text-center lg:text-left">
+        <div className="mx-auto flex w-full max-w-[88rem] items-center justify-center text-center lg:text-left">
           <AboutMeSection />
         </div>
       </section>

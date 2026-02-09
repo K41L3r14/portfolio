@@ -44,4 +44,18 @@ body {
   color: #653c87;
 }
 
+@keyframes aboutBannerMoveRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.about-banner-track {
+  display: flex;
+  width: max-content;
+  animation: aboutBannerMoveRight 24s linear infinite;
+}
 
