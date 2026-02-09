@@ -12,6 +12,12 @@ type Project = {
   slideshow?: string[];
 };
 
+type OtherProject = {
+  title: string;
+  summary: string;
+  skills: string[];
+};
+
 const projects: Project[] = [
   {
     title: "Obserra",
@@ -68,6 +74,69 @@ const projects: Project[] = [
       "Asset Design",
     ],
     video: "/videos/Ripple-Effects.mp4",
+  },
+];
+
+const otherProjects: OtherProject[] = [
+  {
+    title: "Personal Diary - Full-Stack Journaling Application",
+    summary:
+      "Privacy-first full-stack journaling app for creating, editing, and tracking daily reflections in a calendar-based interface. Users can manage entries with full CRUD operations, track mood/weather/food habits, and securely authenticate with Firebase Authentication. I contributed to backend and frontend development, designed the MySQL schema (users and entries with foreign keys), implemented CRUD APIs and UI flows, and supported testing/documentation. The app demonstrates end-to-end architecture with Express APIs, structured JSON entry data, and scalable planning for future features like offline support, multi-device sync, and rich media notes.",
+    skills: [
+      "React",
+      "Express.js",
+      "TypeScript",
+      "MySQL",
+      "Firebase Authentication",
+      "Tailwind CSS",
+      "CRUD APIs",
+      "JSON Data Modeling",
+      "Database Schema Design",
+      "Testing and Documentation",
+    ],
+  },
+  {
+    title: "AuditAI: AI-Powered Vulnerability Scanner",
+    summary:
+      "Full-stack AI security tool that scans open-source code for vulnerabilities and helps developers judge how trustworthy model findings are. The system analyzes code with multiple models (OpenAI, Claude, and CodeBERT), then returns severity levels, confidence scores, highlighted lines, and suggested fixes. It supports import/export for analysis workflows, validates model outputs with Zod schemas, and uses fixture-based testing across scenarios like XSS, eval injection, and redirect vulnerabilities. We also measured precision, recall, F1, and TP/FP/FN to compare models and reduce false positives and hallucinated results.",
+    skills: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Next.js APIs",
+      "OpenAI API",
+      "Claude API",
+      "CodeBERT",
+      "Zod Validation",
+      "Prompt Engineering",
+      "Model Evaluation Metrics",
+    ],
+  },
+  {
+    title: "Travel Planner App",
+    summary:
+      "Team-based full-stack planner that merged multiple app modules into one platform with strong validation and user-focused workflows.",
+    skills: [
+      "Python",
+      "MySQL",
+      "Kivy",
+      "OpenWeather API",
+      "Data Validation",
+      "Team Collaboration",
+    ],
+  },
+  {
+    title: "Burn Plan Evaluation App",
+    summary:
+      "OOP application for evaluating burn plan viability with real-time weather integration and robust automated testing.",
+    skills: [
+      "Java",
+      "REST API",
+      "JUnit",
+      "OOP Design",
+      "System Testing",
+      "Eclipse",
+    ],
   },
 ];
 
@@ -171,6 +240,41 @@ export default function ProjectsPage() {
           </article>
         ))}
       </div>
+
+      <section className="space-y-4">
+        <h3 className="font-serif text-3xl text-[#e0584f] sm:text-4xl">
+          Other Projects I&apos;ve Worked On
+        </h3>
+        <p className="text-sm text-[#3b332b] sm:text-base">
+          No live demos for these yet, but these projects reflect my technical
+          skills and hands-on experience.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {otherProjects.map((project) => (
+            <article
+              key={project.title}
+              className="rounded-2xl bg-white/70 p-5 text-left text-[#1f1f1f] shadow-lg"
+            >
+              <h4 className="text-lg font-semibold text-[#2f1c3a]">
+                {project.title}
+              </h4>
+              <p className="mt-2 text-sm leading-relaxed sm:text-base">
+                {project.summary}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {project.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-[#d3c8b6] bg-[#f0ebe3] px-2 py-1 text-[0.62rem] uppercase tracking-[0.15em] text-[#3b332b]"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
