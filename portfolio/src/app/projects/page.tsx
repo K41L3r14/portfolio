@@ -7,6 +7,7 @@ type Project = {
   title: string;
   stack: string;
   summary: string;
+  technologies: string[];
   video?: string;
   slideshow?: string[];
 };
@@ -17,6 +18,7 @@ const projects: Project[] = [
     stack: "Frontend Project",
     summary:
       "Interactive visual effects project focused on smooth motion and polished interface behavior.",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     video: "/videos/Ripple-Effects.mp4",
   },
   {
@@ -24,6 +26,7 @@ const projects: Project[] = [
     stack: "Conversational Interface",
     summary:
       "Chatbot experience for Buckle with a guided conversational flow and responsive UI behavior.",
+    technologies: ["Next.js", "TypeScript", "REST APIs", "UI Design"],
     video: "/videos/chatbot-Buckle.mp4",
   },
   {
@@ -31,6 +34,7 @@ const projects: Project[] = [
     stack: "Audit Management Platform",
     summary:
       "Role-based workflow platform for managing audits, tasks, and account controls across teams.",
+    technologies: ["React", "TypeScript", "Role-Based Access", "Workflow UI"],
     slideshow: [
       "/Obserra-photos/WelcomeObserraPage.png",
       "/Obserra-photos/ManageAllAccountsAndRolesAdminRole.png",
@@ -44,7 +48,11 @@ const projects: Project[] = [
   },
 ];
 
-function ObserraSlideshow({ slides }: { slides: string[] }) {
+function ObserraSlideshow({
+  slides,
+}: {
+  slides: string[];
+}) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const showPrevious = () => {
@@ -98,15 +106,11 @@ export default function ProjectsPage() {
         {projects.map((project) => (
           <article
             key={project.title}
-            className="rounded-2xl bg-white/70 p-6 text-left text-[#1f1f1f] shadow-lg"
+            className="group rounded-2xl bg-white/70 p-6 text-left text-[#1f1f1f] shadow-lg transition-[background-color,box-shadow] duration-300 hover:bg-white/85 hover:shadow-xl"
           >
             {project.video && (
               <div className="mb-4 overflow-hidden rounded-xl border border-[#d3c8b6] bg-[#f0ebe3]">
-                <video
-                  className="aspect-video w-full"
-                  controls
-                  preload="metadata"
-                >
+                <video className="aspect-video w-full" controls preload="metadata">
                   <source src={project.video} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
@@ -119,9 +123,26 @@ export default function ProjectsPage() {
             <h3 className="mt-2 text-xl font-semibold text-[#2f1c3a]">
               {project.title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed sm:text-base">
-              {project.summary}
+            <p className="mt-2 hidden text-[0.7rem] uppercase tracking-[0.24em] text-[#3b332b] lg:block lg:group-hover:hidden">
+              Hover card to expand details
             </p>
+
+            <div className="mt-4 lg:mt-0 lg:max-h-0 lg:overflow-hidden lg:opacity-0 lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:mt-4 lg:group-hover:max-h-72 lg:group-hover:opacity-100">
+              <p className="text-sm leading-relaxed sm:text-base">{project.summary}</p>
+              <p className="mt-4 text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#3b332b]">
+                Technologies
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full border border-[#d3c8b6] bg-[#f0ebe3] px-2 py-1 text-[0.62rem] uppercase tracking-[0.15em] text-[#3b332b]"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
           </article>
         ))}
       </div>
