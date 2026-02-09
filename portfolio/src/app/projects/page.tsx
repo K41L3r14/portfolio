@@ -62,7 +62,8 @@ function ObserraSlideshow({ slides }: { slides: string[] }) {
           src={slides[currentIndex]}
           alt={`Obserra slide ${currentIndex + 1}`}
           fill
-          sizes="(min-width: 1024px) 40vw, 90vw"
+          sizes="(min-width: 1280px) 980px, (min-width: 1024px) 78vw, (min-width: 640px) 90vw, 96vw"
+          quality={100}
           className="object-contain"
         />
       </div>
