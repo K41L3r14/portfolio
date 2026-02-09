@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import AboutMeSection from "./aboutMe/page";
+import TypingText from "./components/TypingText";
 import ContactMePage from "./contactMe/page";
 import ProjectsPage from "./projects/page";
 import ServicesPage from "./services/page";
@@ -102,10 +103,11 @@ export default function Home() {
           </div>
 
           <div className="space-y-6">
-            <h1 className="font-serif text-5xl leading-[0.95] text-[#e0584f] sm:text-6xl lg:text-7xl">
-              Katia
-              <br />
-              Henrriquez
+            <h1 className="font-serif text-4xl leading-[0.95] text-[#e0584f] sm:text-5xl lg:text-6xl">
+              <TypingText
+                text={"Hello There! I Am Katia Henrriquez."}
+                speed={120}
+              />
             </h1>
             <div className="pt-8 sm:pt-12">
               <p className="max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
