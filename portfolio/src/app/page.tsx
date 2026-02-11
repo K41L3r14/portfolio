@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 
 import AboutMeSection from "./aboutMe/page";
 import TypingText from "./components/TypingText";
@@ -39,6 +39,10 @@ export default function Home() {
   const mainRef = useRef<HTMLElement | null>(null);
   const aboutSectionRef = useRef<HTMLElement | null>(null);
   const [isAboutInView, setIsAboutInView] = useState(false);
+  const [startSecondLineTyping, setStartSecondLineTyping] = useState(false);
+  const handleFirstLineComplete = useCallback(() => {
+    setStartSecondLineTyping(true);
+  }, []);
 
   useEffect(() => {
     const mainElement = mainRef.current;
@@ -67,7 +71,7 @@ export default function Home() {
   return (
     <main
       ref={mainRef}
-      className="relative isolate min-h-screen h-screen snap-y snap-mandatory overflow-y-auto scroll-smooth text-[#1f1b17]"
+      className="relative isolate min-h-screen h-screen snap-y snap-mandatory overflow-x-clip overflow-y-auto scroll-smooth text-[#1f1b17]"
       style={{ backgroundColor: "#f7f3ec" } as CSSProperties}
     >
       <div
@@ -152,14 +156,27 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="space-y-6">
-              <h1 className="font-serif text-4xl leading-[0.95] text-[#c94841] sm:text-5xl lg:text-6xl">
-                <TypingText
-                  text={"Hello There! I Am Katia Henrriquez."}
-                  speed={120}
-                />
+            <div className="space-y-6 pt-8 sm:pt-12 lg:pt-14">
+              <h1 className="w-full max-w-md space-y-2">
+                <span className="block w-fit whitespace-nowrap bg-[#d9efe3]/90 px-3 py-1.5 font-serif text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
+                  <TypingText
+                    text={"Hello There!"}
+                    speed={95}
+                    className="!whitespace-nowrap"
+                    showCursor={false}
+                    onComplete={handleFirstLineComplete}
+                  />
+                </span>
+                <span className="block w-fit whitespace-nowrap bg-[#d9efe3]/90 px-3 py-1.5 font-serif text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
+                  <TypingText
+                    text={"I Am Katia Henrriquez."}
+                    speed={110}
+                    className="!whitespace-nowrap"
+                    isActive={startSecondLineTyping}
+                  />
+                </span>
               </h1>
-              <div className="pt-8 sm:pt-12">
+              <div className="pt-6 sm:pt-10">
                 <p className="max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
                 I&apos;m a curiosity-driven developer who enjoys learning new technologies and solving real problems.
                  I&apos;m passionate about full-stack development and like working across both front-end and back-end to build complete,

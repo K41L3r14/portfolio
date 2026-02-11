@@ -6,16 +6,26 @@ type TypingTextProps = {
   text: string;
   speed?: number;
   className?: string;
+  showCursor?: boolean;
+  onComplete?: () => void;
+  isActive?: boolean;
 };
 
 export default function TypingText({
   text,
   speed = 120,
   className = "",
+  showCursor = true,
+  onComplete,
+  isActive = true,
 }: TypingTextProps) {
   const [typedText, setTypedText] = useState("");
 
   useEffect(() => {
+    if (!isActive) {
+      return;
+    }
+
     let currentIndex = 0;
     setTypedText("");
 
@@ -25,18 +35,21 @@ export default function TypingText({
 
       if (currentIndex >= text.length) {
         window.clearInterval(intervalId);
+        onComplete?.();
       }
     }, speed);
 
     return () => window.clearInterval(intervalId);
-  }, [speed, text]);
+  }, [isActive, onComplete, speed, text]);
 
   return (
-    <span className={`inline-block whitespace-pre-line ${className}`}>
+    <span className={`inline-block ${className}`}>
       {typedText}
-      <span aria-hidden className="ml-1 inline-block animate-pulse">
-        |
-      </span>
+      {showCursor && (
+        <span aria-hidden className="ml-1 inline-block animate-pulse">
+          |
+        </span>
+      )}
     </span>
   );
 }
