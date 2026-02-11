@@ -34,7 +34,7 @@ const contactMethods = [
 export default function ContactMePage() {
   return (
     <div className="w-full max-w-6xl space-y-8">
-      <h2 className="font-serif text-4xl text-[#e0584f] sm:text-5xl">
+      <h2 className="font-serif text-4xl text-[#c94841] sm:text-5xl">
         Lets Work together!
       </h2>
 

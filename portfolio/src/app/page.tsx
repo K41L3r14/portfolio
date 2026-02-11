@@ -153,7 +153,7 @@ export default function Home() {
             </div>
 
             <div className="space-y-6">
-              <h1 className="font-serif text-4xl leading-[0.95] text-[#e0584f] sm:text-5xl lg:text-6xl">
+              <h1 className="font-serif text-4xl leading-[0.95] text-[#c94841] sm:text-5xl lg:text-6xl">
                 <TypingText
                   text={"Hello There! I Am Katia Henrriquez."}
                   speed={120}

@@ -255,7 +255,7 @@ function OtherProjectsSlideshow({
 export default function ProjectsPage() {
   return (
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
-      <h2 className="font-serif text-4xl text-[#e0584f] sm:text-5xl">
+      <h2 className="font-serif text-4xl text-[#c94841] sm:text-5xl">
         Projects I&apos;ve Worked On
       </h2>
       <div className="grid gap-6 lg:grid-cols-1">
@@ -304,7 +304,7 @@ export default function ProjectsPage() {
       </div>
 
       <section className="space-y-4">
-        <h3 className="font-serif text-3xl text-[#e0584f] sm:text-4xl">
+        <h3 className="font-serif text-3xl text-[#c94841] sm:text-4xl">
           Other Projects I&apos;ve Worked On
         </h3>
         <p className="text-sm text-[#3b332b] sm:text-base">
