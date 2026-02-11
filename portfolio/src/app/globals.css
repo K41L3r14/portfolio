@@ -156,40 +156,30 @@ body {
   animation-duration: 2.8s;
 }
 
-@keyframes contactPanelSlideLeft {
-  from {
-    opacity: 0;
-    transform: translate3d(-44px, 22px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes contactPanelSlideRight {
-  from {
-    opacity: 0;
-    transform: translate3d(44px, 22px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 .contact-panel-left,
 .contact-panel-right {
   opacity: 0;
+  transition:
+    opacity 650ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 650ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.contact-panel-left.is-visible {
-  animation: contactPanelSlideLeft 620ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+.contact-panel-left {
+  transform: translate3d(-54px, 24px, 0);
+}
+
+.contact-panel-right {
+  transform: translate3d(54px, 24px, 0);
+}
+
+.contact-panel-left.is-visible,
+.contact-panel-right.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 .contact-panel-right.is-visible {
-  animation: contactPanelSlideRight 620ms cubic-bezier(0.22, 0.61, 0.36, 1) 120ms
-    forwards;
+  transition-delay: 120ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
