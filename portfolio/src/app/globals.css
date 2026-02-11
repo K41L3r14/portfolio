@@ -80,3 +80,52 @@ body {
   }
 }
 
+@keyframes pastelMeshShift {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.08) translate3d(-2%, 1%, 0);
+  }
+  100% {
+    transform: scale(1.04) translate3d(2%, -1.5%, 0);
+  }
+}
+
+@keyframes pastelStripePulse {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.34;
+  }
+}
+
+.pastel-mesh {
+  background:
+    radial-gradient(circle at 8% 20%, rgba(240, 207, 140, 0.5) 0%, rgba(241, 164, 142, 0) 42%),
+    radial-gradient(circle at 38% 45%, rgba(240, 172, 191, 0.58) 0%, rgba(244, 191, 205, 0) 45%),
+    radial-gradient(circle at 80% 22%, rgba(186, 223, 233, 0.58) 0%, rgba(186, 223, 233, 0) 40%),
+    radial-gradient(circle at 82% 78%, rgba(157, 238, 201, 0.5) 0%, rgba(181, 232, 209, 0) 42%),
+    linear-gradient(110deg, #f9e5db 0%, #f7f3ec 46%, #d8f0ea 100%);
+  animation: pastelMeshShift 20s ease-in-out infinite alternate;
+}
+
+.pastel-stripes {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.26) 0px,
+    rgba(255, 255, 255, 0.26) 1px,
+    rgba(255, 255, 255, 0) 1px,
+    rgba(255, 255, 255, 0) 92px
+  );
+  animation: pastelStripePulse 4.8s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pastel-mesh,
+  .pastel-stripes {
+    animation: none;
+  }
+}
+

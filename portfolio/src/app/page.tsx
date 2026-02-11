@@ -67,12 +67,23 @@ export default function Home() {
   return (
     <main
       ref={mainRef}
-      className="min-h-screen h-screen snap-y snap-mandatory overflow-y-auto scroll-smooth text-[#1f1b17]"
+      className="relative isolate min-h-screen h-screen snap-y snap-mandatory overflow-y-auto scroll-smooth text-[#1f1b17]"
       style={{ backgroundColor: "#f7f3ec" } as CSSProperties}
     >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      >
+        <div className="pastel-mesh absolute inset-[-14%]" />
+        <div className="pastel-stripes absolute inset-0" />
+      </div>
+
       <header
         className="fixed left-0 right-0 top-0 z-30"
-        style={{ backgroundColor: "#f7f3ec" }}
+        style={{
+          backgroundColor: "rgba(247, 243, 236, 0.82)",
+          backdropFilter: "blur(6px)",
+        }}
       >
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-6 py-2 sm:flex-row sm:justify-between sm:px-8 sm:py-3 lg:px-10">
           <span className="text-xs uppercase tracking-[0.35em] text-[#3b332b]">
@@ -117,106 +128,108 @@ export default function Home() {
         </div>
       </header>
 
-      <section
-        id="home"
-        className="min-h-screen snap-start px-4 py-16 flex items-center"
-      >
-        <div className="mx-auto grid w-full max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-          <div className="space-y-8">
-            <div className="relative w-full max-w-md overflow-hidden border border-[#d3c8b6] bg-white/70 p-3 shadow-sm">
-              <div className="relative aspect-[4/5] w-full">
-                <Image
-                  src="/profile.png"
-                  alt="Profile"
-                  fill
-                  sizes="(min-width: 1024px) 24rem, (min-width: 640px) 20rem, 16rem"
-                  className="object-cover"
-                  priority
-                />
+      <div className="relative z-10">
+        <section
+          id="home"
+          className="min-h-screen snap-start px-4 py-16 flex items-center"
+        >
+          <div className="mx-auto grid w-full max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+            <div className="space-y-8">
+              <div className="relative w-full max-w-md overflow-hidden border border-[#d3c8b6] bg-white/70 p-3 shadow-sm">
+                <div className="relative aspect-[4/5] w-full">
+                  <Image
+                    src="/profile.png"
+                    alt="Profile"
+                    fill
+                    sizes="(min-width: 1024px) 24rem, (min-width: 640px) 20rem, 16rem"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
               </div>
-            </div>
-            <p className="text-xs uppercase tracking-[0.35em] text-[#3b332b]">
-              Software engineer
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            <h1 className="font-serif text-4xl leading-[0.95] text-[#e0584f] sm:text-5xl lg:text-6xl">
-              <TypingText
-                text={"Hello There! I Am Katia Henrriquez."}
-                speed={120}
-              />
-            </h1>
-            <div className="pt-8 sm:pt-12">
-              <p className="max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
-              I&apos;m a curiosity-driven developer who enjoys learning new technologies and solving real problems.
-               I&apos;m passionate about full-stack development and like working across both front-end and back-end to build complete,
-                reliable applications. I enjoy taking on challenges and continuously improving my skills to deliver better solutions.
+              <p className="text-xs uppercase tracking-[0.35em] text-[#3b332b]">
+                Software engineer
               </p>
             </div>
-            <div className="mt-6 flex flex-wrap gap-4 sm:mt-8">
-              <a
-                href="mailto:henrriquezkatia7@gmail.com"
-                className="inline-flex items-center justify-center border-2 border-[#1f1b17] px-6 py-2 text-[0.7rem] uppercase tracking-[0.35em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
-              >
-                Email me
-              </a>
-              <a
-                href="/My_resume.pdf"
-                className="inline-flex items-center justify-center border-2 border-[#1f1b17] px-6 py-2 text-[0.7rem] uppercase tracking-[0.35em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Resume
-              </a>
+
+            <div className="space-y-6">
+              <h1 className="font-serif text-4xl leading-[0.95] text-[#e0584f] sm:text-5xl lg:text-6xl">
+                <TypingText
+                  text={"Hello There! I Am Katia Henrriquez."}
+                  speed={120}
+                />
+              </h1>
+              <div className="pt-8 sm:pt-12">
+                <p className="max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
+                I&apos;m a curiosity-driven developer who enjoys learning new technologies and solving real problems.
+                 I&apos;m passionate about full-stack development and like working across both front-end and back-end to build complete,
+                  reliable applications. I enjoy taking on challenges and continuously improving my skills to deliver better solutions.
+                </p>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-4 sm:mt-8">
+                <a
+                  href="mailto:henrriquezkatia7@gmail.com"
+                  className="inline-flex items-center justify-center border-2 border-[#1f1b17] px-6 py-2 text-[0.7rem] uppercase tracking-[0.35em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                >
+                  Email me
+                </a>
+                <a
+                  href="/My_resume.pdf"
+                  className="inline-flex items-center justify-center border-2 border-[#1f1b17] px-6 py-2 text-[0.7rem] uppercase tracking-[0.35em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Resume
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section
-        id="aboutMe"
-        ref={aboutSectionRef}
-        className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
-        style={{
-          backgroundColor: isAboutInView ? "#ec746c" : "#f7f3ec",
-          transition: "background-color 700ms ease",
-        }}
-      >
-        <div className="mx-auto flex w-full max-w-[88rem] items-center justify-center text-center lg:text-left">
-          <AboutMeSection />
-        </div>
-      </section>
+        <section
+          id="aboutMe"
+          ref={aboutSectionRef}
+          className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          style={{
+            backgroundColor: isAboutInView ? "#ec746c" : "transparent",
+            transition: "background-color 700ms ease",
+          }}
+        >
+          <div className="mx-auto flex w-full max-w-[88rem] items-center justify-center text-center lg:text-left">
+            <AboutMeSection />
+          </div>
+        </section>
 
-      <section
-        id="services"
-        className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
-        style={{ backgroundColor: "#f7f3ec" }}
-      >
-        <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
-          <ServicesPage />
-        </div>
-      </section>
+        <section
+          id="services"
+          className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          style={{ backgroundColor: "transparent" }}
+        >
+          <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
+            <ServicesPage />
+          </div>
+        </section>
 
-      <section
-        id="projects"
-        className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
-        style={{ backgroundColor: "#f7f3ec" }}
-      >
-        <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
-          <ProjectsPage />
-        </div>
-      </section>
+        <section
+          id="projects"
+          className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          style={{ backgroundColor: "transparent" }}
+        >
+          <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
+            <ProjectsPage />
+          </div>
+        </section>
 
-      <section
-        id="contactMe"
-        className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
-        style={{ backgroundColor: "#f7f3ec" }}
-      >
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-center">
-          <ContactMePage />
-        </div>
-      </section>
+        <section
+          id="contactMe"
+          className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          style={{ backgroundColor: "transparent" }}
+        >
+          <div className="mx-auto flex w-full max-w-6xl items-center justify-center">
+            <ContactMePage />
+          </div>
+        </section>
+      </div>
     </main>
   );
 }
