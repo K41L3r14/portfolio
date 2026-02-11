@@ -165,7 +165,7 @@ export default function Home() {
                     text={"Hello There!"}
                     speed={95}
                     className="!whitespace-nowrap"
-                    showCursor={false}
+                    showCursor={!startSecondLineTyping}
                     onComplete={handleFirstLineComplete}
                   />
                 </span>
@@ -175,6 +175,7 @@ export default function Home() {
                     speed={110}
                     className="!whitespace-nowrap"
                     isActive={startSecondLineTyping}
+                    showCursor={startSecondLineTyping}
                   />
                 </span>
               </h1>
