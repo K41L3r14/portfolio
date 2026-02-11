@@ -53,23 +53,6 @@ const loopedTechnologies = [...technologies, ...technologies];
 export default function ServicesPage() {
   return (
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
-      <h2 className="font-serif text-4xl text-[#e0584f] sm:text-5xl">
-        What I offer...
-      </h2>
-      <ul className="grid gap-6 sm:grid-cols-2">
-        {services.map((service) => (
-          <li
-            key={service.title}
-            className="rounded-2xl bg-white/70 p-6 text-sm leading-relaxed text-[#1f1f1f] shadow-lg sm:text-base"
-          >
-            <h3 className="text-xl font-semibold text-[#2f1c3a]">
-              {service.title}
-            </h3>
-            <p className="mt-2">{service.description}</p>
-          </li>
-        ))}
-      </ul>
-
       <section className="space-y-5">
         <h3 className="font-serif text-3xl text-[#e0584f] sm:text-4xl">
           My skills
@@ -96,7 +79,24 @@ export default function ServicesPage() {
             ))}
           </div>
         </div>
+        <h2 className="font-serif text-4xl text-[#e0584f] sm:text-5xl">
+          What I offer...
+        </h2>
       </section>
+
+      <ul className="grid gap-6 sm:grid-cols-2">
+        {services.map((service) => (
+          <li
+            key={service.title}
+            className="rounded-2xl bg-white/70 p-6 text-sm leading-relaxed text-[#1f1f1f] shadow-lg sm:text-base"
+          >
+            <h3 className="text-xl font-semibold text-[#2f1c3a]">
+              {service.title}
+            </h3>
+            <p className="mt-2">{service.description}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

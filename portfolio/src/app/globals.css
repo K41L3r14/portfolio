@@ -71,7 +71,7 @@ body {
 .skills-icon-banner-track {
   display: flex;
   width: max-content;
-  animation: skillsIconSlide 22s linear infinite;
+  animation: skillsIconSlide 28s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -190,6 +190,80 @@ function ObserraSlideshow({
   );
 }
 
+function OtherProjectsSlideshow({
+  projects,
+}: {
+  projects: OtherProject[];
+}) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentProject = projects[currentIndex];
+
+  const showPrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
+  };
+
+  const showNext = () => {
+    setCurrentIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
+  };
+
+  return (
+    <div className="space-y-4">
+      <article className="rounded-2xl bg-white/70 p-5 text-left text-[#1f1f1f] shadow-lg">
+        <h4 className="text-lg font-semibold text-[#2f1c3a]">
+          {currentProject.title}
+        </h4>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">
+          {currentProject.summary}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {currentProject.skills.map((skill) => (
+            <span
+              key={skill}
+              className="rounded-full border border-[#d3c8b6] bg-[#f0ebe3] px-2 py-1 text-[0.62rem] uppercase tracking-[0.15em] text-[#3b332b]"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </article>
+
+      <div className="flex items-center justify-between gap-2">
+        <button
+          type="button"
+          onClick={showPrevious}
+          className="rounded border border-[#1f1b17] px-3 py-1 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+        >
+          Prev
+        </button>
+        <p className="text-xs uppercase tracking-[0.2em] text-[#3b332b]">
+          {currentIndex + 1} / {projects.length}
+        </p>
+        <button
+          type="button"
+          onClick={showNext}
+          className="rounded border border-[#1f1b17] px-3 py-1 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+        >
+          Next
+        </button>
+      </div>
+
+      <div className="flex justify-center gap-2">
+        {projects.map((project, index) => (
+          <button
+            key={project.title}
+            type="button"
+            onClick={() => setCurrentIndex(index)}
+            aria-label={`Go to ${project.title}`}
+            className={`h-2.5 w-2.5 rounded-full transition-colors ${
+              currentIndex === index ? "bg-[#e0584f]" : "bg-[#c9bdab]"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function ProjectsPage() {
   return (
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
@@ -249,31 +323,7 @@ export default function ProjectsPage() {
           No live demos for these yet, but these projects reflect my technical
           skills and hands-on experience.
         </p>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {otherProjects.map((project) => (
-            <article
-              key={project.title}
-              className="rounded-2xl bg-white/70 p-5 text-left text-[#1f1f1f] shadow-lg"
-            >
-              <h4 className="text-lg font-semibold text-[#2f1c3a]">
-                {project.title}
-              </h4>
-              <p className="mt-2 text-sm leading-relaxed sm:text-base">
-                {project.summary}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {project.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-full border border-[#d3c8b6] bg-[#f0ebe3] px-2 py-1 text-[0.62rem] uppercase tracking-[0.15em] text-[#3b332b]"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
+        <OtherProjectsSlideshow projects={otherProjects} />
       </section>
     </div>
   );
