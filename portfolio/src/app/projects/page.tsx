@@ -113,29 +113,17 @@ const otherProjects: OtherProject[] = [
     ],
   },
   {
-    title: "Travel Planner App",
+    title: "Zulip Open-Source Contribution - Moderation & Engagement Features",
     summary:
-      "Team-based full-stack planner that merged multiple app modules into one platform with strong validation and user-focused workflows.",
+      "Contributed to the Zulip open-source team chat platform by developing features that improve topic organization, moderation, and user engagement. Built an Upvote system that helps users highlight and track important discussions, and implemented a Topic Lock (read-only) feature that allows admins and moderators to control conversations and protect important topics. Worked across the Django backend, JavaScript frontend, and UI templates, including adding models, event handlers, and authorization checks. Also supported testing and developer documentation to make the features reliable and easier for future contributors to understand.",
     skills: [
-      "Python",
-      "MySQL",
-      "Kivy",
-      "OpenWeather API",
-      "Data Validation",
-      "Team Collaboration",
-    ],
-  },
-  {
-    title: "Burn Plan Evaluation App",
-    summary:
-      "OOP application for evaluating burn plan viability with real-time weather integration and robust automated testing.",
-    skills: [
-      "Java",
-      "REST API",
-      "JUnit",
-      "OOP Design",
-      "System Testing",
-      "Eclipse",
+      "Python (Django)",
+      "JavaScript",
+      "MVC Architecture",
+      "Open-Source Collaboration",
+      "Testing and Debugging",
+      "Technical Documentation",
+      "Scrum Development Process",
     ],
   },
 ];

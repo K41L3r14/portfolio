@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 import AboutMeSection from "./aboutMe/page";
 import TypingText from "./components/TypingText";
@@ -33,9 +36,44 @@ const socialLinks = [
 ];
 
 export default function Home() {
+  const mainRef = useRef<HTMLElement | null>(null);
+  const aboutSectionRef = useRef<HTMLElement | null>(null);
+  const [isAboutInView, setIsAboutInView] = useState(false);
+
+  useEffect(() => {
+    const mainElement = mainRef.current;
+    const aboutElement = aboutSectionRef.current;
+
+    if (!mainElement || !aboutElement) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsAboutInView(entry.isIntersecting);
+      },
+      {
+        root: mainElement,
+        threshold: 0.45,
+      }
+    );
+    observer.observe(aboutElement);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <main className="min-h-screen h-screen snap-y snap-mandatory overflow-y-auto scroll-smooth bg-[#f7f3ec] text-[#1f1b17]">
-      <header className="fixed left-0 right-0 top-0 z-30 bg-[#f7f3ec]/95">
+    <main
+      ref={mainRef}
+      className="min-h-screen h-screen snap-y snap-mandatory overflow-y-auto scroll-smooth text-[#1f1b17]"
+      style={{ backgroundColor: "#f7f3ec" } as CSSProperties}
+    >
+      <header
+        className="fixed left-0 right-0 top-0 z-30"
+        style={{ backgroundColor: "#f7f3ec" }}
+      >
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-6 py-2 sm:flex-row sm:justify-between sm:px-8 sm:py-3 lg:px-10">
           <span className="text-xs uppercase tracking-[0.35em] text-[#3b332b]">
             Portfolio
@@ -124,7 +162,7 @@ export default function Home() {
                 Email me
               </a>
               <a
-                href="/katia_s_Resume__Anonymous___update___Copy_.pdf"
+                href="/My_resume.pdf"
                 className="inline-flex items-center justify-center border-2 border-[#1f1b17] px-6 py-2 text-[0.7rem] uppercase tracking-[0.35em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
                 target="_blank"
                 rel="noreferrer"
@@ -138,7 +176,12 @@ export default function Home() {
 
       <section
         id="aboutMe"
-        className="min-h-screen snap-start bg-[#f7f3ec] px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+        ref={aboutSectionRef}
+        className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+        style={{
+          backgroundColor: isAboutInView ? "#ec746c" : "#f7f3ec",
+          transition: "background-color 700ms ease",
+        }}
       >
         <div className="mx-auto flex w-full max-w-[88rem] items-center justify-center text-center lg:text-left">
           <AboutMeSection />
@@ -147,7 +190,8 @@ export default function Home() {
 
       <section
         id="services"
-        className="min-h-screen snap-start bg-[#f7f3ec] px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+        className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+        style={{ backgroundColor: "#f7f3ec" }}
       >
         <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
           <ServicesPage />
@@ -156,7 +200,8 @@ export default function Home() {
 
       <section
         id="projects"
-        className="min-h-screen snap-start bg-[#f7f3ec] px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+        className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+        style={{ backgroundColor: "#f7f3ec" }}
       >
         <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
           <ProjectsPage />
@@ -165,7 +210,8 @@ export default function Home() {
 
       <section
         id="contactMe"
-        className="min-h-screen snap-start bg-[#f7f3ec] px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+        className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+        style={{ backgroundColor: "#f7f3ec" }}
       >
         <div className="mx-auto flex w-full max-w-6xl items-center justify-center">
           <ContactMePage />
