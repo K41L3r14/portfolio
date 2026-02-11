@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const inquiryTypes = [
   "Web App Development",
@@ -32,14 +35,49 @@ const contactMethods = [
 ];
 
 export default function ContactMePage() {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const sectionElement = sectionRef.current;
+
+    if (!sectionElement) {
+      return;
+    }
+
+    const scrollRoot = sectionElement.closest("main");
+    const observerRoot =
+      scrollRoot instanceof Element ? scrollRoot : null;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        root: observerRoot,
+        threshold: 0.35,
+      }
+    );
+
+    observer.observe(sectionElement);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <div className="w-full max-w-6xl space-y-8">
+    <div ref={sectionRef} className="w-full max-w-6xl space-y-8">
       <h2 className="font-serif text-4xl text-[#c94841] sm:text-5xl">
         Lets Work together!
       </h2>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(220px,0.42fr)]">
-        <div className="rounded-3xl border border-[#2d2926] bg-[#f7f3ec]/60 p-4 sm:p-6">
+        <div
+          className={`contact-panel-left rounded-3xl border border-[#2d2926] bg-[#f7f3ec]/60 p-4 sm:p-6 ${
+            isVisible ? "is-visible" : ""
+          }`}
+        >
           <form className="space-y-4">
             <div className="grid gap-3 sm:grid-cols-2">
               <input
@@ -87,7 +125,11 @@ export default function ContactMePage() {
           </form>
         </div>
 
-        <aside className="rounded-3xl border border-[#2d2926] bg-[#f7f3ec]/60 p-5 sm:p-6">
+        <aside
+          className={`contact-panel-right rounded-3xl border border-[#2d2926] bg-[#f7f3ec]/60 p-5 sm:p-6 ${
+            isVisible ? "is-visible" : ""
+          }`}
+        >
           <p className="mb-6 text-xs uppercase tracking-[0.35em] text-[#3b332b]">
             Get in Touch
           </p>
