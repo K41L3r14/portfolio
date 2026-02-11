@@ -169,15 +169,17 @@ export default function Home() {
                     onComplete={handleFirstLineComplete}
                   />
                 </span>
-                <span className="block w-fit whitespace-nowrap bg-[#d9efe3]/90 px-3 py-1.5 font-serif text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
-                  <TypingText
-                    text={"I Am Katia Henrriquez."}
-                    speed={110}
-                    className="!whitespace-nowrap"
-                    isActive={startSecondLineTyping}
-                    showCursor={startSecondLineTyping}
-                  />
-                </span>
+                {startSecondLineTyping && (
+                  <span className="block w-fit whitespace-nowrap bg-[#d9efe3]/90 px-3 py-1.5 font-serif text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
+                    <TypingText
+                      text={"I Am Katia Henrriquez."}
+                      speed={110}
+                      className="!whitespace-nowrap"
+                      isActive={startSecondLineTyping}
+                      showCursor={startSecondLineTyping}
+                    />
+                  </span>
+                )}
               </h1>
               <div className="pt-6 sm:pt-10">
                 <p className="max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
