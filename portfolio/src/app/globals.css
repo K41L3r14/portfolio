@@ -101,6 +101,29 @@ body {
   }
 }
 
+@keyframes pastelMeshMix {
+  0% {
+    transform: scale(1.02) rotate(0deg) translate3d(0, 0, 0);
+    filter: hue-rotate(0deg) saturate(1.02);
+  }
+  25% {
+    transform: scale(1.08) rotate(1deg) translate3d(-1.4%, 1.2%, 0);
+    filter: hue-rotate(7deg) saturate(1.12);
+  }
+  50% {
+    transform: scale(1.12) rotate(-1.2deg) translate3d(1.6%, -1%, 0);
+    filter: hue-rotate(14deg) saturate(1.2);
+  }
+  75% {
+    transform: scale(1.08) rotate(1.4deg) translate3d(-0.8%, 1.6%, 0);
+    filter: hue-rotate(8deg) saturate(1.14);
+  }
+  100% {
+    transform: scale(1.04) rotate(0deg) translate3d(0, 0, 0);
+    filter: hue-rotate(0deg) saturate(1.04);
+  }
+}
+
 .pastel-mesh {
   background:
     radial-gradient(circle at 8% 20%, rgba(240, 207, 140, 0.5) 0%, rgba(241, 164, 142, 0) 42%),
@@ -109,6 +132,7 @@ body {
     radial-gradient(circle at 82% 78%, rgba(157, 238, 201, 0.5) 0%, rgba(181, 232, 209, 0) 42%),
     linear-gradient(110deg, #f9e5db 0%, #f7f3ec 46%, #d8f0ea 100%);
   animation: pastelMeshShift 20s ease-in-out infinite alternate;
+  transition: filter 500ms ease, opacity 500ms ease;
 }
 
 .pastel-stripes {
@@ -120,6 +144,16 @@ body {
     rgba(255, 255, 255, 0) 92px
   );
   animation: pastelStripePulse 4.8s ease-in-out infinite alternate;
+  transition: opacity 500ms ease;
+}
+
+.mesh-mixing .pastel-mesh {
+  animation: pastelMeshMix 7.2s ease-in-out infinite;
+}
+
+.mesh-mixing .pastel-stripes {
+  opacity: 0.42;
+  animation-duration: 2.8s;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -128,4 +162,3 @@ body {
     animation: none;
   }
 }
-

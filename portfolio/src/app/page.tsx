@@ -71,7 +71,9 @@ export default function Home() {
   return (
     <main
       ref={mainRef}
-      className="relative isolate min-h-screen h-screen snap-y snap-mandatory overflow-x-clip overflow-y-auto scroll-smooth text-[#1f1b17]"
+      className={`relative isolate min-h-screen h-screen snap-y snap-mandatory overflow-x-clip overflow-y-auto scroll-smooth text-[#1f1b17] ${
+        isAboutInView ? "mesh-mixing" : ""
+      }`}
       style={{ backgroundColor: "#f7f3ec" } as CSSProperties}
     >
       <div
@@ -207,10 +209,7 @@ export default function Home() {
           id="aboutMe"
           ref={aboutSectionRef}
           className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
-          style={{
-            backgroundColor: isAboutInView ? "#ec746c" : "transparent",
-            transition: "background-color 700ms ease",
-          }}
+          style={{ backgroundColor: "transparent" }}
         >
           <div className="mx-auto flex w-full max-w-[88rem] items-center justify-center text-center lg:text-left">
             <AboutMeSection />
