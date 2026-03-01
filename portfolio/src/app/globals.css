@@ -27,6 +27,14 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
 }
 
+.title-font {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.description-font {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
 .notebook {
   background: repeating-linear-gradient(
       to bottom,
@@ -37,7 +45,7 @@ body {
   border-left: 6px solid #ffc48f;
   padding: 1.5rem 2rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  font-family: "Homemade Apple", cursive; /* optional for handwriting vibe */
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 .text-color {

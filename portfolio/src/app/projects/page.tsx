@@ -197,10 +197,10 @@ function OtherProjectsSlideshow({
   return (
     <div className="space-y-4">
       <article className="rounded-2xl bg-white/70 p-5 text-left text-[#1f1f1f] shadow-lg">
-        <h4 className="text-lg font-semibold text-[#2f1c3a]">
+        <h4 className="title-font text-lg font-semibold text-[#2f1c3a]">
           {currentProject.title}
         </h4>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">
+        <p className="description-font mt-2 text-sm leading-relaxed sm:text-base">
           {currentProject.summary}
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -255,7 +255,7 @@ function OtherProjectsSlideshow({
 export default function ProjectsPage() {
   return (
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
-      <h2 className="font-serif text-4xl text-[#c94841] sm:text-5xl">
+      <h2 className="title-font text-4xl text-[#c94841] sm:text-5xl">
         Projects I&apos;ve Worked On
       </h2>
       <div className="grid gap-6 lg:grid-cols-1">
@@ -276,7 +276,7 @@ export default function ProjectsPage() {
             <p className="text-xs font-semibold uppercase tracking-wide text-[#1b475D]">
               {project.stack}
             </p>
-            <h3 className="mt-2 text-xl font-semibold text-[#2f1c3a]">
+            <h3 className="title-font mt-2 text-xl font-semibold text-[#2f1c3a]">
               {project.title}
             </h3>
             <p className="mt-2 hidden text-[0.7rem] uppercase tracking-[0.24em] text-[#3b332b] lg:block lg:group-hover:hidden">
@@ -284,7 +284,7 @@ export default function ProjectsPage() {
             </p>
 
             <div className="mt-4 lg:mt-0 lg:max-h-0 lg:overflow-hidden lg:opacity-0 lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:mt-4 lg:group-hover:max-h-[56rem] lg:group-hover:opacity-100">
-              <p className="text-sm leading-relaxed sm:text-base">{project.summary}</p>
+              <p className="description-font text-sm leading-relaxed sm:text-base">{project.summary}</p>
               <p className="mt-4 text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#3b332b]">
                 Technologies
               </p>
@@ -304,10 +304,10 @@ export default function ProjectsPage() {
       </div>
 
       <section className="space-y-4">
-        <h3 className="font-serif text-3xl text-[#c94841] sm:text-4xl">
+        <h3 className="title-font text-3xl text-[#c94841] sm:text-4xl">
           Other Projects I&apos;ve Worked On
         </h3>
-        <p className="text-sm text-[#3b332b] sm:text-base">
+        <p className="description-font text-sm text-[#3b332b] sm:text-base">
           No live demos for these yet, but these projects reflect my technical
           skills and hands-on experience.
         </p>

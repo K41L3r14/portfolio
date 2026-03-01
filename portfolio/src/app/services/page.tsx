@@ -54,7 +54,7 @@ export default function ServicesPage() {
   return (
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
       <section className="space-y-5">
-        <h3 className="font-serif text-3xl text-[#c94841] sm:text-4xl">
+        <h3 className="title-font text-3xl text-[#c94841] sm:text-4xl">
           My skills
         </h3>
         <div className="relative overflow-hidden rounded-xl border border-[#d3c8b6] bg-[#f5f2ec] px-2 py-3">
@@ -79,7 +79,7 @@ export default function ServicesPage() {
             ))}
           </div>
         </div>
-        <h2 className="font-serif text-4xl text-[#c94841] sm:text-5xl">
+        <h2 className="title-font text-4xl text-[#c94841] sm:text-5xl">
           What I offer...
         </h2>
       </section>
@@ -90,10 +90,10 @@ export default function ServicesPage() {
             key={service.title}
             className="rounded-2xl bg-white/70 p-6 text-sm leading-relaxed text-[#1f1f1f] shadow-lg sm:text-base"
           >
-            <h3 className="text-xl font-semibold text-[#2f1c3a]">
+            <h3 className="title-font text-xl font-semibold text-[#2f1c3a]">
               {service.title}
             </h3>
-            <p className="mt-2">{service.description}</p>
+            <p className="description-font mt-2">{service.description}</p>
           </li>
         ))}
       </ul>

@@ -34,10 +34,10 @@ export default function AboutMeSection() {
 
         <div className="relative z-10 flex min-h-[34rem] items-end p-6 sm:min-h-[40rem] sm:p-10">
           <div className="max-w-3xl space-y-5 text-left text-[#f7f3ec]">
-            <h2 className="font-serif text-3xl leading-tight sm:text-4xl lg:text-5xl">
+            <h2 className="title-font text-3xl leading-tight sm:text-4xl lg:text-5xl">
               I am a Independent Software Developer
             </h2>
-            <div className="space-y-4 text-sm leading-relaxed sm:text-base">
+            <div className="description-font space-y-4 text-sm leading-relaxed sm:text-base">
               <p>
                 I love collaborating on projects that solve real problems and create memorable experiences.
                 I have experience working on full-stack projects that range from building reliable backend

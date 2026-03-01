@@ -92,10 +92,10 @@ export default function Home() {
         }}
       >
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-6 py-2 sm:flex-row sm:justify-between sm:px-8 sm:py-3 lg:px-10">
-          <span className="text-xs uppercase tracking-[0.35em] text-[#3b332b]">
-            Portfolio
+          <span className="description-font text-sm font-medium tracking-[0.18em] text-[#3b332b]">
+            Katia Henrriquez
           </span>
-          <nav className="flex flex-wrap items-center justify-center text-[0.7rem] uppercase tracking-[0.35em] text-[#3b332b]">
+          <nav className="description-font flex flex-wrap items-center justify-center text-[0.7rem] uppercase tracking-[0.35em] text-[#3b332b]">
             {navLinks.map((link, index) => (
               <span key={link.label} className="flex items-center">
                 <a
@@ -153,14 +153,14 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <p className="text-xs uppercase tracking-[0.35em] text-[#3b332b]">
+              <p className="description-font text-xs uppercase tracking-[0.35em] text-[#3b332b]">
                 Software engineer
               </p>
             </div>
 
             <div className="space-y-6 pt-8 sm:pt-12 lg:pt-14">
               <h1 className="w-full max-w-md space-y-2">
-                <span className="block w-fit whitespace-nowrap bg-[#d9efe3]/90 px-3 py-1.5 font-serif text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
+                <span className="title-font block w-fit whitespace-nowrap bg-[#d9efe3]/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
                   <TypingText
                     text={"Hello There!"}
                     speed={95}
@@ -170,7 +170,7 @@ export default function Home() {
                   />
                 </span>
                 {startSecondLineTyping && (
-                  <span className="block w-fit whitespace-nowrap bg-[#d9efe3]/90 px-3 py-1.5 font-serif text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
+                  <span className="title-font block w-fit whitespace-nowrap bg-[#d9efe3]/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
                     <TypingText
                       text={"I Am Katia Henrriquez."}
                       speed={110}
@@ -182,7 +182,7 @@ export default function Home() {
                 )}
               </h1>
               <div className="pt-6 sm:pt-10">
-                <p className="max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
+                <p className="description-font max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
                 I&apos;m a curiosity-driven developer who enjoys learning new technologies and solving real problems.
                  I&apos;m passionate about full-stack development and like working across both front-end and back-end to build complete,
                   reliable applications. I enjoy taking on challenges and continuously improving my skills to deliver better solutions.
