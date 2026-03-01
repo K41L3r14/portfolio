@@ -187,8 +187,7 @@ export default function Home() {
               <div className="pt-6 sm:pt-10">
                 <p className="description-font max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
                 I&apos;m a curiosity-driven developer who enjoys learning new technologies and solving real problems.
-                 I&apos;m passionate about full-stack development and like working across both front-end and back-end to build complete,
-                  reliable applications. I enjoy taking on challenges and continuously improving my skills to deliver better solutions.
+                 I like building reliable full-stack applications and taking on challenges that help me grow.
                 </p>
               </div>
               <div className="mt-6 flex flex-wrap gap-4 sm:mt-8">
