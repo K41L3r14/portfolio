@@ -91,7 +91,7 @@ export default function Home() {
           backdropFilter: "blur(6px)",
         }}
       >
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-6 py-2 sm:flex-row sm:justify-between sm:px-8 sm:py-3 lg:px-10">
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-4 py-2 sm:flex-row sm:justify-between sm:py-3">
           <span className="description-font text-sm font-medium tracking-[0.18em] text-[#3b332b]">
             Katia Henrriquez
           </span>
@@ -141,7 +141,7 @@ export default function Home() {
         >
           <div className="mx-auto grid w-full max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <div className="space-y-8">
-              <div className="relative w-full max-w-md overflow-hidden border border-[#d3c8b6] bg-white/70 p-3 shadow-sm">
+              <div className="w-full max-w-md rotate-[-2deg] border border-[#d8d1c7] bg-[#fffdf8] p-3 pb-7 shadow-[0_20px_40px_rgba(31,27,23,0.18)]">
                 <div className="relative aspect-[4/5] w-full">
                   <Image
                     src="/profile.png"
@@ -152,6 +152,9 @@ export default function Home() {
                     priority
                   />
                 </div>
+                <p className="description-font pt-4 text-center text-xs uppercase tracking-[0.28em] text-[#5a4a3f]">
+                  Katia Henrriquez
+                </p>
               </div>
               <p className="description-font text-xs uppercase tracking-[0.35em] text-[#3b332b]">
                 Software engineer
