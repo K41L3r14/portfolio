@@ -5,21 +5,29 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 const services = [
   {
+    priority: "01",
+    tier: "Top Priority",
     title: "Full-Stack Web Development",
     description:
       "Build responsive web apps with Next.js, React, TypeScript, Node.js, and MySQL/Supabase.",
   },
   {
+    priority: "02",
+    tier: "Core Add-On",
     title: "AI Feature Integration",
     description:
       "Add AI-powered workflows (chatbots, document parsing, semantic search) using OpenAI/LLM APIs.",
   },
   {
+    priority: "03",
+    tier: "Infrastructure",
     title: "Backend API Development",
     description:
       "Design and build with Node.js and Express, plus auth, validation, and role-based access.",
   },
   {
+    priority: "04",
+    tier: "Polish Layer",
     title: "UI Prototyping and Frontend Polish",
     description:
       "Create fast, interactive prototypes and polished interfaces that are accessible, mobile-friendly, and ready for real users.",
@@ -140,19 +148,48 @@ export default function ServicesPage() {
         </h2>
       </section>
 
-      <ul className="grid gap-6 sm:grid-cols-2">
-        {services.map((service) => (
+      <ol className="relative mx-auto w-full max-w-4xl space-y-6 text-left">
+        {services.map((service, index) => (
           <li
             key={service.title}
-            className="rounded-2xl bg-white/70 p-6 text-sm leading-relaxed text-[#1f1f1f] shadow-lg sm:text-base"
+            className="relative grid gap-4 pl-12 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-6 sm:pl-16"
           >
-            <h3 className="title-font text-xl font-semibold text-[#2f1c3a]">
-              {service.title}
-            </h3>
-            <p className="description-font mt-2">{service.description}</p>
+            {index === 0 && services.length > 1 && (
+              <span
+                aria-hidden
+                className="absolute bottom-[-1.5rem] left-5 top-1/2 w-px bg-[#cdbfb2] sm:left-[1.875rem]"
+              />
+            )}
+            {index > 0 && index < services.length - 1 && (
+              <span
+                aria-hidden
+                className="absolute bottom-[-1.5rem] left-5 top-[-1.5rem] w-px bg-[#cdbfb2] sm:left-[1.875rem]"
+              />
+            )}
+            {index === services.length - 1 && index > 0 && (
+              <span
+                aria-hidden
+                className="absolute bottom-1/2 left-5 top-[-1.5rem] w-px bg-[#cdbfb2] sm:left-[1.875rem]"
+              />
+            )}
+            <div className="absolute left-0 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#c94841]/30 bg-[#fff4f1] text-sm font-semibold text-[#c94841] shadow-sm sm:left-2 sm:h-11 sm:w-11">
+              {service.priority}
+            </div>
+            <div className="hidden sm:block" />
+            <article className="rounded-[1.75rem] border border-[#d9cec1] bg-white/72 p-5 shadow-lg sm:p-6">
+              <p className="description-font text-[0.7rem] uppercase tracking-[0.28em] text-[#8c5b56]">
+                {service.tier}
+              </p>
+              <h3 className="title-font mt-2 text-xl font-semibold text-[#2f1c3a] sm:text-2xl">
+                {service.title}
+              </h3>
+              <p className="description-font mt-3 text-sm leading-relaxed text-[#1f1f1f] sm:text-base">
+                {service.description}
+              </p>
+            </article>
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   );
 }
