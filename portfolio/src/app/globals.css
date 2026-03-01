@@ -82,6 +82,50 @@ body {
   animation: skillsIconSlide 28s linear infinite;
 }
 
+@keyframes tetrisBlockDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--drop-distance, 160px)));
+  }
+  76% {
+    opacity: 1;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tetris-board {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(59, 51, 43, 0.08) 0%, rgba(59, 51, 43, 0.02) 100%);
+  background-size:
+    100% calc(100% / 7),
+    calc(100% / 6) 100%,
+    100% 100%;
+}
+
+.tetris-block-falling {
+  animation: tetrisBlockDrop var(--fall-duration, 1400ms) cubic-bezier(0.2, 0.8, 0.2, 1) var(--fall-delay, 0ms) both;
+}
+
+.tetris-block-waiting {
+  opacity: 0;
+  transform: translateY(calc(-1 * var(--drop-distance, 160px)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tetris-block-waiting,
+  .tetris-block-falling {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .skills-icon-banner-track {
     animation: none;

@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 const services = [
   {
@@ -23,7 +26,12 @@ const services = [
   },
 ];
 
-const technologies = [
+type Technology = {
+  name: string;
+  icon: string;
+};
+
+const technologies: Technology[] = [
   { name: "Python", icon: "https://cdn.simpleicons.org/python/3776AB" },
   { name: "Java", icon: "https://cdn.simpleicons.org/openjdk/ED8B00" },
   { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript/F7DF1E" },
@@ -36,6 +44,7 @@ const technologies = [
   { name: "React", icon: "https://cdn.simpleicons.org/react/61DAFB" },
   { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript/3178C6" },
   { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs/111111" },
+  { name: "Figma", icon: "https://cdn.simpleicons.org/figma/F24E1E" },
   { name: "Tailwind CSS", icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
   { name: "Jest", icon: "https://cdn.simpleicons.org/jest/C21325" },
   { name: "JUnit", icon: "https://cdn.simpleicons.org/junit5/25A162" },
@@ -48,33 +57,88 @@ const technologies = [
   { name: "Linux VM", icon: "https://cdn.simpleicons.org/linux/FCC624" },
 ];
 
-const loopedTechnologies = [...technologies, ...technologies];
+const skillBlockColors = [
+  "#f6b8ab",
+  "#f7cfaa",
+  "#f7e3a1",
+  "#b6e0c4",
+  "#b9e8e1",
+  "#bdd4fb",
+  "#e2c2f1",
+  "#f8bfd3",
+];
 
 export default function ServicesPage() {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [isSkillsInView, setIsSkillsInView] = useState(false);
+
+  useEffect(() => {
+    const sectionElement = sectionRef.current;
+
+    if (!sectionElement) {
+      return;
+    }
+
+    const scrollRoot = sectionElement.closest("main");
+    const observerRoot = scrollRoot instanceof Element ? scrollRoot : null;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsSkillsInView(entry.isIntersecting);
+      },
+      {
+        root: observerRoot,
+        threshold: 0.45,
+      }
+    );
+
+    observer.observe(sectionElement);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
+    <div ref={sectionRef} className="w-full max-w-5xl space-y-8 text-center lg:text-left">
       <section className="space-y-5">
         <h3 className="title-font text-3xl text-[#c94841] sm:text-4xl">
           My skills
         </h3>
-        <div className="relative overflow-hidden rounded-xl border border-[#d3c8b6] bg-[#f5f2ec] px-2 py-3">
-          <div className="skills-icon-banner-track">
-            {loopedTechnologies.map((technology, index) => (
+        <div className="rounded-[2rem] border border-[#d3c8b6] bg-white/65 p-4 shadow-lg sm:p-5">
+          <div className="mb-4 flex items-center justify-between gap-3 text-left">
+            <p className="description-font text-xs uppercase tracking-[0.28em] text-[#3b332b] sm:text-sm">
+              Skill stack in motion
+            </p>
+            <p className="description-font text-[0.65rem] uppercase tracking-[0.24em] text-[#8c5b56] sm:text-xs">
+              New pieces dropping into place
+            </p>
+          </div>
+          <div className="tetris-board relative mx-auto grid h-[30rem] w-full max-w-4xl grid-cols-6 grid-rows-8 gap-2 overflow-hidden rounded-3xl border border-[#b88c84] bg-[#231e1a] p-3 sm:h-[34rem] sm:p-4">
+            {technologies.map((technology, index) => (
               <div
-                key={`${technology.name}-${index}`}
-                className="mx-1.5 flex shrink-0 items-center gap-2 rounded-full bg-white/95 px-3 py-2 text-left shadow-sm ring-1 ring-[#d8cfbf]"
+                key={technology.name}
+                className={`${isSkillsInView ? "tetris-block-falling" : "tetris-block-waiting"} description-font flex h-full min-h-[2.5rem] items-center justify-center gap-2 rounded-xl border border-black/10 px-2 text-center text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[#1f1b17] shadow-[inset_0_-2px_0_rgba(0,0,0,0.12)] sm:min-h-[2.75rem] sm:text-[0.76rem]`}
+                style={
+                  {
+                    backgroundColor: skillBlockColors[index % skillBlockColors.length],
+                    gridColumn: `${(index % 3) * 2 + 1} / span 2`,
+                    gridRow: `${Math.floor(index / 3) + 1}`,
+                    "--drop-distance": `${(Math.floor(index / 3) + 2) * 68}px`,
+                    "--fall-delay": `${index * 95}ms`,
+                    "--fall-duration": `${880 + (index % 4) * 90}ms`,
+                  } as CSSProperties
+                }
               >
                 <Image
                   src={technology.icon}
                   alt={`${technology.name} logo`}
-                  width={20}
-                  height={20}
+                  width={28}
+                  height={28}
                   unoptimized
-                  className="h-5 w-5"
+                  className="h-6 w-6 shrink-0 object-contain sm:h-7 sm:w-7"
                 />
-                <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#3b332b] sm:text-xs">
-                  {technology.name}
-                </span>
+                <span>{technology.name}</span>
               </div>
             ))}
           </div>
