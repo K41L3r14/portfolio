@@ -71,7 +71,7 @@ export default function Home() {
   return (
     <main
       ref={mainRef}
-      className={`relative isolate min-h-screen h-screen snap-y snap-mandatory overflow-x-clip overflow-y-auto scroll-smooth text-[#1f1b17] ${
+      className={`relative isolate min-h-screen h-screen overflow-x-clip overflow-y-auto scroll-smooth text-[#1f1b17] ${
         isAboutInView ? "mesh-mixing" : ""
       }`}
       style={{ backgroundColor: "#f7f3ec" } as CSSProperties}
@@ -137,12 +137,12 @@ export default function Home() {
       <div className="relative z-10">
         <section
           id="home"
-          className="min-h-screen snap-start px-4 py-16 flex items-center"
+          className="min-h-screen px-4 py-16 flex items-center"
         >
           <div className="mx-auto grid w-full max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <div className="space-y-8">
-              <div className="w-full max-w-md rotate-[-2deg] border border-[#d8d1c7] bg-[#fffdf8] p-3 pb-7 shadow-[0_20px_40px_rgba(31,27,23,0.18)]">
-                <div className="relative aspect-[4/5] w-full">
+              <div className="w-full max-w-[23rem] border border-[#d8d1c7] bg-[#fffdf8] p-4 pb-7 shadow-[0_20px_40px_rgba(31,27,23,0.18)] sm:max-w-[25rem]">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#f7f3ec]">
                   <Image
                     src="/profile.png"
                     alt="Profile"
@@ -153,7 +153,7 @@ export default function Home() {
                   />
                 </div>
                 <p className="description-font pt-4 text-center text-xs uppercase tracking-[0.28em] text-[#5a4a3f]">
-                  Katia Henrriquez
+                  #NiceToMeetYou
                 </p>
               </div>
               <p className="description-font text-xs uppercase tracking-[0.35em] text-[#3b332b]">
@@ -163,20 +163,20 @@ export default function Home() {
 
             <div className="space-y-6 pt-8 sm:pt-12 lg:pt-14">
               <h1 className="w-full max-w-md space-y-2">
-                <span className="title-font block w-fit whitespace-nowrap bg-[#d9efe3]/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
+                <span className="title-font block w-fit whitespace-nowrap bg-white/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
                   <TypingText
                     text={"Hello There!"}
-                    speed={95}
+                    speed={72}
                     className="!whitespace-nowrap"
                     showCursor={!startSecondLineTyping}
                     onComplete={handleFirstLineComplete}
                   />
                 </span>
                 {startSecondLineTyping && (
-                  <span className="title-font block w-fit whitespace-nowrap bg-[#d9efe3]/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
+                  <span className="title-font block w-fit whitespace-nowrap bg-white/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
                     <TypingText
                       text={"I Am Katia Henrriquez."}
-                      speed={110}
+                      speed={84}
                       className="!whitespace-nowrap"
                       isActive={startSecondLineTyping}
                       showCursor={startSecondLineTyping}
@@ -214,7 +214,7 @@ export default function Home() {
         <section
           id="aboutMe"
           ref={aboutSectionRef}
-          className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          className="min-h-screen px-4 py-16 text-[#1f1b17] flex items-center justify-center"
           style={{ backgroundColor: "transparent" }}
         >
           <div className="mx-auto flex w-full max-w-[88rem] items-center justify-center text-center lg:text-left">
@@ -224,7 +224,7 @@ export default function Home() {
 
         <section
           id="services"
-          className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          className="min-h-screen px-4 py-16 text-[#1f1b17] flex items-center justify-center"
           style={{ backgroundColor: "transparent" }}
         >
           <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
@@ -234,7 +234,7 @@ export default function Home() {
 
         <section
           id="projects"
-          className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          className="min-h-screen px-4 py-16 text-[#1f1b17] flex items-center justify-center"
           style={{ backgroundColor: "transparent" }}
         >
           <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
@@ -244,7 +244,7 @@ export default function Home() {
 
         <section
           id="contactMe"
-          className="min-h-screen snap-start px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          className="min-h-screen px-4 py-16 text-[#1f1b17] flex items-center justify-center"
           style={{ backgroundColor: "transparent" }}
         >
           <div className="mx-auto flex w-full max-w-6xl items-center justify-center">
