@@ -6,28 +6,24 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 const services = [
   {
     priority: "01",
-    tier: "Top Priority",
     title: "Full-Stack Web Development",
     description:
       "Build responsive web apps with Next.js, React, TypeScript, Node.js, and MySQL/Supabase.",
   },
   {
     priority: "02",
-    tier: "Core Add-On",
     title: "AI Feature Integration",
     description:
       "Add AI-powered workflows (chatbots, document parsing, semantic search) using OpenAI/LLM APIs.",
   },
   {
     priority: "03",
-    tier: "Infrastructure",
     title: "Backend API Development",
     description:
       "Design and build with Node.js and Express, plus auth, validation, and role-based access.",
   },
   {
     priority: "04",
-    tier: "Polish Layer",
     title: "UI Prototyping and Frontend Polish",
     description:
       "Create fast, interactive prototypes and polished interfaces that are accessible, mobile-friendly, and ready for real users.",
@@ -77,17 +73,20 @@ const skillBlockColors = [
 ];
 
 export default function ServicesPage() {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const skillsGridRef = useRef<HTMLDivElement | null>(null);
+  const serviceItemRefs = useRef<Array<HTMLLIElement | null>>([]);
+  const serviceVisibilityRef = useRef<boolean[]>(services.map(() => false));
   const [isSkillsInView, setIsSkillsInView] = useState(false);
+  const [activeServiceIndex, setActiveServiceIndex] = useState(-1);
 
   useEffect(() => {
-    const sectionElement = sectionRef.current;
+    const skillsGridElement = skillsGridRef.current;
 
-    if (!sectionElement) {
+    if (!skillsGridElement) {
       return;
     }
 
-    const scrollRoot = sectionElement.closest("main");
+    const scrollRoot = skillsGridElement.closest("main");
     const observerRoot = scrollRoot instanceof Element ? scrollRoot : null;
 
     const observer = new IntersectionObserver(
@@ -96,11 +95,57 @@ export default function ServicesPage() {
       },
       {
         root: observerRoot,
-        threshold: 0.45,
+        threshold: 0,
       }
     );
 
-    observer.observe(sectionElement);
+    observer.observe(skillsGridElement);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const serviceElements = serviceItemRefs.current.filter(
+      (element): element is HTMLLIElement => element !== null
+    );
+
+    if (!serviceElements.length) {
+      return;
+    }
+
+    const scrollRoot = serviceElements[0]?.closest("main");
+    const observerRoot = scrollRoot instanceof Element ? scrollRoot : null;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Number(entry.target.getAttribute("data-service-index"));
+
+          if (!Number.isNaN(index)) {
+            serviceVisibilityRef.current[index] = entry.isIntersecting;
+          }
+        });
+
+        let highestVisibleIndex = -1;
+
+        serviceVisibilityRef.current.forEach((isVisible, index) => {
+          if (isVisible) {
+            highestVisibleIndex = index;
+          }
+        });
+
+        setActiveServiceIndex(highestVisibleIndex);
+      },
+      {
+        root: observerRoot,
+        threshold: 0.25,
+        rootMargin: "0px 0px -15% 0px",
+      }
+    );
+
+    serviceElements.forEach((element) => observer.observe(element));
 
     return () => {
       observer.disconnect();
@@ -108,17 +153,20 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="w-full max-w-5xl space-y-8 text-center lg:text-left">
+    <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
       <section className="space-y-5">
         <h3 className="title-font text-4xl text-[#c94841] sm:text-5xl">
           My Skill Stack
         </h3>
-        <div className="rounded-[2rem] border border-[#d3c8b6] bg-white/65 p-4 shadow-lg sm:p-5">
-          <div className="tetris-board relative mx-auto grid h-[30rem] w-full max-w-4xl grid-cols-6 grid-rows-8 gap-2 overflow-hidden rounded-3xl border border-[#b88c84] bg-[#231e1a] p-3 sm:h-[34rem] sm:p-4">
+        <div
+          ref={skillsGridRef}
+          className="rounded-none border border-[#d3c8b6] bg-white/65 p-4 shadow-lg sm:p-5"
+        >
+          <div className="tetris-board relative mx-auto grid h-[30rem] w-full max-w-4xl grid-cols-6 grid-rows-8 gap-2 overflow-hidden rounded-none border border-[#b88c84] bg-[#231e1a] p-3 sm:h-[34rem] sm:p-4">
             {technologies.map((technology, index) => (
               <div
                 key={technology.name}
-                className={`${isSkillsInView ? "tetris-block-falling" : "tetris-block-waiting"} description-font flex h-full min-h-[2.5rem] items-center justify-center gap-2 rounded-xl border border-black/10 px-2 text-center text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[#1f1b17] shadow-[inset_0_-2px_0_rgba(0,0,0,0.12)] sm:min-h-[2.75rem] sm:text-[0.76rem]`}
+                className={`${isSkillsInView ? "tetris-block-falling" : "tetris-block-waiting"} description-font flex h-full min-h-[2.5rem] items-center justify-center gap-2 rounded-none border border-black/10 px-2 text-center text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[#1f1b17] shadow-[inset_0_-2px_0_rgba(0,0,0,0.12)] sm:min-h-[2.75rem] sm:text-[0.76rem]`}
                 style={
                   {
                     backgroundColor: skillBlockColors[index % skillBlockColors.length],
@@ -143,52 +191,88 @@ export default function ServicesPage() {
             ))}
           </div>
         </div>
-        <h2 className="title-font text-4xl text-[#c94841] sm:text-5xl">
+        <h2 className="title-font mt-24 text-4xl text-[#c94841] sm:mt-28 sm:text-5xl">
           My Services
         </h2>
       </section>
 
-      <ol className="relative mx-auto w-full max-w-4xl space-y-6 text-left">
-        {services.map((service, index) => (
-          <li
-            key={service.title}
-            className="relative grid gap-4 pl-12 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-6 sm:pl-16"
-          >
-            {index === 0 && services.length > 1 && (
-              <span
-                aria-hidden
-                className="absolute bottom-[-1.5rem] left-5 top-1/2 w-px bg-[#cdbfb2] sm:left-[1.875rem]"
-              />
-            )}
-            {index > 0 && index < services.length - 1 && (
-              <span
-                aria-hidden
-                className="absolute bottom-[-1.5rem] left-5 top-[-1.5rem] w-px bg-[#cdbfb2] sm:left-[1.875rem]"
-              />
-            )}
-            {index === services.length - 1 && index > 0 && (
-              <span
-                aria-hidden
-                className="absolute bottom-1/2 left-5 top-[-1.5rem] w-px bg-[#cdbfb2] sm:left-[1.875rem]"
-              />
-            )}
-            <div className="absolute left-0 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#c94841]/30 bg-[#fff4f1] text-sm font-semibold text-[#c94841] shadow-sm sm:left-2 sm:h-11 sm:w-11">
-              {service.priority}
-            </div>
-            <div className="hidden sm:block" />
-            <article className="rounded-[1.75rem] border border-[#d9cec1] bg-white/72 p-5 shadow-lg sm:p-6">
-              <p className="description-font text-[0.7rem] uppercase tracking-[0.28em] text-[#8c5b56]">
-                {service.tier}
-              </p>
-              <h3 className="title-font mt-2 text-xl font-semibold text-[#2f1c3a] sm:text-2xl">
-                {service.title}
-              </h3>
-              <p className="description-font mt-3 text-sm leading-relaxed text-[#1f1f1f] sm:text-base">
-                {service.description}
-              </p>
-            </article>
-          </li>
-        ))}
+      <ol className="relative mx-auto w-full max-w-5xl space-y-6 text-left sm:space-y-8">
+        {services.map((service, index) => {
+          const isLeft = index % 2 === 0;
+
+          return (
+            <li
+              key={service.title}
+              ref={(element) => {
+                serviceItemRefs.current[index] = element;
+              }}
+              data-service-index={index}
+              className="relative grid gap-4 pl-12 sm:min-h-[13rem] sm:grid-cols-[minmax(0,1fr)_4rem_minmax(0,1fr)] sm:items-center sm:gap-6 sm:pl-0"
+            >
+              {index > 0 && (
+                <span
+                  aria-hidden
+                  className={`absolute left-5 top-[-1.5rem] bottom-1/2 w-px transition-colors duration-500 sm:left-1/2 sm:top-[-2rem] sm:-translate-x-1/2 ${
+                    activeServiceIndex >= index ? "bg-[#c94841]" : "bg-[#cdbfb2]"
+                  }`}
+                />
+              )}
+              {index < services.length - 1 && (
+                <span
+                  aria-hidden
+                  className={`absolute left-5 top-1/2 bottom-[-1.5rem] w-px transition-colors duration-500 sm:bottom-[-2rem] sm:left-1/2 sm:-translate-x-1/2 ${
+                    activeServiceIndex >= index + 1 ? "bg-[#c94841]" : "bg-[#cdbfb2]"
+                  }`}
+                />
+              )}
+
+              {isLeft ? (
+                <article className="hidden min-h-[13rem] rounded-none border border-[#d9cec1] bg-white/72 p-5 shadow-lg sm:col-start-1 sm:block sm:h-[13.5rem] sm:p-6">
+                  <h3 className="title-font text-xl font-semibold text-[#2f1c3a] sm:text-2xl">
+                    {service.title}
+                  </h3>
+                  <p className="description-font mt-3 text-sm leading-relaxed text-[#1f1f1f] sm:text-base">
+                    {service.description}
+                  </p>
+                </article>
+              ) : (
+                <div className="hidden sm:block" />
+              )}
+
+              <div
+                className={`absolute left-0 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-none border text-sm font-semibold shadow-sm transition-colors duration-500 sm:static sm:left-auto sm:top-auto sm:h-11 sm:w-11 sm:translate-y-0 sm:justify-self-center ${
+                  activeServiceIndex >= index
+                    ? "border-[#c94841] bg-[#c94841] text-[#fff4f1]"
+                    : "border-[#c94841]/30 bg-[#fff4f1] text-[#c94841]"
+                }`}
+              >
+                {service.priority}
+              </div>
+
+              {isLeft ? (
+                <div className="hidden sm:block" />
+              ) : (
+                <article className="hidden min-h-[13rem] rounded-none border border-[#d9cec1] bg-white/72 p-5 shadow-lg sm:col-start-3 sm:block sm:h-[13.5rem] sm:p-6">
+                  <h3 className="title-font text-xl font-semibold text-[#2f1c3a] sm:text-2xl">
+                    {service.title}
+                  </h3>
+                  <p className="description-font mt-3 text-sm leading-relaxed text-[#1f1f1f] sm:text-base">
+                    {service.description}
+                  </p>
+                </article>
+              )}
+
+              <article className="min-h-[13rem] rounded-none border border-[#d9cec1] bg-white/72 p-5 shadow-lg sm:hidden">
+                <h3 className="title-font text-xl font-semibold text-[#2f1c3a] sm:text-2xl">
+                  {service.title}
+                </h3>
+                <p className="description-font mt-3 text-sm leading-relaxed text-[#1f1f1f] sm:text-base">
+                  {service.description}
+                </p>
+              </article>
+            </li>
+          );
+        })}
       </ol>
     </div>
   );
