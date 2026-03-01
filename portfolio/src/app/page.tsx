@@ -37,22 +37,26 @@ const socialLinks = [
 
 export default function Home() {
   const mainRef = useRef<HTMLElement | null>(null);
+  const homeSectionRef = useRef<HTMLElement | null>(null);
   const aboutSectionRef = useRef<HTMLElement | null>(null);
+  const hasSeenHomeSectionRef = useRef(false);
   const [isAboutInView, setIsAboutInView] = useState(false);
   const [startSecondLineTyping, setStartSecondLineTyping] = useState(false);
+  const [titleAnimationKey, setTitleAnimationKey] = useState(0);
   const handleFirstLineComplete = useCallback(() => {
     setStartSecondLineTyping(true);
   }, []);
 
   useEffect(() => {
     const mainElement = mainRef.current;
+    const homeElement = homeSectionRef.current;
     const aboutElement = aboutSectionRef.current;
 
-    if (!mainElement || !aboutElement) {
+    if (!mainElement || !homeElement || !aboutElement) {
       return;
     }
 
-    const observer = new IntersectionObserver(
+    const aboutObserver = new IntersectionObserver(
       ([entry]) => {
         setIsAboutInView(entry.isIntersecting);
       },
@@ -61,10 +65,32 @@ export default function Home() {
         threshold: 0.45,
       }
     );
-    observer.observe(aboutElement);
+    const homeObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        if (hasSeenHomeSectionRef.current) {
+          setStartSecondLineTyping(false);
+          setTitleAnimationKey((current) => current + 1);
+          return;
+        }
+
+        hasSeenHomeSectionRef.current = true;
+      },
+      {
+        root: mainElement,
+        threshold: 0.55,
+      }
+    );
+
+    aboutObserver.observe(aboutElement);
+    homeObserver.observe(homeElement);
 
     return () => {
-      observer.disconnect();
+      aboutObserver.disconnect();
+      homeObserver.disconnect();
     };
   }, []);
 
@@ -137,6 +163,7 @@ export default function Home() {
       <div className="relative z-10">
         <section
           id="home"
+          ref={homeSectionRef}
           className="min-h-screen px-4 py-16 flex items-center"
         >
           <div className="mx-auto grid w-full max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
@@ -165,6 +192,7 @@ export default function Home() {
               <h1 className="w-full max-w-md space-y-2">
                 <span className="title-font block w-fit whitespace-nowrap bg-white/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
                   <TypingText
+                    key={`hero-line-1-${titleAnimationKey}`}
                     text={"Hello There!"}
                     speed={72}
                     className="!whitespace-nowrap"
@@ -175,6 +203,7 @@ export default function Home() {
                 {startSecondLineTyping && (
                   <span className="title-font block w-fit whitespace-nowrap bg-white/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
                     <TypingText
+                      key={`hero-line-2-${titleAnimationKey}`}
                       text={"I Am Katia Henrriquez."}
                       speed={84}
                       className="!whitespace-nowrap"

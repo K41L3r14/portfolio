@@ -102,18 +102,10 @@ export default function ServicesPage() {
   return (
     <div ref={sectionRef} className="w-full max-w-5xl space-y-8 text-center lg:text-left">
       <section className="space-y-5">
-        <h3 className="title-font text-3xl text-[#c94841] sm:text-4xl">
-          My skills
+        <h3 className="title-font text-4xl text-[#c94841] sm:text-5xl">
+          My Skill Stack
         </h3>
         <div className="rounded-[2rem] border border-[#d3c8b6] bg-white/65 p-4 shadow-lg sm:p-5">
-          <div className="mb-4 flex items-center justify-between gap-3 text-left">
-            <p className="description-font text-xs uppercase tracking-[0.28em] text-[#3b332b] sm:text-sm">
-              Skill stack in motion
-            </p>
-            <p className="description-font text-[0.65rem] uppercase tracking-[0.24em] text-[#8c5b56] sm:text-xs">
-              New pieces dropping into place
-            </p>
-          </div>
           <div className="tetris-board relative mx-auto grid h-[30rem] w-full max-w-4xl grid-cols-6 grid-rows-8 gap-2 overflow-hidden rounded-3xl border border-[#b88c84] bg-[#231e1a] p-3 sm:h-[34rem] sm:p-4">
             {technologies.map((technology, index) => (
               <div
@@ -144,7 +136,7 @@ export default function ServicesPage() {
           </div>
         </div>
         <h2 className="title-font text-4xl text-[#c94841] sm:text-5xl">
-          What I offer...
+          My Services
         </h2>
       </section>
 
