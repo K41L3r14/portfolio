@@ -59,12 +59,6 @@ export default function ServicesPage({ copy }: ServicesPageProps) {
   const [activeServiceIndex, setActiveServiceIndex] = useState(-1);
 
   useEffect(() => {
-    serviceVisibilityRef.current = copy.services.map(() => false);
-    serviceItemRefs.current = [];
-    setActiveServiceIndex(-1);
-  }, [copy.services]);
-
-  useEffect(() => {
     const skillsGridElement = skillsGridRef.current;
 
     if (!skillsGridElement) {
@@ -92,6 +86,9 @@ export default function ServicesPage({ copy }: ServicesPageProps) {
   }, []);
 
   useEffect(() => {
+    serviceVisibilityRef.current = copy.services.map(() => false);
+    setActiveServiceIndex(-1);
+
     const serviceElements = serviceItemRefs.current.filter(
       (element): element is HTMLLIElement => element !== null
     );
