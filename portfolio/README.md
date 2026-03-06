@@ -34,3 +34,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Contact Inquiries (DB Integration)
+
+This project includes an API route that saves contact form submissions to Supabase:
+
+- API endpoint: `POST /api/inquiries`
+- Route file: `src/app/api/inquiries/route.ts`
+
+### 1) Create the table
+
+Run `database/create_portfolio_inquiries_table.sql` in your Supabase SQL editor.
+
+### 2) Configure environment variables
+
+Copy `.env.example` to `.env.local` and set:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_INQUIRIES_TABLE` (optional, defaults to `portfolio_inquiries`)
+
+Important: keep `SUPABASE_SERVICE_ROLE_KEY` server-only. Do not expose it in client code.

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 import type { ContactCopy } from "@/i18n/translations";
 
@@ -12,7 +12,8 @@ type ContactMePageProps = {
 export default function ContactMePage({ copy }: ContactMePageProps) {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const encodedSubject = useMemo(() => encodeURIComponent(copy.mailtoSubject), [copy.mailtoSubject]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   useEffect(() => {
     const sectionElement = sectionRef.current;
@@ -41,6 +42,46 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
     };
   }, []);
 
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitMessage(null);
+    setIsSubmitting(true);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      inquiryType: String(formData.get("inquiryType") ?? ""),
+      message: String(formData.get("message") ?? ""),
+    };
+
+    try {
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+
+      if (!response.ok) {
+        throw new Error(result?.error ?? copy.errorMessage);
+      }
+
+      form.reset();
+      setSubmitMessage({ type: "success", text: copy.successMessage });
+    } catch (error) {
+      const text = error instanceof Error ? error.message : copy.errorMessage;
+      setSubmitMessage({ type: "error", text });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div ref={sectionRef} className="w-full max-w-6xl space-y-8">
       <h2 className="title-font text-4xl text-[#c94841] sm:text-5xl">
@@ -53,17 +94,19 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
             isVisible ? "is-visible" : ""
           }`}
         >
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="grid gap-3 sm:grid-cols-2">
               <input
                 type="text"
                 name="name"
+                required
                 placeholder={copy.namePlaceholder}
                 className="w-full rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#3b332b]/70 focus:border-[#e0584f]"
               />
               <input
                 type="email"
                 name="email"
+                required
                 placeholder={copy.emailPlaceholder}
                 className="w-full rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#3b332b]/70 focus:border-[#e0584f]"
               />
@@ -72,6 +115,7 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
             <select
               name="inquiryType"
               defaultValue=""
+              required
               className="w-full rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] text-[#1f1b17] outline-none focus:border-[#e0584f]"
             >
               <option value="" disabled>
@@ -86,17 +130,29 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
 
             <textarea
               name="message"
+              required
               placeholder={copy.messagePlaceholder}
               rows={7}
               className="w-full resize-none rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#3b332b]/70 focus:border-[#e0584f]"
             />
 
-            <a
-              href={`mailto:henrriquezkatia7@gmail.com?subject=${encodedSubject}`}
-              className="inline-flex w-full items-center justify-center rounded-full bg-[#1f1b17] px-6 py-3 text-xs font-semibold uppercase tracking-[0.35em] text-[#f7f3ec] transition-colors hover:bg-[#e0584f]"
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="inline-flex w-full items-center justify-center rounded-full bg-[#1f1b17] px-6 py-3 text-xs font-semibold uppercase tracking-[0.35em] text-[#f7f3ec] transition-colors hover:bg-[#e0584f] disabled:cursor-not-allowed disabled:opacity-70"
             >
-              {copy.sendMessageLabel}
-            </a>
+              {isSubmitting ? copy.sendingMessageLabel : copy.sendMessageLabel}
+            </button>
+
+            {submitMessage && (
+              <p
+                className={`text-xs uppercase tracking-[0.2em] ${
+                  submitMessage.type === "success" ? "text-[#1b475D]" : "text-[#c94841]"
+                }`}
+              >
+                {submitMessage.text}
+              </p>
+            )}
           </form>
         </div>
 

@@ -89,6 +89,9 @@ export type ContactCopy = {
   messagePlaceholder: string;
   inquiryTypes: string[];
   sendMessageLabel: string;
+  sendingMessageLabel: string;
+  successMessage: string;
+  errorMessage: string;
   getInTouchLabel: string;
   mailtoSubject: string;
   contactMethods: ContactMethodCopy[];
@@ -343,6 +346,9 @@ export const translations: Record<Locale, PortfolioTranslation> = {
         "Other",
       ],
       sendMessageLabel: "Send Message",
+      sendingMessageLabel: "Sending...",
+      successMessage: "Thanks. Your inquiry was sent successfully.",
+      errorMessage: "Could not send your inquiry right now. Please try again.",
       getInTouchLabel: "Get in Touch",
       mailtoSubject: "Portfolio Inquiry",
       contactMethods: [
@@ -582,6 +588,9 @@ export const translations: Record<Locale, PortfolioTranslation> = {
         "Otro",
       ],
       sendMessageLabel: "Enviar Mensaje",
+      sendingMessageLabel: "Enviando...",
+      successMessage: "Gracias. Tu consulta fue enviada correctamente.",
+      errorMessage: "No se pudo enviar tu consulta ahora. Intenta de nuevo.",
       getInTouchLabel: "Hablemos",
       mailtoSubject: "Consulta del Portafolio",
       contactMethods: [
