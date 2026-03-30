@@ -1,17 +1,49 @@
 import Image from "next/image";
+import { cookies } from "next/headers";
+
+import { hasValidDevHubSession, DEV_HUB_SESSION_COOKIE } from "@/lib/devHubAuth";
 
 import AboutMeSection from "./aboutMe/page";
 import ContactMePage from "./contactMe/page";
 import ProjectsPage from "./projects/page";
 import ServicesPage from "./services/page";
 
-const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#aboutMe", label: "About me" },
-  { href: "#services", label: "Services" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contactMe", label: "Contact me" },
-];
+type HomeProps = {
+  searchParams?: {
+    lang?: string;
+  };
+};
+
+const copy = {
+  en: {
+    navLinks: [
+      { href: "#home", label: "Home" },
+      { href: "#aboutMe", label: "About me" },
+      { href: "#services", label: "Services" },
+      { href: "#projects", label: "Projects" },
+      { href: "#contactMe", label: "Contact me" },
+    ],
+    role: "Software engineer",
+    intro:
+      "I'm a curiosity-driven software engineer who loves tackling tough problems and crafting memorable products. I build resilient backend systems and polished, human-friendly interfaces.",
+    emailMe: "Email me",
+    resume: "Resume",
+  },
+  es: {
+    navLinks: [
+      { href: "#home", label: "Inicio" },
+      { href: "#aboutMe", label: "Sobre mi" },
+      { href: "#services", label: "Servicios" },
+      { href: "#projects", label: "Proyectos" },
+      { href: "#contactMe", label: "Contacto" },
+    ],
+    role: "Ingeniera de software",
+    intro:
+      "Soy una ingeniera de software impulsada por la curiosidad. Me encanta resolver problemas complejos y crear productos memorables. Construyo sistemas backend resilientes e interfaces pulidas y faciles de usar.",
+    emailMe: "Escribeme",
+    resume: "Curriculum",
+  },
+} as const;
 
 const socialLinks = [
   {
@@ -31,7 +63,14 @@ const socialLinks = [
   },
 ];
 
-export default function Home() {
+export default async function Home({ searchParams }: HomeProps) {
+  const selectedLang = searchParams?.lang === "es" ? "es" : "en";
+  const labels = copy[selectedLang];
+
+  const cookieStore = await cookies();
+  const sessionCookie = cookieStore.get(DEV_HUB_SESSION_COOKIE)?.value;
+  const canSeeDevHub = hasValidDevHubSession(sessionCookie);
+
   return (
     <main className="min-h-screen h-screen snap-y snap-mandatory overflow-y-auto scroll-smooth bg-[#f7f3ec] text-[#1f1b17]">
       <header className="fixed left-0 right-0 top-0 z-30 bg-[#f7f3ec]/95">
@@ -40,7 +79,7 @@ export default function Home() {
             Portfolio
           </span>
           <nav className="flex flex-wrap items-center justify-center text-[0.7rem] uppercase tracking-[0.35em] text-[#3b332b]">
-            {navLinks.map((link, index) => (
+            {labels.navLinks.map((link, index) => (
               <span key={link.label} className="flex items-center">
                 <a
                   href={link.href}
@@ -48,7 +87,7 @@ export default function Home() {
                 >
                   {link.label}
                 </a>
-                {index < navLinks.length - 1 && (
+                {index < labels.navLinks.length - 1 && (
                   <span className="mx-2 h-3 w-px bg-[#3b332b]/60" />
                 )}
               </span>
@@ -56,6 +95,36 @@ export default function Home() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <div className="inline-flex items-center rounded-full border border-[#1f1b17] text-[0.62rem] uppercase tracking-[0.22em]">
+              <a
+                href="/?lang=en"
+                className={`rounded-l-full px-2 py-1 transition-colors ${
+                  selectedLang === "en"
+                    ? "bg-[#1f1b17] text-[#f7f3ec]"
+                    : "hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                }`}
+              >
+                EN
+              </a>
+              <a
+                href="/?lang=es"
+                className={`rounded-r-full px-2 py-1 transition-colors ${
+                  selectedLang === "es"
+                    ? "bg-[#1f1b17] text-[#f7f3ec]"
+                    : "hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                }`}
+              >
+                ES
+              </a>
+            </div>
+            {canSeeDevHub ? (
+              <a
+                href="/dev-hub"
+                className="rounded-full border border-[#1f1b17] px-3 py-1 text-[0.62rem] uppercase tracking-[0.22em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+              >
+                Dev Hub
+              </a>
+            ) : null}
             {socialLinks.map((link) => (
               <a
                 key={link.label}
@@ -97,7 +166,7 @@ export default function Home() {
               </div>
             </div>
             <p className="text-xs uppercase tracking-[0.35em] text-[#3b332b]">
-              Software engineer
+              {labels.role}
             </p>
           </div>
 
@@ -109,9 +178,7 @@ export default function Home() {
             </h1>
             <div className="pt-8 sm:pt-12">
               <p className="max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
-              I&apos;m a curiosity-driven software engineer who loves tackling
-              tough problems and crafting memorable products. I build resilient
-              backend systems and polished, human-friendly interfaces.
+                {labels.intro}
               </p>
             </div>
             <div className="mt-6 flex flex-wrap gap-4 sm:mt-8">
@@ -119,7 +186,7 @@ export default function Home() {
                 href="mailto:henrriquezkatia7@gmail.com"
                 className="inline-flex items-center justify-center border-2 border-[#1f1b17] px-6 py-2 text-[0.7rem] uppercase tracking-[0.35em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
               >
-                Email me
+                {labels.emailMe}
               </a>
               <a
                 href="/katia_s_Resume__Anonymous___update___Copy_.pdf"
@@ -127,7 +194,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Resume
+                {labels.resume}
               </a>
             </div>
           </div>
