@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+import { isDevHubAuthenticated } from "@/lib/devHubAuth";
+import { inquiriesTable, inquiryStatuses, type InquiryStatus } from "@/lib/inquiries";
+
 type InquiryPayload = {
   name: string;
   email: string;
@@ -49,6 +52,17 @@ function validatePayload(body: unknown): { valid: true; payload: InquiryPayload 
   return { valid: true, payload };
 }
 
+function getSupabaseConfig() {
+  const supabaseUrl = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    return null;
+  }
+
+  return { supabaseUrl, serviceRoleKey };
+}
+
 export async function POST(request: Request) {
   let parsedBody: unknown;
 
@@ -64,13 +78,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: validation.error }, { status: 400 });
   }
 
-  const supabaseUrl = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const tableName = process.env.SUPABASE_INQUIRIES_TABLE ?? "portfolio_inquiries";
+  const config = getSupabaseConfig();
 
-  if (!supabaseUrl || !serviceRoleKey) {
+  if (!config) {
     return NextResponse.json(
-      { error: "Server configuration missing. Add Supabase env variables." },
+      {
+        error:
+          "Server configuration missing. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local, then restart the Next.js server.",
+      },
       { status: 500 }
     );
   }
@@ -82,11 +97,11 @@ export async function POST(request: Request) {
     message: validation.payload.message,
   };
 
-  const response = await fetch(`${supabaseUrl}/rest/v1/${tableName}`, {
+  const response = await fetch(`${config.supabaseUrl}/rest/v1/${inquiriesTable}`, {
     method: "POST",
     headers: {
-      apikey: serviceRoleKey,
-      Authorization: `Bearer ${serviceRoleKey}`,
+      apikey: config.serviceRoleKey,
+      Authorization: `Bearer ${config.serviceRoleKey}`,
       "Content-Type": "application/json",
       Prefer: "return=minimal",
     },
@@ -102,4 +117,49 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({ ok: true }, { status: 201 });
+}
+
+export async function GET() {
+  const isAuthenticated = await isDevHubAuthenticated();
+
+  if (!isAuthenticated) {
+    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+  }
+
+  const config = getSupabaseConfig();
+
+  if (!config) {
+    return NextResponse.json(
+      {
+        error:
+          "Server configuration missing. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local, then restart the Next.js server.",
+      },
+      { status: 500 }
+    );
+  }
+
+  const query = "select=id,name,email,inquiry_type,message,status,created_at,updated_at&order=created_at.desc";
+  const response = await fetch(`${config.supabaseUrl}/rest/v1/${inquiriesTable}?${query}`, {
+    method: "GET",
+    headers: {
+      apikey: config.serviceRoleKey,
+      Authorization: `Bearer ${config.serviceRoleKey}`,
+    },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const failureMessage = await response.text();
+    return NextResponse.json(
+      { error: `Failed to load inquiries. ${failureMessage || "Please try again."}` },
+      { status: 500 }
+    );
+  }
+
+  const rows = (await response.json()) as Array<Record<string, unknown>>;
+  const validStatuses = new Set<InquiryStatus>(inquiryStatuses);
+
+  const inquiries = rows.filter((row) => validStatuses.has(row.status as InquiryStatus));
+
+  return NextResponse.json({ inquiries });
 }
