@@ -57,6 +57,8 @@ export type OtherProjectCopy = {
   title: string;
   summary: string;
   skills: string[];
+  video?: string;
+  slideshow?: string[];
 };
 
 export type ProjectsCopy = {
@@ -128,6 +130,21 @@ const obserraSlides = [
   "/Obserra-photos/TasksAssigningCoordinatorRole.png",
   "/Obserra-photos/ViewControlsAndTasksCoordinatorRole.png",
   "/Obserra-photos/ProgressOnTasksContributorRole.png",
+];
+
+const diarySlides = [
+  "/diary-photos/image (26).png",
+  "/diary-photos/image (27).png",
+  "/diary-photos/image (28).png",
+  "/diary-photos/image (30).png",
+];
+
+const auditAiSlides = [
+  "/AuditAI-photos/Screenshot 2026-04-02 125950.png",
+  "/AuditAI-photos/Screenshot 2026-04-02 130005.png",
+  "/AuditAI-photos/Screenshot 2026-04-02 132953.png",
+  "/AuditAI-photos/Screenshot 2026-04-02 133138.png",
+  "/AuditAI-photos/Screenshot 2026-04-02 133157.png",
 ];
 
 export const translations: Record<Locale, PortfolioTranslation> = {
@@ -296,6 +313,7 @@ export const translations: Record<Locale, PortfolioTranslation> = {
             "Database Schema Design",
             "Testing and Documentation",
           ],
+          slideshow: diarySlides,
         },
         {
           title: "AuditAI: AI-Powered Vulnerability Scanner",
@@ -313,6 +331,8 @@ export const translations: Record<Locale, PortfolioTranslation> = {
             "Prompt Engineering",
             "Model Evaluation Metrics",
           ],
+          video: "/videos/Full-AuditAI demo.mp4",
+          slideshow: auditAiSlides,
         },
         {
           title: "Zulip Open-Source Contribution - Moderation and Engagement Features",
@@ -538,6 +558,7 @@ export const translations: Record<Locale, PortfolioTranslation> = {
             "Diseno de Esquema de Base de Datos",
             "Pruebas y Documentacion",
           ],
+          slideshow: diarySlides,
         },
         {
           title: "AuditAI: Escaner de Vulnerabilidades con IA",
@@ -555,6 +576,8 @@ export const translations: Record<Locale, PortfolioTranslation> = {
             "Prompt Engineering",
             "Metricas de Evaluacion de Modelos",
           ],
+          video: "/videos/Full-AuditAI demo.mp4",
+          slideshow: auditAiSlides,
         },
         {
           title: "Contribucion Open Source en Zulip - Moderacion y Engagement",

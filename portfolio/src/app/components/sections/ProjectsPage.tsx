@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { OtherProjectCopy, ProjectsCopy } from "@/i18n/translations";
 
@@ -16,13 +16,34 @@ type ObserraSlideshowProps = {
   altPrefix: string;
 };
 
-function ObserraSlideshow({
+function MediaSlideshow({
   slides,
   prevLabel,
   nextLabel,
   altPrefix,
 }: ObserraSlideshowProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const hasSlides = slides.length > 0;
+  const safeIndex = hasSlides
+    ? Math.min(currentIndex, Math.max(0, slides.length - 1))
+    : 0;
+
+  useEffect(() => {
+    if (!hasSlides) {
+      if (currentIndex !== 0) {
+        setCurrentIndex(0);
+      }
+      return;
+    }
+
+    if (currentIndex > slides.length - 1) {
+      setCurrentIndex(0);
+    }
+  }, [currentIndex, hasSlides, slides.length]);
+
+  if (!hasSlides) {
+    return null;
+  }
 
   const showPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
@@ -36,8 +57,8 @@ function ObserraSlideshow({
     <div className="mb-4 space-y-3">
       <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-[#d3c8b6] bg-[#f0ebe3]">
         <Image
-          src={slides[currentIndex]}
-          alt={`${altPrefix} ${currentIndex + 1}`}
+          src={encodeURI(slides[safeIndex])}
+          alt={`${altPrefix} ${safeIndex + 1}`}
           fill
           sizes="(min-width: 1280px) 980px, (min-width: 1024px) 78vw, (min-width: 640px) 90vw, 96vw"
           quality={100}
@@ -53,7 +74,7 @@ function ObserraSlideshow({
           {prevLabel}
         </button>
         <p className="text-xs uppercase tracking-[0.2em] text-[#3b332b]">
-          {currentIndex + 1} / {slides.length}
+          {safeIndex + 1} / {slides.length}
         </p>
         <button
           type="button"
@@ -72,14 +93,25 @@ function OtherProjectsSlideshow({
   prevLabel,
   nextLabel,
   dotAriaPrefix,
+  hoverHint,
 }: {
   projects: OtherProjectCopy[];
   prevLabel: string;
   nextLabel: string;
   dotAriaPrefix: string;
+  hoverHint: string;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [mediaIndex, setMediaIndex] = useState(0);
   const currentProject = projects[currentIndex];
+  const mediaItems = [
+    ...(currentProject.video ? [{ type: "video" as const, src: currentProject.video }] : []),
+    ...((currentProject.slideshow ?? []).map((slide) => ({ type: "image" as const, src: slide }))),
+  ];
+  const hasMedia = mediaItems.length > 0;
+  const safeMediaIndex = hasMedia
+    ? Math.min(mediaIndex, Math.max(0, mediaItems.length - 1))
+    : 0;
 
   const showPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
@@ -89,24 +121,84 @@ function OtherProjectsSlideshow({
     setCurrentIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
   };
 
+  const showPreviousMedia = () => {
+    setMediaIndex((prev) => (prev === 0 ? mediaItems.length - 1 : prev - 1));
+  };
+
+  const showNextMedia = () => {
+    setMediaIndex((prev) => (prev === mediaItems.length - 1 ? 0 : prev + 1));
+  };
+
+  useEffect(() => {
+    setMediaIndex(0);
+  }, [currentProject.title]);
+
   return (
     <div className="space-y-4">
-      <article className="rounded-2xl bg-white/70 p-5 text-left text-[#1f1f1f] shadow-lg">
+      <article className="group rounded-2xl bg-white/70 p-5 text-left text-[#1f1f1f] shadow-lg transition-[background-color,box-shadow] duration-300 hover:bg-white/85 hover:shadow-xl">
+        {hasMedia && (
+          <div className="mb-4 space-y-3">
+            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-[#d3c8b6] bg-[#f0ebe3]">
+              {mediaItems[safeMediaIndex].type === "video" ? (
+                <video className="h-full w-full" controls preload="metadata">
+                  <source src={encodeURI(mediaItems[safeMediaIndex].src)} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <Image
+                  src={encodeURI(mediaItems[safeMediaIndex].src)}
+                  alt={`${currentProject.title} media ${safeMediaIndex + 1}`}
+                  fill
+                  sizes="(min-width: 1280px) 980px, (min-width: 1024px) 78vw, (min-width: 640px) 90vw, 96vw"
+                  quality={100}
+                  className="object-contain"
+                />
+              )}
+            </div>
+            {mediaItems.length > 1 && (
+              <div className="flex items-center justify-between gap-2">
+                <button
+                  type="button"
+                  onClick={showPreviousMedia}
+                  className="rounded border border-[#1f1b17] px-3 py-1 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                >
+                  {prevLabel}
+                </button>
+                <p className="text-xs uppercase tracking-[0.2em] text-[#3b332b]">
+                  {safeMediaIndex + 1} / {mediaItems.length}
+                </p>
+                <button
+                  type="button"
+                  onClick={showNextMedia}
+                  className="rounded border border-[#1f1b17] px-3 py-1 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                >
+                  {nextLabel}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
         <h4 className="title-font text-lg font-semibold text-[#2f1c3a]">
           {currentProject.title}
         </h4>
-        <p className="description-font mt-2 text-sm leading-relaxed sm:text-base">
-          {currentProject.summary}
+        <p className="mt-2 hidden text-[0.7rem] uppercase tracking-[0.24em] text-[#3b332b] lg:block lg:group-hover:hidden">
+          {hoverHint}
         </p>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {currentProject.skills.map((skill) => (
-            <span
-              key={skill}
-              className="rounded-full border border-[#d3c8b6] bg-[#f0ebe3] px-2 py-1 text-[0.62rem] uppercase tracking-[0.15em] text-[#3b332b]"
-            >
-              {skill}
-            </span>
-          ))}
+
+        <div className="mt-4 lg:mt-0 lg:max-h-0 lg:overflow-hidden lg:opacity-0 lg:transition-all lg:duration-500 lg:ease-out lg:group-hover:mt-4 lg:group-hover:max-h-[56rem] lg:group-hover:opacity-100">
+          <p className="description-font text-sm leading-relaxed sm:text-base">
+            {currentProject.summary}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {currentProject.skills.map((skill) => (
+              <span
+                key={skill}
+                className="rounded-full border border-[#d3c8b6] bg-[#f0ebe3] px-2 py-1 text-[0.62rem] uppercase tracking-[0.15em] text-[#3b332b]"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
         </div>
       </article>
 
@@ -162,13 +254,13 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
             {project.video && (
               <div className="mb-4 overflow-hidden rounded-xl border border-[#d3c8b6] bg-[#f0ebe3]">
                 <video className="aspect-video w-full" controls preload="metadata">
-                  <source src={project.video} type="video/mp4" />
+                  <source src={encodeURI(project.video)} type="video/mp4" />
                   {copy.videoFallback}
                 </video>
               </div>
             )}
             {project.slideshow && (
-              <ObserraSlideshow
+              <MediaSlideshow
                 slides={project.slideshow}
                 prevLabel={copy.prevLabel}
                 nextLabel={copy.nextLabel}
@@ -217,6 +309,7 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
           prevLabel={copy.prevLabel}
           nextLabel={copy.nextLabel}
           dotAriaPrefix={copy.otherProjectDotAria}
+          hoverHint={copy.hoverHint}
         />
       </section>
     </div>
