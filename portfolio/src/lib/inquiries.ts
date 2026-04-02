@@ -1,4 +1,4 @@
-export const inquiryStatuses = ["new", "in_progress", "done"] as const;
+export const inquiryStatuses = ["new", "reviewed", "accepted"] as const;
 
 export type InquiryStatus = (typeof inquiryStatuses)[number];
 

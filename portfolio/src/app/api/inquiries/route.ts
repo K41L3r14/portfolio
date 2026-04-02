@@ -159,7 +159,21 @@ export async function GET() {
   const rows = (await response.json()) as Array<Record<string, unknown>>;
   const validStatuses = new Set<InquiryStatus>(inquiryStatuses);
 
-  const inquiries = rows.filter((row) => validStatuses.has(row.status as InquiryStatus));
+  const inquiries = rows
+    .map((row) => {
+      const status = row.status;
+
+      if (status === "in_progress") {
+        return { ...row, status: "reviewed" };
+      }
+
+      if (status === "done") {
+        return { ...row, status: "accepted" };
+      }
+
+      return row;
+    })
+    .filter((row) => validStatuses.has(row.status as InquiryStatus));
 
   return NextResponse.json({ inquiries });
 }

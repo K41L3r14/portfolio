@@ -13,12 +13,12 @@ const columnConfig: Record<InquiryStatus, { title: string; color: string }> = {
     title: "New",
     color: "bg-[#fce68b]",
   },
-  in_progress: {
-    title: "In Progress",
-    color: "bg-[#f9cbd3]",
+  reviewed: {
+    title: "Reviewed",
+    color: "bg-[#f7bf75]",
   },
-  done: {
-    title: "Done",
+  accepted: {
+    title: "Accepted",
     color: "bg-[#bde7c4]",
   },
 };
@@ -101,6 +101,35 @@ export default function DevHubPage() {
     }
   }
 
+  async function deleteInquiry(id: string) {
+    const shouldDelete = window.confirm("Delete this inquiry? This cannot be undone.");
+
+    if (!shouldDelete) {
+      return;
+    }
+
+    setPendingIds((current) => ({ ...current, [id]: true }));
+    const previous = inquiries;
+    setInquiries((current) => current.filter((item) => item.id !== id));
+
+    try {
+      const response = await fetch(`/api/inquiries/${id}`, {
+        method: "DELETE",
+      });
+      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+
+      if (!response.ok) {
+        throw new Error(result?.error ?? "Unable to delete inquiry.");
+      }
+    } catch (deleteError) {
+      const message = deleteError instanceof Error ? deleteError.message : "Unable to delete inquiry.";
+      setError(message);
+      setInquiries(previous);
+    } finally {
+      setPendingIds((current) => ({ ...current, [id]: false }));
+    }
+  }
+
   async function handleLogout() {
     setIsLoggingOut(true);
 
@@ -113,15 +142,27 @@ export default function DevHubPage() {
   }
 
   const grouped = useMemo(() => {
+    const normalized = inquiries.map((item) => {
+      if ((item.status as string) === "in_progress") {
+        return { ...item, status: "reviewed" as InquiryStatus };
+      }
+
+      if ((item.status as string) === "done") {
+        return { ...item, status: "accepted" as InquiryStatus };
+      }
+
+      return item;
+    });
+
     return inquiryStatuses.reduce(
       (accumulator, status) => {
-        accumulator[status] = inquiries.filter((item) => item.status === status);
+        accumulator[status] = normalized.filter((item) => item.status === status);
         return accumulator;
       },
       {
         new: [] as InquiryRecord[],
-        in_progress: [] as InquiryRecord[],
-        done: [] as InquiryRecord[],
+        reviewed: [] as InquiryRecord[],
+        accepted: [] as InquiryRecord[],
       }
     );
   }, [inquiries]);
@@ -242,9 +283,19 @@ export default function DevHubPage() {
                       <p className="text-xs uppercase tracking-[0.16em] text-[#3b332b]">{inquiry.inquiry_type}</p>
                       <p className="mt-2 text-sm leading-relaxed text-[#1f1b17]">{inquiry.message}</p>
 
-                      <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-[#3b332b]">
-                        Drag to another column to update status
-                      </p>
+                      <div className="mt-3 flex items-center justify-between gap-2">
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-[#3b332b]">
+                          Drag to another column to update status
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => void deleteInquiry(inquiry.id)}
+                          disabled={pendingIds[inquiry.id]}
+                          className="rounded-full border border-[#7e2f29] px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-[#7e2f29] transition-colors hover:bg-[#7e2f29] hover:text-[#fff5ec] disabled:cursor-not-allowed disabled:opacity-70"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </article>
                   ))}
 

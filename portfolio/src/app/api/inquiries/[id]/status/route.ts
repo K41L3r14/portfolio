@@ -11,6 +11,18 @@ type Body = {
   status?: string;
 };
 
+function toDatabaseStatus(status: InquiryStatus): "new" | "in_progress" | "done" {
+  if (status === "reviewed") {
+    return "in_progress";
+  }
+
+  if (status === "accepted") {
+    return "done";
+  }
+
+  return "new";
+}
+
 export async function PATCH(request: Request, context: Params) {
   const isAuthenticated = await isDevHubAuthenticated();
 
@@ -47,7 +59,7 @@ export async function PATCH(request: Request, context: Params) {
       Prefer: "return=minimal",
     },
     body: JSON.stringify({
-      status: body.status,
+      status: toDatabaseStatus(body.status as InquiryStatus),
       updated_at: new Date().toISOString(),
     }),
   });
