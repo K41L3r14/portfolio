@@ -119,7 +119,7 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
       </h2>
 
       <div className="relative grid items-start gap-3 lg:grid-cols-[minmax(0,1fr)_12.5rem]">
-        <section className="rounded-3xl border border-[#1f1b17]/25 bg-gradient-to-br from-[#f8f5ef] via-[#fffdf9] to-[#efe8dd] p-5 shadow-[0_24px_50px_rgba(31,27,23,0.15)] sm:p-7">
+        <section className="scrapbook-page rounded-3xl p-5 sm:p-7">
           {hasMedia ? (
             <div className="mb-6 space-y-3">
               <button
@@ -205,10 +205,10 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
                 key={project.title}
                 type="button"
                 onClick={() => setActiveProjectIndex(index)}
-                className={`min-w-[11rem] shrink-0 rounded-xl border px-3 py-2 text-left transition-all duration-200 lg:rounded-r-2xl lg:rounded-l-none lg:border-l-0 ${
+                className={`sticky-tab min-w-[11rem] shrink-0 rounded-xl px-3 py-2 text-left transition-all duration-200 lg:rounded-r-2xl lg:rounded-l-none lg:border-l-0 ${
                   isActive
-                    ? "border-[#1f1b17]/45 bg-[#fffdf8] shadow-[0_8px_16px_rgba(31,27,23,0.12)] lg:translate-x-[-8px]"
-                    : "border-[#b9aa92] bg-[#eee5d8] hover:bg-[#f4ecdf]"
+                    ? "border-[#7b5f2c]/50 bg-[rgba(255,243,186,0.68)] shadow-[0_10px_18px_rgba(60,44,26,0.18)] lg:translate-x-[-8px]"
+                    : "bg-[rgba(255,239,174,0.42)] hover:bg-[rgba(255,239,174,0.56)]"
                 }`}
               >
                 <p className="title-font truncate text-sm text-[#2f1c3a]">
