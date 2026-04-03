@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function DevHubLoginPage() {
   const [password, setPassword] = useState("");
@@ -9,7 +9,6 @@ export default function DevHubLoginPage() {
   const [error, setError] = useState<string | null>(null);
 
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -32,7 +31,7 @@ export default function DevHubLoginPage() {
         throw new Error(result?.error ?? "Login failed.");
       }
 
-      const nextPath = searchParams.get("next") || "/dev-hub";
+      const nextPath = new URLSearchParams(window.location.search).get("next") || "/dev-hub";
       router.replace(nextPath);
       router.refresh();
     } catch (submitError) {
