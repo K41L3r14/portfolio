@@ -200,7 +200,11 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
         >
           <div className="mx-auto grid w-full max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <div className="space-y-8">
-              <div className="w-full max-w-[23rem] border border-[#8eb8b5] bg-[#f2fbfa] p-4 pb-7 shadow-[0_20px_40px_rgba(16,54,59,0.22)] sm:max-w-[25rem]">
+              <div className="relative w-full max-w-[23rem] border border-[#8eb8b5] bg-[#f2fbfa] p-4 pb-7 shadow-[0_26px_44px_rgba(16,54,59,0.3)] sm:max-w-[25rem]">
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-1/2 top-0 z-10 h-7 w-36 -translate-x-1/2 -translate-y-1/2 rotate-[2deg] border border-[rgba(141,125,94,0.34)] bg-[linear-gradient(180deg,rgba(255,255,250,0.76)_0%,rgba(250,239,204,0.56)_100%)] shadow-[0_4px_10px_rgba(61,46,27,0.18)]"
+                />
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#e7f4f2]">
                   <Image
                     src="/profile.png"

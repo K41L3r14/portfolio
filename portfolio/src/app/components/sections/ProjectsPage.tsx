@@ -118,7 +118,7 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
         {copy.sectionTitle}
       </h2>
 
-      <div className="relative grid items-start gap-3 lg:grid-cols-[minmax(0,1fr)_12.5rem]">
+      <div className="relative grid items-start gap-3 lg:gap-0 lg:grid-cols-[minmax(0,1fr)_12.5rem]">
         <section className="scrapbook-page rounded-3xl p-5 sm:p-7">
           {hasMedia ? (
             <div className="mb-6 space-y-3">
@@ -197,7 +197,7 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
           </div>
         </section>
 
-        <aside className="no-scrollbar flex max-h-[48rem] gap-2 overflow-y-auto pb-1 lg:flex-col lg:pt-4">
+        <aside className="projects-side-tabs no-scrollbar flex max-h-[48rem] gap-2 overflow-y-auto pb-1 lg:flex-col lg:pt-4">
           {allProjects.map((project, index) => {
             const isActive = index === activeProjectIndex;
             return (
@@ -205,16 +205,16 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
                 key={project.title}
                 type="button"
                 onClick={() => setActiveProjectIndex(index)}
-                className={`sticky-tab min-w-[11rem] shrink-0 rounded-xl px-3 py-2 text-left transition-all duration-200 lg:rounded-r-2xl lg:rounded-l-none lg:border-l-0 ${
+                className={`sticky-tab projects-side-tab group min-w-[11rem] shrink-0 rounded-xl px-3 py-2 text-left transition-all duration-200 ${
                   isActive
-                    ? "border-[#2b7c72]/50 bg-[rgba(95, 177, 168, 0.72)] shadow-[0_10px_18px_rgba(13, 60, 56, 0.22)] lg:translate-x-[-8px]"
-                    : "bg-[rgba(95, 177, 168, 0.40)] hover:bg-[rgba(95, 177, 168, 0.56)]"
+                    ? "is-active border-[#f29bbd]/65 bg-[rgba(242,155,189,0.72)] shadow-[0_10px_18px_rgba(108,53,83,0.22)]"
+                    : "bg-[rgba(250,196,218,0.45)] hover:bg-[rgba(242,155,189,0.58)]"
                 }`}
               >
-                <p className="title-font truncate text-sm text-[#ff5ca8]">
+                <p className="projects-side-tab-title title-font truncate text-sm text-[#1d555b]">
                   {project.title}
                 </p>
-                <p className="description-font mt-0.5 truncate text-[0.58rem] uppercase tracking-[0.16em] text-[#1d555b]">
+                <p className="projects-side-tab-subtitle description-font mt-0.5 truncate text-[0.58rem] uppercase tracking-[0.16em] text-[#1d555b]">
                   {project.subtitle}
                 </p>
               </button>
