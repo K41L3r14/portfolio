@@ -160,9 +160,9 @@ export default function ServicesPage() {
         </h3>
         <div
           ref={skillsGridRef}
-          className="rounded-none border border-[#d3c8b6] bg-white/65 p-4 shadow-lg sm:p-5"
+          className="rounded-none border border-[#d3c8b6] bg-transparent p-4 shadow-lg sm:p-5"
         >
-          <div className="tetris-board relative mx-auto grid h-[30rem] w-full max-w-4xl grid-cols-6 grid-rows-8 gap-2 overflow-hidden rounded-none border border-[#b88c84] bg-[#231e1a] p-3 sm:h-[34rem] sm:p-4">
+          <div className="tetris-board relative mx-auto grid h-[30rem] w-full max-w-4xl grid-cols-6 grid-rows-8 gap-2 overflow-hidden rounded-none border border-[#b88c84] p-3 sm:h-[34rem] sm:p-4">
             {technologies.map((technology, index) => (
               <div
                 key={technology.name}
