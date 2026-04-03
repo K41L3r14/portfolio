@@ -34,7 +34,7 @@ export default function AboutMeSection({ copy }: AboutMeSectionProps) {
 
         <div className="relative z-10 flex min-h-[34rem] items-start justify-start p-6 sm:min-h-[40rem] sm:p-10">
           <div className="max-w-3xl space-y-5 text-left text-[#e7f4f2]">
-            <h2 className="title-font text-3xl leading-tight text-[#ff5ca8] sm:text-4xl lg:text-5xl">
+            <h2 className="title-font scrap-tape-title text-3xl leading-tight text-[#ff5ca8] sm:text-4xl lg:text-5xl">
               {copy.title}
             </h2>
             <div className="description-font space-y-4 text-sm leading-relaxed sm:text-base">

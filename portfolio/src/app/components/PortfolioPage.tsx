@@ -246,7 +246,7 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
                 )}
               </h1>
               <div className="pt-6 sm:pt-10">
-                <p className="description-font max-w-md text-sm leading-relaxed text-white sm:text-base">
+                <p className="description-font w-fit max-w-md rounded-2xl bg-black/42 px-4 py-4 text-sm leading-relaxed text-white shadow-[0_14px_28px_rgba(0,0,0,0.28)] backdrop-blur-[1.2px] sm:px-5 sm:py-5 sm:text-base">
                   {copy.hero.intro}
                 </p>
               </div>

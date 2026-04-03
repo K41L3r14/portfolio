@@ -155,7 +155,7 @@ export default function ServicesPage() {
   return (
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
       <section className="space-y-5">
-        <h3 className="title-font text-4xl text-[#c94841] sm:text-5xl">
+        <h3 className="title-font scrap-tape-title text-4xl text-[#c94841] sm:text-5xl">
           My Skill Stack
         </h3>
         <div
@@ -191,7 +191,7 @@ export default function ServicesPage() {
             ))}
           </div>
         </div>
-        <h2 className="title-font mt-24 text-4xl text-[#c94841] sm:mt-28 sm:text-5xl">
+        <h2 className="title-font scrap-tape-title mt-24 text-4xl text-[#c94841] sm:mt-28 sm:text-5xl">
           My Services
         </h2>
       </section>

@@ -68,7 +68,7 @@ export default function ContactMePage() {
 
   return (
     <div ref={sectionRef} className="w-full max-w-6xl space-y-8">
-      <h2 className="title-font text-4xl text-[#c94841] sm:text-5xl">
+      <h2 className="title-font scrap-tape-title text-4xl text-[#c94841] sm:text-5xl">
         Lets Work together!
       </h2>
 

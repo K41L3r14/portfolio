@@ -137,7 +137,7 @@ export default function ServicesPage({ copy }: ServicesPageProps) {
   return (
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
       <section className="space-y-5">
-        <h3 className="title-font text-4xl text-[#ff5ca8] sm:text-5xl">
+        <h3 className="title-font scrap-tape-title text-4xl text-[#ff5ca8] sm:text-5xl">
           {copy.skillStackTitle}
         </h3>
         <div
@@ -173,7 +173,7 @@ export default function ServicesPage({ copy }: ServicesPageProps) {
             ))}
           </div>
         </div>
-        <h2 className="title-font mt-24 text-4xl text-[#ff5ca8] sm:mt-28 sm:text-5xl">
+        <h2 className="title-font scrap-tape-title mt-24 text-4xl text-[#ff5ca8] sm:mt-28 sm:text-5xl">
           {copy.servicesTitle}
         </h2>
       </section>

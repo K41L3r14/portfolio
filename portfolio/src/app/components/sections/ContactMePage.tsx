@@ -84,7 +84,7 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
 
   return (
     <div ref={sectionRef} className="w-full max-w-6xl space-y-8">
-      <h2 className="title-font text-4xl text-[#ff5ca8] sm:text-5xl">
+      <h2 className="title-font scrap-tape-title text-4xl text-[#ff5ca8] sm:text-5xl">
         {copy.title}
       </h2>
 

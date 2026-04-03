@@ -31,6 +31,54 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
+.scrap-tape-title {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  padding: 0.08em 0.5em 0.16em;
+  line-height: 1.1;
+  transform: rotate(-1.2deg);
+  transform-origin: center;
+}
+
+.scrap-tape-title::before {
+  content: "";
+  position: absolute;
+  inset: 0.02em -0.18em -0.04em;
+  z-index: -2;
+  border: 1px solid rgba(115, 92, 63, 0.3);
+  background: linear-gradient(
+    175deg,
+    rgba(255, 246, 205, 0.9) 0%,
+    rgba(255, 236, 186, 0.74) 100%
+  );
+  box-shadow:
+    0 5px 12px rgba(60, 44, 26, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.62);
+  transform: none;
+}
+
+.scrap-tape-title::after {
+  content: "";
+  position: absolute;
+  top: -0.3em;
+  left: 50%;
+  z-index: -1;
+  width: clamp(4.2rem, 42%, 8.5rem);
+  height: 0.58em;
+  transform: translateX(-50%) rotate(1.5deg);
+  border: 1px solid rgba(141, 125, 94, 0.32);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 250, 0.72) 0%,
+    rgba(250, 239, 204, 0.55) 100%
+  );
+  box-shadow:
+    0 2px 7px rgba(61, 46, 27, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.64);
+  backdrop-filter: blur(0.7px);
+}
+
 .description-font {
   font-family: var(--font-inter), system-ui, sans-serif;
 }

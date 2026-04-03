@@ -114,7 +114,7 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
 
   return (
     <div className="w-full max-w-7xl space-y-8 text-left">
-      <h2 className="title-font text-center text-5xl text-[#ff5ca8] sm:text-6xl lg:text-left">
+      <h2 className="title-font scrap-tape-title mx-auto text-center text-5xl text-[#ff5ca8] sm:text-6xl lg:mx-0 lg:text-left">
         {copy.sectionTitle}
       </h2>
 
