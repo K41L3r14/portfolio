@@ -41,14 +41,14 @@ const technologies: Technology[] = [
 ];
 
 const skillBlockColors = [
-  "#f6b8ab",
-  "#f7cfaa",
-  "#f7e3a1",
-  "#b6e0c4",
-  "#b9e8e1",
-  "#bdd4fb",
-  "#e2c2f1",
-  "#f8bfd3",
+  "#a7ded7",
+  "#95d4cc",
+  "#83cbc2",
+  "#72c1b7",
+  "#63b2ad",
+  "#8bd2dc",
+  "#79c5cf",
+  "#67b9c4",
 ];
 
 export default function ServicesPage({ copy }: ServicesPageProps) {
@@ -137,18 +137,18 @@ export default function ServicesPage({ copy }: ServicesPageProps) {
   return (
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
       <section className="space-y-5">
-        <h3 className="title-font text-4xl text-[#c94841] sm:text-5xl">
+        <h3 className="title-font text-4xl text-[#ff5ca8] sm:text-5xl">
           {copy.skillStackTitle}
         </h3>
         <div
           ref={skillsGridRef}
-          className="rounded-none border border-[#d3c8b6] bg-white/65 p-4 shadow-lg sm:p-5"
+          className="rounded-none border border-[#8ab5b2] bg-white/65 p-4 shadow-lg sm:p-5"
         >
-          <div className="tetris-board relative mx-auto grid h-[30rem] w-full max-w-4xl grid-cols-6 grid-rows-8 gap-2 overflow-hidden rounded-none border border-[#b88c84] bg-[#231e1a] p-3 sm:h-[34rem] sm:p-4">
+          <div className="tetris-board relative mx-auto grid h-[30rem] w-full max-w-4xl grid-cols-6 grid-rows-8 gap-2 overflow-hidden rounded-none border border-[#4c6f74] bg-[#0f2f33] p-3 sm:h-[34rem] sm:p-4">
             {technologies.map((technology, index) => (
               <div
                 key={technology.name}
-                className={`${isSkillsInView ? "tetris-block-falling" : "tetris-block-waiting"} description-font flex h-full min-h-[2.5rem] items-center justify-center gap-2 rounded-none border border-black/10 px-2 text-center text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[#1f1b17] shadow-[inset_0_-2px_0_rgba(0,0,0,0.12)] sm:min-h-[2.75rem] sm:text-[0.76rem]`}
+                className={`${isSkillsInView ? "tetris-block-falling" : "tetris-block-waiting"} description-font flex h-full min-h-[2.5rem] items-center justify-center gap-2 rounded-none border border-black/10 px-2 text-center text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-[#10363b] shadow-[inset_0_-2px_0_rgba(0,0,0,0.12)] sm:min-h-[2.75rem] sm:text-[0.76rem]`}
                 style={
                   {
                     backgroundColor: skillBlockColors[index % skillBlockColors.length],
@@ -173,7 +173,7 @@ export default function ServicesPage({ copy }: ServicesPageProps) {
             ))}
           </div>
         </div>
-        <h2 className="title-font mt-24 text-4xl text-[#c94841] sm:mt-28 sm:text-5xl">
+        <h2 className="title-font mt-24 text-4xl text-[#ff5ca8] sm:mt-28 sm:text-5xl">
           {copy.servicesTitle}
         </h2>
       </section>
@@ -195,7 +195,7 @@ export default function ServicesPage({ copy }: ServicesPageProps) {
                 <span
                   aria-hidden
                   className={`absolute left-5 top-[-1.5rem] bottom-1/2 w-px transition-colors duration-500 sm:left-1/2 sm:top-[-2rem] sm:-translate-x-1/2 ${
-                    activeServiceIndex >= index ? "bg-[#c94841]" : "bg-[#cdbfb2]"
+                    activeServiceIndex >= index ? "bg-[#1f7f78]" : "bg-[#79a8a5]"
                   }`}
                 />
               )}
@@ -203,17 +203,17 @@ export default function ServicesPage({ copy }: ServicesPageProps) {
                 <span
                   aria-hidden
                   className={`absolute left-5 top-1/2 bottom-[-1.5rem] w-px transition-colors duration-500 sm:bottom-[-2rem] sm:left-1/2 sm:-translate-x-1/2 ${
-                    activeServiceIndex >= index + 1 ? "bg-[#c94841]" : "bg-[#cdbfb2]"
+                    activeServiceIndex >= index + 1 ? "bg-[#1f7f78]" : "bg-[#79a8a5]"
                   }`}
                 />
               )}
 
               {isLeft ? (
-                <article className="hidden min-h-[13rem] rounded-none border border-[#d9cec1] bg-white/72 p-5 shadow-lg sm:col-start-1 sm:block sm:h-[13.5rem] sm:p-6">
-                  <h3 className="title-font text-xl font-semibold text-[#2f1c3a] sm:text-2xl">
+                <article className="hidden min-h-[13rem] rounded-none border border-[#8fb8b5] bg-white/72 p-5 shadow-lg sm:col-start-1 sm:block sm:h-[13.5rem] sm:p-6">
+                  <h3 className="title-font text-xl font-semibold text-[#ff5ca8] sm:text-2xl">
                     {service.title}
                   </h3>
-                  <p className="description-font mt-3 text-sm leading-relaxed text-[#1f1f1f] sm:text-base">
+                  <p className="description-font mt-3 text-sm leading-relaxed text-[#12363b] sm:text-base">
                     {service.description}
                   </p>
                 </article>
@@ -224,8 +224,8 @@ export default function ServicesPage({ copy }: ServicesPageProps) {
               <div
                 className={`absolute left-0 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-none border text-sm font-semibold shadow-sm transition-colors duration-500 sm:static sm:left-auto sm:top-auto sm:h-11 sm:w-11 sm:translate-y-0 sm:justify-self-center ${
                   activeServiceIndex >= index
-                    ? "border-[#c94841] bg-[#c94841] text-[#fff4f1]"
-                    : "border-[#c94841]/30 bg-[#fff4f1] text-[#c94841]"
+                    ? "border-[#1f7f78] bg-[#1f7f78] text-[#eefbfa]"
+                    : "border-[#1f7f78]/30 bg-[#eefbfa] text-[#1f7f78]"
                 }`}
               >
                 {service.priority}
@@ -234,21 +234,21 @@ export default function ServicesPage({ copy }: ServicesPageProps) {
               {isLeft ? (
                 <div className="hidden sm:block" />
               ) : (
-                <article className="hidden min-h-[13rem] rounded-none border border-[#d9cec1] bg-white/72 p-5 shadow-lg sm:col-start-3 sm:block sm:h-[13.5rem] sm:p-6">
-                  <h3 className="title-font text-xl font-semibold text-[#2f1c3a] sm:text-2xl">
+                <article className="hidden min-h-[13rem] rounded-none border border-[#8fb8b5] bg-white/72 p-5 shadow-lg sm:col-start-3 sm:block sm:h-[13.5rem] sm:p-6">
+                  <h3 className="title-font text-xl font-semibold text-[#ff5ca8] sm:text-2xl">
                     {service.title}
                   </h3>
-                  <p className="description-font mt-3 text-sm leading-relaxed text-[#1f1f1f] sm:text-base">
+                  <p className="description-font mt-3 text-sm leading-relaxed text-[#12363b] sm:text-base">
                     {service.description}
                   </p>
                 </article>
               )}
 
-              <article className="min-h-[13rem] rounded-none border border-[#d9cec1] bg-white/72 p-5 shadow-lg sm:hidden">
-                <h3 className="title-font text-xl font-semibold text-[#2f1c3a] sm:text-2xl">
+              <article className="min-h-[13rem] rounded-none border border-[#8fb8b5] bg-white/72 p-5 shadow-lg sm:hidden">
+                <h3 className="title-font text-xl font-semibold text-[#ff5ca8] sm:text-2xl">
                   {service.title}
                 </h3>
-                <p className="description-font mt-3 text-sm leading-relaxed text-[#1f1f1f] sm:text-base">
+                <p className="description-font mt-3 text-sm leading-relaxed text-[#12363b] sm:text-base">
                   {service.description}
                 </p>
               </article>

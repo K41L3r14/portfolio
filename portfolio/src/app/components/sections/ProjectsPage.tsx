@@ -114,7 +114,7 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
 
   return (
     <div className="w-full max-w-7xl space-y-8 text-left">
-      <h2 className="title-font text-center text-5xl text-[#c94841] sm:text-6xl lg:text-left">
+      <h2 className="title-font text-center text-5xl text-[#ff5ca8] sm:text-6xl lg:text-left">
         {copy.sectionTitle}
       </h2>
 
@@ -125,7 +125,7 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
               <button
                 type="button"
                 onClick={() => setIsMediaExpanded(true)}
-                className="relative mx-auto block aspect-[16/7] w-full overflow-hidden rounded-2xl border border-[#d3c8b6] bg-[#f0ebe3] text-left shadow-[0_12px_26px_rgba(31,27,23,0.12)]"
+                className="relative mx-auto block aspect-[16/7] w-full overflow-hidden rounded-2xl border border-[#8ab5b2] bg-[#e3f1ef] text-left shadow-[0_12px_26px_rgba(31,27,23,0.12)]"
               >
                 {activeProject.media[safeMediaIndex].type === "video" ? (
                   <video className="h-full w-full" controls preload="metadata">
@@ -154,17 +154,17 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
                   <button
                     type="button"
                     onClick={showPreviousMedia}
-                    className="rounded-lg border border-[#1f1b17] px-3 py-1.5 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                    className="rounded-lg border border-[#10363b] px-3 py-1.5 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[#10363b] hover:text-[#e7f4f2]"
                   >
                     {copy.prevLabel}
                   </button>
-                  <p className="text-sm uppercase tracking-[0.2em] text-[#3b332b]">
+                  <p className="text-sm uppercase tracking-[0.2em] text-[#1d555b]">
                     {safeMediaIndex + 1} / {activeProject.media.length}
                   </p>
                   <button
                     type="button"
                     onClick={showNextMedia}
-                    className="rounded-lg border border-[#1f1b17] px-3 py-1.5 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                    className="rounded-lg border border-[#10363b] px-3 py-1.5 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[#10363b] hover:text-[#e7f4f2]"
                   >
                     {copy.nextLabel}
                   </button>
@@ -173,23 +173,23 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
             </div>
           ) : null}
 
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1b475D]">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#175f66]">
             {activeProject.subtitle}
           </p>
-          <h3 className="title-font mt-2 text-2xl font-semibold text-[#2f1c3a] sm:text-3xl">
+          <h3 className="title-font mt-2 text-2xl font-semibold text-[#ff5ca8] sm:text-3xl">
             {activeProject.title}
           </h3>
-          <p className="description-font mt-4 text-base leading-relaxed text-[#231f1b] sm:text-lg">
+          <p className="description-font mt-4 text-base leading-relaxed text-[#12363b] sm:text-lg">
             {activeProject.summary}
           </p>
-          <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-[#3b332b]">
+          <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-[#1d555b]">
             {copy.technologiesLabel}
           </p>
           <div className="mt-3 flex flex-wrap gap-2.5">
             {activeProject.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-[#d3c8b6] bg-[#f0ebe3] px-3 py-1.5 text-[0.65rem] uppercase tracking-[0.14em] text-[#3b332b]"
+                className="rounded-full border border-[#8ab5b2] bg-[#e3f1ef] px-3 py-1.5 text-[0.65rem] uppercase tracking-[0.14em] text-[#1d555b]"
               >
                 {tag}
               </span>
@@ -207,14 +207,14 @@ export default function ProjectsPage({ copy }: ProjectsPageProps) {
                 onClick={() => setActiveProjectIndex(index)}
                 className={`sticky-tab min-w-[11rem] shrink-0 rounded-xl px-3 py-2 text-left transition-all duration-200 lg:rounded-r-2xl lg:rounded-l-none lg:border-l-0 ${
                   isActive
-                    ? "border-[#7b5f2c]/50 bg-[rgba(255,243,186,0.68)] shadow-[0_10px_18px_rgba(60,44,26,0.18)] lg:translate-x-[-8px]"
-                    : "bg-[rgba(255,239,174,0.42)] hover:bg-[rgba(255,239,174,0.56)]"
+                    ? "border-[#2b7c72]/50 bg-[rgba(95, 177, 168, 0.72)] shadow-[0_10px_18px_rgba(13, 60, 56, 0.22)] lg:translate-x-[-8px]"
+                    : "bg-[rgba(95, 177, 168, 0.40)] hover:bg-[rgba(95, 177, 168, 0.56)]"
                 }`}
               >
-                <p className="title-font truncate text-sm text-[#2f1c3a]">
+                <p className="title-font truncate text-sm text-[#ff5ca8]">
                   {project.title}
                 </p>
-                <p className="description-font mt-0.5 truncate text-[0.58rem] uppercase tracking-[0.16em] text-[#3b332b]">
+                <p className="description-font mt-0.5 truncate text-[0.58rem] uppercase tracking-[0.16em] text-[#1d555b]">
                   {project.subtitle}
                 </p>
               </button>

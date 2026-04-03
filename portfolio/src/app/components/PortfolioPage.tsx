@@ -98,41 +98,41 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
   return (
     <main
       ref={mainRef}
-      className={`relative isolate min-h-screen h-screen overflow-x-clip overflow-y-auto scroll-smooth text-[#1f1b17] ${
+      className={`relative isolate min-h-screen h-screen overflow-x-clip overflow-y-auto scroll-smooth text-[#10363b] ${
         isAboutInView ? "mesh-mixing" : ""
       }`}
-      style={{ backgroundColor: "#f7f3ec" } as CSSProperties}
+      style={{
+        backgroundColor: "#e7f4f2",
+        backgroundImage: "url('/website-art/background.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      } as CSSProperties}
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
-      >
-        <div className="pastel-mesh absolute inset-[-14%]" />
-        <div className="pastel-stripes absolute inset-0" />
-      </div>
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 bg-black/10" />
 
       <header
         className="fixed left-0 right-0 top-0 z-30"
         style={{
-          backgroundColor: "rgba(247, 243, 236, 0.82)",
+          backgroundColor: "rgba(231, 244, 242, 0.82)",
           backdropFilter: "blur(6px)",
         }}
       >
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-4 py-2 sm:flex-row sm:justify-between sm:py-3">
-          <span className="description-font text-sm font-medium tracking-[0.18em] text-[#3b332b]">
+          <span className="description-font text-sm font-medium tracking-[0.18em] text-[#ff5ca8]">
             {copy.headerName}
           </span>
-          <nav className="description-font flex flex-wrap items-center justify-center text-[0.7rem] uppercase tracking-[0.35em] text-[#3b332b]">
+          <nav className="description-font flex flex-wrap items-center justify-center text-[0.7rem] uppercase tracking-[0.35em] text-[#ff5ca8]">
             {copy.navLinks.map((link, index) => (
               <span key={link.label} className="flex items-center">
                 <a
                   href={link.href}
-                  className="px-2 transition-colors hover:text-[#e0584f]"
+                  className="px-2 transition-colors hover:text-[#2d9f95]"
                 >
                   {link.label}
                 </a>
                 {index < copy.navLinks.length - 1 && (
-                  <span className="mx-2 h-3 w-px bg-[#3b332b]/60" />
+                  <span className="mx-2 h-3 w-px bg-[#1d555b]/60" />
                 )}
               </span>
             ))}
@@ -140,18 +140,18 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
 
           <div className="flex items-center gap-3">
             <div className="description-font flex items-center gap-2">
-              <span className="text-[0.58rem] uppercase tracking-[0.22em] text-[#5a4a3f]">
+              <span className="text-[0.58rem] uppercase tracking-[0.22em] text-[#2d666c]">
                 {copy.languageSwitcher.label}
               </span>
-              <div className="inline-flex overflow-hidden rounded-full border-2 border-[#1f1b17] bg-white/80 shadow-[0_6px_18px_rgba(31,27,23,0.16)]">
+              <div className="inline-flex overflow-hidden rounded-full border-2 border-[#10363b] bg-white/80 shadow-[0_6px_18px_rgba(16,54,59,0.2)]">
                 <a
                   href={`/en${activeHash}`}
                   aria-label={copy.languageSwitcher.english}
                   aria-current={locale === "en" ? "page" : undefined}
                   className={`px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.22em] transition-colors ${
                     locale === "en"
-                      ? "bg-[#c94841] text-[#fff4f1]"
-                      : "text-[#1f1b17] hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                      ? "bg-[#1f7f78] text-[#eefbfa]"
+                      : "text-[#10363b] hover:bg-[#10363b] hover:text-[#e7f4f2]"
                   }`}
                 >
                   EN
@@ -160,10 +160,10 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
                   href={`/es${activeHash}`}
                   aria-label={copy.languageSwitcher.spanish}
                   aria-current={locale === "es" ? "page" : undefined}
-                  className={`border-l-2 border-[#1f1b17] px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.22em] transition-colors ${
+                  className={`border-l-2 border-[#10363b] px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.22em] transition-colors ${
                     locale === "es"
-                      ? "bg-[#c94841] text-[#fff4f1]"
-                      : "text-[#1f1b17] hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                      ? "bg-[#1f7f78] text-[#eefbfa]"
+                      : "text-[#10363b] hover:bg-[#10363b] hover:text-[#e7f4f2]"
                   }`}
                 >
                   ES
@@ -200,8 +200,8 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
         >
           <div className="mx-auto grid w-full max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <div className="space-y-8">
-              <div className="w-full max-w-[23rem] border border-[#d8d1c7] bg-[#fffdf8] p-4 pb-7 shadow-[0_20px_40px_rgba(31,27,23,0.18)] sm:max-w-[25rem]">
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#f7f3ec]">
+              <div className="w-full max-w-[23rem] border border-[#8eb8b5] bg-[#f2fbfa] p-4 pb-7 shadow-[0_20px_40px_rgba(16,54,59,0.22)] sm:max-w-[25rem]">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#e7f4f2]">
                   <Image
                     src="/profile.png"
                     alt="Profile"
@@ -211,18 +211,18 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
                     priority
                   />
                 </div>
-                <p className="description-font pt-4 text-center text-xs uppercase tracking-[0.28em] text-[#5a4a3f]">
+                <p className="description-font pt-4 text-center text-xs uppercase tracking-[0.28em] text-[#2d666c]">
                   {copy.hero.photoTag}
                 </p>
               </div>
-              <p className="description-font text-xs uppercase tracking-[0.35em] text-[#3b332b]">
+              <p className="description-font text-xs uppercase tracking-[0.35em] text-white">
                 {copy.hero.role}
               </p>
             </div>
 
             <div className="space-y-6 pt-8 sm:pt-12 lg:pt-14">
               <h1 className="w-full max-w-md space-y-2">
-                <span className="title-font block w-fit whitespace-nowrap bg-white/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
+                <span className="title-font block w-fit whitespace-nowrap bg-white/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#ff5ca8] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
                   <TypingText
                     key={`hero-line-1-${titleAnimationKey}-${locale}`}
                     text={copy.hero.line1}
@@ -233,7 +233,7 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
                   />
                 </span>
                 {startSecondLineTyping && (
-                  <span className="title-font block w-fit whitespace-nowrap bg-white/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#c94841] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
+                  <span className="title-font block w-fit whitespace-nowrap bg-white/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#ff5ca8] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
                     <TypingText
                       key={`hero-line-2-${titleAnimationKey}-${locale}`}
                       text={copy.hero.line2}
@@ -246,20 +246,20 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
                 )}
               </h1>
               <div className="pt-6 sm:pt-10">
-                <p className="description-font max-w-md text-sm leading-relaxed text-[#1f1b17] sm:text-base">
+                <p className="description-font max-w-md text-sm leading-relaxed text-white sm:text-base">
                   {copy.hero.intro}
                 </p>
               </div>
               <div className="mt-6 flex flex-wrap gap-4 sm:mt-8">
                 <a
                   href="mailto:henrriquezkatia7@gmail.com"
-                  className="inline-flex items-center justify-center border-2 border-[#1f1b17] px-6 py-2 text-[0.7rem] uppercase tracking-[0.35em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                  className="inline-flex items-center justify-center border-2 border-[#10363b] px-6 py-2 text-[0.7rem] uppercase tracking-[0.35em] transition-colors hover:bg-[#10363b] hover:text-[#e7f4f2]"
                 >
                   {copy.hero.emailCta}
                 </a>
                 <a
                   href="/My_resume.pdf"
-                  className="inline-flex items-center justify-center border-2 border-[#1f1b17] px-6 py-2 text-[0.7rem] uppercase tracking-[0.35em] transition-colors hover:bg-[#1f1b17] hover:text-[#f7f3ec]"
+                  className="inline-flex items-center justify-center border-2 border-[#10363b] px-6 py-2 text-[0.7rem] uppercase tracking-[0.35em] transition-colors hover:bg-[#10363b] hover:text-[#e7f4f2]"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -273,7 +273,7 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
         <section
           id="aboutMe"
           ref={aboutSectionRef}
-          className="min-h-screen px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          className="min-h-screen px-4 py-16 text-[#10363b] flex items-center justify-center"
           style={{ backgroundColor: "transparent" }}
         >
           <div className="mx-auto flex w-full max-w-[88rem] items-center justify-center text-center lg:text-left">
@@ -283,7 +283,7 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
 
         <section
           id="services"
-          className="min-h-screen px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          className="min-h-screen px-4 py-16 text-[#10363b] flex items-center justify-center"
           style={{ backgroundColor: "transparent" }}
         >
           <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
@@ -293,7 +293,7 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
 
         <section
           id="projects"
-          className="min-h-screen px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          className="min-h-screen px-4 py-16 text-[#10363b] flex items-center justify-center"
           style={{ backgroundColor: "transparent" }}
         >
           <div className="mx-auto flex w-full max-w-4xl items-center justify-center">
@@ -303,7 +303,7 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
 
         <section
           id="contactMe"
-          className="min-h-screen px-4 py-16 text-[#1f1b17] flex items-center justify-center"
+          className="min-h-screen px-4 py-16 text-[#10363b] flex items-center justify-center"
           style={{ backgroundColor: "transparent" }}
         >
           <div className="mx-auto flex w-full max-w-6xl items-center justify-center">

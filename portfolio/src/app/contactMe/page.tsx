@@ -74,7 +74,7 @@ export default function ContactMePage() {
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(220px,0.42fr)]">
         <div
-          className={`contact-panel-left rounded-3xl border border-[#2d2926] bg-[#f7f3ec]/60 p-4 sm:p-6 ${
+          className={`contact-panel-left rounded-3xl border border-[#2d2926] bg-[#f7f3ec] p-4 sm:p-6 ${
             isVisible ? "is-visible" : ""
           }`}
         >
@@ -126,7 +126,7 @@ export default function ContactMePage() {
         </div>
 
         <aside
-          className={`contact-panel-right rounded-3xl border border-[#2d2926] bg-[#f7f3ec]/60 p-5 sm:p-6 ${
+          className={`contact-panel-right rounded-3xl border border-[#2d2926] bg-[#f7f3ec] p-5 sm:p-6 ${
             isVisible ? "is-visible" : ""
           }`}
         >

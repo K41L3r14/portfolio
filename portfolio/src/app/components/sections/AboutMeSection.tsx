@@ -11,7 +11,7 @@ export default function AboutMeSection({ copy }: AboutMeSectionProps) {
 
   return (
     <div className="w-full max-w-[88rem]">
-      <div className="relative min-h-[34rem] overflow-hidden rounded-3xl border border-[#d3c8b6] shadow-xl sm:min-h-[40rem]">
+      <div className="relative min-h-[34rem] overflow-hidden rounded-3xl border border-[#8ab5b2] shadow-xl sm:min-h-[40rem]">
         <div className="about-banner-track absolute inset-y-0 left-0">
           {loopedImages.map((image, index) => (
             <div
@@ -30,11 +30,11 @@ export default function AboutMeSection({ copy }: AboutMeSectionProps) {
           ))}
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1f1b17]/78 via-[#1f1b17]/52 to-[#1f1b17]/24" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#10363b]/78 via-[#10363b]/52 to-[#10363b]/24" />
 
         <div className="relative z-10 flex min-h-[34rem] items-start justify-start p-6 sm:min-h-[40rem] sm:p-10">
-          <div className="max-w-3xl space-y-5 text-left text-[#f7f3ec]">
-            <h2 className="title-font text-3xl leading-tight sm:text-4xl lg:text-5xl">
+          <div className="max-w-3xl space-y-5 text-left text-[#e7f4f2]">
+            <h2 className="title-font text-3xl leading-tight text-[#ff5ca8] sm:text-4xl lg:text-5xl">
               {copy.title}
             </h2>
             <div className="description-font space-y-4 text-sm leading-relaxed sm:text-base">

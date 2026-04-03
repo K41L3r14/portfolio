@@ -84,13 +84,13 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
 
   return (
     <div ref={sectionRef} className="w-full max-w-6xl space-y-8">
-      <h2 className="title-font text-4xl text-[#c94841] sm:text-5xl">
+      <h2 className="title-font text-4xl text-[#ff5ca8] sm:text-5xl">
         {copy.title}
       </h2>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(220px,0.42fr)]">
         <div
-          className={`contact-panel-left rounded-3xl border border-[#2d2926] bg-[#f7f3ec]/60 p-4 sm:p-6 ${
+          className={`contact-panel-left rounded-3xl border border-[#1a4a50] bg-[#e7f4f2] p-4 sm:p-6 ${
             isVisible ? "is-visible" : ""
           }`}
         >
@@ -101,14 +101,14 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
                 name="name"
                 required
                 placeholder={copy.namePlaceholder}
-                className="w-full rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#3b332b]/70 focus:border-[#e0584f]"
+                className="w-full rounded-xl border border-[#1a4a50] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#1d555b]/70 focus:border-[#2d9f95]"
               />
               <input
                 type="email"
                 name="email"
                 required
                 placeholder={copy.emailPlaceholder}
-                className="w-full rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#3b332b]/70 focus:border-[#e0584f]"
+                className="w-full rounded-xl border border-[#1a4a50] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#1d555b]/70 focus:border-[#2d9f95]"
               />
             </div>
 
@@ -116,7 +116,7 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
               name="inquiryType"
               defaultValue=""
               required
-              className="w-full rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] text-[#1f1b17] outline-none focus:border-[#e0584f]"
+              className="w-full rounded-xl border border-[#1a4a50] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] text-[#10363b] outline-none focus:border-[#2d9f95]"
             >
               <option value="" disabled>
                 {copy.inquiryPlaceholder}
@@ -133,13 +133,13 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
               required
               placeholder={copy.messagePlaceholder}
               rows={7}
-              className="w-full resize-none rounded-xl border border-[#2d2926] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#3b332b]/70 focus:border-[#e0584f]"
+              className="w-full resize-none rounded-xl border border-[#1a4a50] bg-transparent px-4 py-3 text-xs uppercase tracking-[0.3em] outline-none placeholder:text-[#1d555b]/70 focus:border-[#2d9f95]"
             />
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex w-full items-center justify-center rounded-full bg-[#1f1b17] px-6 py-3 text-xs font-semibold uppercase tracking-[0.35em] text-[#f7f3ec] transition-colors hover:bg-[#e0584f] disabled:cursor-not-allowed disabled:opacity-70"
+              className="inline-flex w-full items-center justify-center rounded-full bg-[#10363b] px-6 py-3 text-xs font-semibold uppercase tracking-[0.35em] text-[#e7f4f2] transition-colors hover:bg-[#2d9f95] disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isSubmitting ? copy.sendingMessageLabel : copy.sendMessageLabel}
             </button>
@@ -147,7 +147,7 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
             {submitMessage && (
               <p
                 className={`text-xs uppercase tracking-[0.2em] ${
-                  submitMessage.type === "success" ? "text-[#1b475D]" : "text-[#c94841]"
+                  submitMessage.type === "success" ? "text-[#175f66]" : "text-[#1f7f78]"
                 }`}
               >
                 {submitMessage.text}
@@ -157,11 +157,11 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
         </div>
 
         <aside
-          className={`contact-panel-right rounded-3xl border border-[#2d2926] bg-[#f7f3ec]/60 p-5 sm:p-6 ${
+          className={`contact-panel-right rounded-3xl border border-[#1a4a50] bg-[#e7f4f2] p-5 sm:p-6 ${
             isVisible ? "is-visible" : ""
           }`}
         >
-          <p className="mb-6 text-xs uppercase tracking-[0.35em] text-[#3b332b]">
+          <p className="mb-6 text-xs uppercase tracking-[0.35em] text-[#1d555b]">
             {copy.getInTouchLabel}
           </p>
           <div className="space-y-5">
@@ -181,10 +181,10 @@ export default function ContactMePage({ copy }: ContactMePageProps) {
                   className="mt-0.5 object-contain opacity-80 transition group-hover:opacity-100"
                 />
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-[#1f1b17]">
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#10363b]">
                     {method.label}
                   </p>
-                  <p className="text-sm leading-snug text-[#3b332b]">
+                  <p className="text-sm leading-snug text-[#1d555b]">
                     {method.value}
                   </p>
                 </div>
