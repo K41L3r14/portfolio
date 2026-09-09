@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { COMPANY_NAME, PERSON_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,8 +19,45 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Katia's Portfolio",
-  description: "My own Personal Portfolio website built with Next.js and Tailwind CSS",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${PERSON_NAME} | Software Engineer & Owner`,
+    template: `%s | ${PERSON_NAME}`,
+  },
+  description: `${PERSON_NAME} is a software engineer and owner of ${COMPANY_NAME}, creating professional websites and custom software for businesses in Omaha and worldwide.`,
+  applicationName: COMPANY_NAME,
+  manifest: "/manifest.webmanifest",
+  authors: [{ name: PERSON_NAME, url: SITE_URL }],
+  creator: PERSON_NAME,
+  publisher: COMPANY_NAME,
+  category: "Software Development",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: COMPANY_NAME,
+    title: `${PERSON_NAME} | Software Engineer & Owner`,
+    description: `Professional websites and custom software for businesses and organizations in Omaha and worldwide.`,
+    locale: "en_US",
+    alternateLocale: ["es_US"],
+    images: [
+      {
+        url: "/profile.png",
+        alt: `${PERSON_NAME}, software engineer and owner of ${COMPANY_NAME}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${PERSON_NAME} | Software Engineer & Owner`,
+    description: `Professional websites and custom software for businesses and organizations in Omaha and worldwide.`,
+    images: ["/profile.png"],
+  },
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",

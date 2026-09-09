@@ -150,8 +150,9 @@ const auditAiSlides = [
 export const translations: Record<Locale, PortfolioTranslation> = {
   en: {
     metadata: {
-      title: "Katia's Portfolio",
-      description: "Personal portfolio website built with Next.js and Tailwind CSS.",
+      title: "Katia Henrriquez | Software Engineer & Owner",
+      description:
+        "Katia Henrriquez, owner of Yisel Software Solutions LLC, builds professional websites and custom software for businesses in Omaha and worldwide.",
     },
     headerName: "Katia Henrriquez",
     navLinks: [
@@ -185,11 +186,11 @@ export const translations: Record<Locale, PortfolioTranslation> = {
     },
     hero: {
       photoTag: "#NiceToMeetYou",
-      role: "Software engineer",
+      role: "Software Engineer | Owner, Yisel Software Solutions LLC",
       line1: "Hello There!",
       line2: "I Am Katia Henrriquez.",
       intro:
-        "I'm a curiosity-driven developer who enjoys learning new technologies and solving real problems. I like building reliable full-stack applications and taking on challenges that help me grow.",
+        "I run Yisel Software Solutions LLC to help businesses and organizations establish a strong online presence through professional websites and custom software that supports everyday work. Based in Omaha, I work with clients locally, remotely, and internationally.",
       emailCta: "Email me",
       resumeCta: "Resume",
     },
@@ -199,7 +200,7 @@ export const translations: Record<Locale, PortfolioTranslation> = {
         { src: "/aboutMe2.jpeg", alt: "Katia walking outdoors" },
         { src: "/aboutMe3.jpeg", alt: "Katia portrait" },
       ],
-      title: "I am an Independent Software Developer",
+      title: "Software Engineer & Owner of Yisel Software Solutions LLC",
       paragraphs: [
         "I enjoy collaborating on projects that solve real problems and create meaningful experiences. My full-stack work includes reliable backend systems and polished, user-friendly interfaces. I am always looking for ways to grow and learn new technologies.",
         "Outside of coding, I enjoy time with family and friends, drawing, and learning languages. Spanish is my first language, I learned English at 13, and I am currently teaching myself Japanese. I also love game design because it combines art and software development.",
@@ -395,8 +396,9 @@ export const translations: Record<Locale, PortfolioTranslation> = {
   },
   es: {
     metadata: {
-      title: "Portafolio de Katia",
-      description: "Portafolio personal creado con Next.js y Tailwind CSS.",
+      title: "Katia Henrriquez | Ingeniera de Software y Propietaria",
+      description:
+        "Katia Henrriquez, propietaria de Yisel Software Solutions LLC, crea sitios web profesionales y software personalizado para empresas en Omaha y todo el mundo.",
     },
     headerName: "Katia Henrriquez",
     navLinks: [
@@ -430,11 +432,11 @@ export const translations: Record<Locale, PortfolioTranslation> = {
     },
     hero: {
       photoTag: "#MuchoGusto",
-      role: "Ingeniera de software",
+      role: "Ingeniera de Software | Propietaria, Yisel Software Solutions LLC",
       line1: "Hola!",
       line2: "Soy Katia Henrriquez.",
       intro:
-        "Soy una desarrolladora impulsada por la curiosidad, me gusta aprender nuevas tecnologias y resolver problemas reales. Disfruto crear aplicaciones full-stack confiables y enfrentar retos que me ayuden a crecer.",
+        "Dirijo Yisel Software Solutions LLC para ayudar a empresas y organizaciones a establecer una presencia solida en linea mediante sitios web profesionales y software personalizado que facilita el trabajo diario. Estoy en Omaha y trabajo con clientes locales, remotos e internacionales.",
       emailCta: "Escribeme",
       resumeCta: "Curriculum",
     },
@@ -444,7 +446,7 @@ export const translations: Record<Locale, PortfolioTranslation> = {
         { src: "/aboutMe2.jpeg", alt: "Katia caminando al aire libre" },
         { src: "/aboutMe3.jpeg", alt: "Retrato de Katia" },
       ],
-      title: "Soy una Desarrolladora de Software Independiente",
+      title: "Ingeniera de Software y Propietaria de Yisel Software Solutions LLC",
       paragraphs: [
         "Disfruto colaborar en proyectos que resuelven problemas reales y crean experiencias con impacto. Mi trabajo full-stack incluye sistemas backend confiables e interfaces pulidas y faciles de usar. Siempre busco crecer y aprender nuevas tecnologias.",
         "Fuera del codigo, disfruto pasar tiempo con familia y amigos, dibujar y aprender idiomas. El espanol es mi primer idioma, aprendi ingles a los 13 anos y actualmente estudio japones por mi cuenta. Tambien me encanta el diseno de juegos porque combina arte y desarrollo de software.",

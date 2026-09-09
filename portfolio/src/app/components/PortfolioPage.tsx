@@ -208,7 +208,7 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#e7f4f2]">
                   <Image
                     src="/profile.png"
-                    alt="Profile"
+                    alt="Katia Henrriquez, software engineer and owner of Yisel Software Solutions LLC"
                     fill
                     sizes="(min-width: 1024px) 24rem, (min-width: 640px) 20rem, 16rem"
                     className="object-cover"
@@ -226,6 +226,11 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
 
             <div className="space-y-6 pt-8 sm:pt-12 lg:pt-14">
               <h1 className="w-full max-w-md space-y-2">
+                <span className="sr-only">
+                  {locale === "es"
+                    ? "Katia Henrriquez, Ingeniera de Software y Propietaria de Yisel Software Solutions LLC"
+                    : "Katia Henrriquez, Software Engineer and Owner of Yisel Software Solutions LLC"}
+                </span>
                 <span className="title-font block w-fit whitespace-nowrap bg-white/90 px-3 py-1.5 text-2xl font-semibold leading-tight text-[#ff5ca8] shadow-[0_8px_20px_rgba(37,65,52,0.12)] backdrop-blur-[1px] sm:px-4 sm:py-2 sm:text-4xl">
                   <TypingText
                     key={`hero-line-1-${titleAnimationKey}-${locale}`}
