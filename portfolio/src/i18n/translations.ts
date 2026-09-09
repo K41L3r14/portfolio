@@ -40,6 +40,7 @@ export type ServiceItemCopy = {
 
 export type ServicesCopy = {
   skillStackTitle: string;
+  skillStackDescription: string;
   servicesTitle: string;
   services: ServiceItemCopy[];
 };
@@ -209,32 +210,33 @@ export const translations: Record<Locale, PortfolioTranslation> = {
       ],
     },
     services: {
-      skillStackTitle: "My Skill Stack",
+      skillStackTitle: "Technologies Behind My Solutions",
+      skillStackDescription: "I use modern technologies to build fast, reliable, and scalable websites and software tailored to each project.",
       servicesTitle: "My Services",
       services: [
         {
           priority: "01",
-          title: "Full-Stack Web Development",
+          title: "Website & Web App Development",
           description:
-            "Build responsive web apps with Next.js, React, TypeScript, Node.js, and MySQL/Supabase.",
+            "Custom, responsive websites and web applications designed around your business, from simple professional sites to more advanced platforms with accounts, dashboards, forms, and databases.",
         },
         {
           priority: "02",
-          title: "AI Feature Integration",
+          title: "Custom Software Solutions",
           description:
-            "Add AI-powered workflows (chatbots, document parsing, semantic search) using OpenAI/LLM APIs.",
+            "Software built around the way your business actually works, including internal tools, client portals, workflow automation, and other custom functionality.",
         },
         {
           priority: "03",
-          title: "Backend API Development",
+          title: "Backend & Database Development",
           description:
-            "Design and build with Node.js and Express, plus auth, validation, and role-based access.",
+            "Secure backend systems, APIs, authentication, databases, and role-based access to power reliable applications behind the scenes.",
         },
         {
           priority: "04",
-          title: "UI Prototyping and Frontend Polish",
+          title: "AI & Automation Integration",
           description:
-            "Create fast, interactive prototypes and polished interfaces that are accessible, mobile-friendly, and ready for real users.",
+            "Add practical AI features such as intelligent assistants, document processing, semantic search, content workflows, and business automation.",
         },
       ],
     },
@@ -471,32 +473,33 @@ export const translations: Record<Locale, PortfolioTranslation> = {
       ],
     },
     services: {
-      skillStackTitle: "Mi Stack de Habilidades",
+      skillStackTitle: "Tecnologías detrás de mis soluciones",
+      skillStackDescription: "Utilizo tecnologías modernas para crear sitios web y software rápidos, confiables y escalables, adaptados a cada proyecto.",
       servicesTitle: "Mis Servicios",
       services: [
         {
           priority: "01",
-          title: "Desarrollo Web Full-Stack",
+          title: "Desarrollo de Sitios y Aplicaciones Web",
           description:
-            "Construyo aplicaciones web responsivas con Next.js, React, TypeScript, Node.js y MySQL/Supabase.",
+            "Sitios y aplicaciones web personalizados y adaptables a cualquier dispositivo, diseñados para tu negocio, desde sitios profesionales sencillos hasta plataformas más avanzadas con cuentas, paneles de control, formularios y bases de datos.",
         },
         {
           priority: "02",
-          title: "Integracion de Funciones con IA",
+          title: "Soluciones de Software a Medida",
           description:
-            "Integro flujos con IA (chatbots, procesamiento de documentos, busqueda semantica) usando APIs de OpenAI y otros LLMs.",
+            "Software creado en torno a la forma en que realmente funciona tu negocio, incluyendo herramientas internas, portales para clientes, automatización de flujos de trabajo y otras funcionalidades personalizadas.",
         },
         {
           priority: "03",
-          title: "Desarrollo de APIs Backend",
+          title: "Desarrollo Backend y de Bases de Datos",
           description:
-            "Diseno y desarrollo APIs con Node.js y Express, incluyendo autenticacion, validacion y control de acceso por roles.",
+            "Sistemas backend seguros, APIs, autenticación, bases de datos y acceso basado en roles para respaldar aplicaciones confiables detrás de escena.",
         },
         {
           priority: "04",
-          title: "Prototipado UI y Pulido Frontend",
+          title: "Integración de IA y Automatización",
           description:
-            "Creo prototipos rapidos e interfaces pulidas, accesibles y adaptadas a mobile, listas para usuarios reales.",
+            "Incorpora funciones prácticas de IA, como asistentes inteligentes, procesamiento de documentos, búsqueda semántica, flujos de trabajo de contenido y automatización empresarial.",
         },
       ],
     },

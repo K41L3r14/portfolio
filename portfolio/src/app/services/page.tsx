@@ -156,8 +156,11 @@ export default function ServicesPage() {
     <div className="w-full max-w-5xl space-y-8 text-center lg:text-left">
       <section className="space-y-5">
         <h3 className="title-font scrap-tape-title text-4xl text-[#c94841] sm:text-5xl">
-          My Skill Stack
+          Technologies Behind My Solutions
         </h3>
+        <p className="description-font text-base italic leading-7">
+          I use modern technologies to build fast, reliable, and scalable websites and software tailored to each project.
+        </p>
         <div
           ref={skillsGridRef}
           className="rounded-none border border-[#d3c8b6] bg-transparent p-4 shadow-lg sm:p-5"

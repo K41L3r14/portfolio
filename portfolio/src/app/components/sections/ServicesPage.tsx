@@ -4,10 +4,10 @@ import type { ServicesCopy } from "@/i18n/translations";
 type ServicesPageProps = { copy: ServicesCopy; locale: Locale };
 
 const skillGroups = [
-  { title: "Frontend Technologies", skills: ["React", "TypeScript", "Next.js", "HTML5", "CSS3", "Tailwind CSS", "Figma"] },
-  { title: "Backend & Scripting", skills: ["Python", "Java", "Node.js", "Express.js", ".NET C#"] },
-  { title: "Databases & Cloud", skills: ["MySQL", "Supabase", "Databricks"] },
-  { title: "Testing & Native Tools", skills: ["Git", "GitLab", "Jest", "JUnit", "Linux VM", "Unity", "OpenWeather API"] },
+  { title: "Web Development", skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
+  { title: "Backend Development", skills: ["Node.js", "Express.js", "Python", "C#/.NET"] },
+  { title: "Databases & Cloud", skills: ["MySQL", "Supabase", "PostgreSQL"] },
+  { title: "Development & Testing", skills: ["Git", "GitLab", "Jest", "JUnit"] },
 ];
 
 const serviceIcons = ["‹›", "✦", "▤", "▦"];
@@ -17,7 +17,7 @@ export default function ServicesPage({ copy, locale }: ServicesPageProps) {
   const localizedSkillGroups = skillGroups.map((group, index) => ({
     ...group,
     title: isSpanish
-      ? ["Tecnologías Frontend", "Backend y Scripting", "Bases de Datos y Cloud", "Pruebas y Herramientas"][index]
+      ? ["Desarrollo Web", "Desarrollo Backend", "Bases de Datos y Nube", "Desarrollo y Pruebas"][index]
       : group.title,
   }));
 
@@ -28,14 +28,13 @@ export default function ServicesPage({ copy, locale }: ServicesPageProps) {
           <div className="text-center">
             <p className="eyebrow">{isSpanish ? "Experiencia" : "Expertise"}</p>
             <h2 className="title-font mt-3 text-4xl sm:text-5xl">{copy.skillStackTitle}</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base italic leading-7 text-white/75">{copy.skillStackDescription}</p>
           </div>
           <div className="mt-12 grid gap-4 md:grid-cols-2">
             {localizedSkillGroups.map((group) => (
               <article key={group.title} className="rounded-2xl border border-[#413B6C]/25 bg-[#101426] p-6">
                 <h3 className="title-font text-xl text-[#B46781]">{group.title}</h3>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {group.skills.map((skill) => <span key={skill} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.64rem] font-medium text-white/75">{skill}</span>)}
-                </div>
+                <p className="mt-4 text-sm leading-7 text-white/75">{group.skills.join(" · ")}</p>
               </article>
             ))}
           </div>
@@ -53,7 +52,7 @@ export default function ServicesPage({ copy, locale }: ServicesPageProps) {
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f1eff6] text-sm font-bold text-[#413B6C]">{serviceIcons[index]}</span>
                   <span className="title-font text-2xl text-[#B46781]">{service.priority}</span>
                 </div>
-                <h3 className="mt-7 text-sm font-bold text-[#181525]">{service.title}</h3>
+                <h3 className="mt-7 text-xl font-bold leading-snug text-[#181525] sm:text-2xl">{service.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-[#736e82]">{service.description}</p>
               </article>
             ))}
