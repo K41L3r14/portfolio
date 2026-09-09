@@ -49,6 +49,8 @@ export type ProjectCopy = {
   stack: string;
   summary: string;
   technologies: string[];
+  website?: string;
+  status?: string;
   video?: string;
   slideshow?: string[];
 };
@@ -249,6 +251,22 @@ export const translations: Record<Locale, PortfolioTranslation> = {
         "No live demos for these yet, but these projects reflect my technical skills and hands-on experience.",
       otherProjectDotAria: "Go to",
       projects: [
+        {
+          title: "Templo Canaan Church Website",
+          stack: "Church Website · Under Development",
+          summary:
+            "A professional website for Templo Canaan designed to strengthen the church's online presence and make its information easier for the community to access. The website is live for review, but it is still actively under development, so its content, features, and visual details may continue to change.",
+          technologies: [
+            "Web Development",
+            "Responsive Design",
+            "UI/UX Design",
+            "Search Engine Optimization",
+            "Under Development",
+          ],
+          website: "https://templocanaan.org/",
+          status: "Under Development",
+          slideshow: ["/canaan/home-page.png"],
+        },
         {
           title: "Obserra",
           stack: "Audit Management Platform",
@@ -495,6 +513,22 @@ export const translations: Record<Locale, PortfolioTranslation> = {
         "Todavia no tienen demo en vivo, pero reflejan mis habilidades tecnicas y experiencia practica.",
       otherProjectDotAria: "Ir a",
       projects: [
+        {
+          title: "Sitio Web de Templo Canaan",
+          stack: "Sitio Web para Iglesia · En Desarrollo",
+          summary:
+            "Un sitio web profesional para Templo Canaan, diseñado para fortalecer la presencia en línea de la iglesia y facilitar el acceso de la comunidad a su información. El sitio está disponible para revisión, pero todavía se encuentra activamente en desarrollo, por lo que su contenido, funciones y detalles visuales pueden seguir cambiando.",
+          technologies: [
+            "Desarrollo Web",
+            "Diseño Responsivo",
+            "Diseño UI/UX",
+            "Optimización para Buscadores",
+            "En Desarrollo",
+          ],
+          website: "https://templocanaan.org/",
+          status: "En Desarrollo",
+          slideshow: ["/canaan/home-page.png"],
+        },
         {
           title: "Obserra",
           stack: "Plataforma de Gestion de Auditorias",

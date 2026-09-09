@@ -105,7 +105,21 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-6 text-white/75">
             {isSpanish ? "Hablemos de tus metas de software, sitio web o plataforma personalizada y creemos un plan claro para llevarlas a producción." : "Let’s discuss your software goals, custom website, or specialized platform and create a clear path from concept to production."}
           </p>
-          <a href="#contactMe" className="brand-focus-ring mt-7 inline-flex rounded-full bg-[#080b16] px-6 py-3 text-xs font-semibold text-white transition hover:bg-white hover:text-[#413B6C]">{isSpanish ? "Ponte en contacto" : "Get in touch"}</a>
+          <ol className="mx-auto mt-10 grid max-w-4xl gap-4 text-left md:grid-cols-3">
+            {[
+              isSpanish ? "Comparte tu visión" : "Share Your Vision",
+              isSpanish ? "Dale forma al plan" : "Shape the Plan",
+              isSpanish ? "Hazla realidad" : "Bring It to Life",
+            ].map((step, index) => (
+              <li key={step} className="relative flex min-h-32 items-center gap-4 rounded-2xl border border-white/20 bg-[#080b16]/25 px-5 py-6 backdrop-blur-sm">
+                <span className="title-font flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-xl text-[#413B6C]">{index + 1}</span>
+                <span className="text-sm font-semibold leading-6 text-white">{step}</span>
+              </li>
+            ))}
+          </ol>
+          <a href="#contactMe" className="brand-focus-ring mt-9 inline-flex text-sm font-semibold text-white transition hover:text-white/75 sm:text-base">
+            {isSpanish ? "¿Lista para comenzar? Cuéntame sobre tu proyecto abajo ↓" : "Ready to get started? Tell me about your project below ↓"}
+          </a>
         </div>
       </section>
 
