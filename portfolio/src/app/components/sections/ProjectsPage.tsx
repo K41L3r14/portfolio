@@ -1,308 +1,99 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
-import type { OtherProjectCopy, ProjectCopy, ProjectsCopy } from "@/i18n/translations";
+import type { Locale } from "@/i18n/config";
+import type { ProjectsCopy } from "@/i18n/translations";
 
-type ProjectsPageProps = {
-  copy: ProjectsCopy;
-};
+type ProjectsPageProps = { copy: ProjectsCopy; locale: Locale };
+type DisplayProject = { title: string; subtitle: string; summary: string; tags: string[]; media?: string; mediaType: "image" | "video" };
 
-type ExplorerProject = {
-  title: string;
-  subtitle: string;
-  summary: string;
-  tags: string[];
-  media: Array<{ type: "video" | "image"; src: string }>;
-};
+export default function ProjectsPage({ copy, locale }: ProjectsPageProps) {
+  const isSpanish = locale === "es";
+  const projects = useMemo<DisplayProject[]>(() => [
+    ...copy.projects.map((project) => ({
+      title: project.title,
+      subtitle: project.stack,
+      summary: project.summary,
+      tags: project.technologies,
+      media: project.slideshow?.[0] ?? project.video,
+      mediaType: project.slideshow?.[0] ? "image" as const : "video" as const,
+    })),
+    ...copy.otherProjects.map((project) => ({
+      title: project.title,
+      subtitle: isSpanish ? "Proyecto adicional" : "Additional project",
+      summary: project.summary,
+      tags: project.skills,
+      media: project.slideshow?.[0] ?? project.video,
+      mediaType: project.slideshow?.[0] ? "image" as const : "video" as const,
+    })),
+  ], [copy.otherProjects, copy.projects, isSpanish]);
 
-function toExplorerProject(project: ProjectCopy): ExplorerProject {
-  return {
-    title: project.title,
-    subtitle: project.stack,
-    summary: project.summary,
-    tags: project.technologies,
-    media: [
-      ...(project.video ? [{ type: "video" as const, src: project.video }] : []),
-      ...((project.slideshow ?? []).map((slide) => ({ type: "image" as const, src: slide }))),
-    ],
-  };
-}
-
-function toExplorerOtherProject(project: OtherProjectCopy): ExplorerProject {
-  return {
-    title: project.title,
-    subtitle: "Additional Project",
-    summary: project.summary,
-    tags: project.skills,
-    media: [
-      ...(project.video ? [{ type: "video" as const, src: project.video }] : []),
-      ...((project.slideshow ?? []).map((slide) => ({ type: "image" as const, src: slide }))),
-    ],
-  };
-}
-
-export default function ProjectsPage({ copy }: ProjectsPageProps) {
-  const allProjects = useMemo(
-    () => [
-      ...copy.projects.map(toExplorerProject),
-      ...copy.otherProjects.map(toExplorerOtherProject),
-    ],
-    [copy.otherProjects, copy.projects]
-  );
-
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
-  const [isMediaExpanded, setIsMediaExpanded] = useState(false);
-
-  useEffect(() => {
-    setActiveMediaIndex(0);
-    setIsMediaExpanded(false);
-  }, [activeProjectIndex]);
-
-  const activeProject = allProjects[activeProjectIndex] ?? allProjects[0];
-  const mediaCount = activeProject?.media.length ?? 0;
-  const hasMedia = mediaCount > 0;
-  const safeMediaIndex = hasMedia
-    ? Math.min(activeMediaIndex, Math.max(0, mediaCount - 1))
-    : 0;
-
-  const showPreviousMedia = () => {
-    setActiveMediaIndex((prev) =>
-      prev === 0 ? mediaCount - 1 : prev - 1
-    );
-  };
-
-  const showNextMedia = () => {
-    setActiveMediaIndex((prev) =>
-      prev === mediaCount - 1 ? 0 : prev + 1
-    );
-  };
-
-  useEffect(() => {
-    if (!isMediaExpanded) {
-      return;
-    }
-
-    const handleKeydown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft" && mediaCount > 1) {
-        event.preventDefault();
-        setActiveMediaIndex((prev) => (prev === 0 ? mediaCount - 1 : prev - 1));
-      }
-
-      if (event.key === "ArrowRight" && mediaCount > 1) {
-        event.preventDefault();
-        setActiveMediaIndex((prev) => (prev === mediaCount - 1 ? 0 : prev + 1));
-      }
-
-      if (event.key === "Escape") {
-        event.preventDefault();
-        setIsMediaExpanded(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeydown);
-    return () => {
-      window.removeEventListener("keydown", handleKeydown);
-    };
-  }, [isMediaExpanded, mediaCount]);
-
-  if (!activeProject) {
-    return null;
-  }
+  const featured = [projects[0], projects[3]].filter(Boolean);
+  const [selectedTitle, setSelectedTitle] = useState<string | null>(null);
+  const selected = projects.find((project) => project.title === selectedTitle);
 
   return (
-    <div className="w-full max-w-7xl space-y-8 text-left">
-      <h2 className="title-font scrap-tape-title mx-auto text-center text-5xl text-[#ff5ca8] sm:text-6xl lg:mx-0 lg:text-left">
-        {copy.sectionTitle}
-      </h2>
+    <section id="projects" className="bg-[#080b16] py-20 text-white sm:py-28">
+      <div className="site-shell">
+        <div className="text-center">
+          <p className="eyebrow">{isSpanish ? "Portafolio" : "Portfolio"}</p>
+          <h2 className="title-font mt-3 text-4xl sm:text-5xl">{isSpanish ? "Trabajo destacado" : "Featured work"}</h2>
+        </div>
 
-      <div className="relative grid items-start gap-3 lg:gap-0 lg:grid-cols-[minmax(0,1fr)_12.5rem]">
-        <section className="scrapbook-page rounded-3xl p-5 sm:p-7">
-          {hasMedia ? (
-            <div className="mb-6 space-y-3">
-              <button
-                type="button"
-                onClick={() => setIsMediaExpanded(true)}
-                className="relative mx-auto block aspect-[16/7] w-full overflow-hidden rounded-2xl border border-[#8ab5b2] bg-[#e3f1ef] text-left shadow-[0_12px_26px_rgba(31,27,23,0.12)]"
-              >
-                {activeProject.media[safeMediaIndex].type === "video" ? (
-                  <video className="h-full w-full" controls preload="metadata">
-                    <source
-                      src={encodeURI(activeProject.media[safeMediaIndex].src)}
-                      type="video/mp4"
-                    />
-                    {copy.videoFallback}
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          {featured.map((project) => (
+            <article key={project.title} className="overflow-hidden rounded-3xl border border-[#413B6C]/28 bg-[#101426] transition hover:border-[#B46781]/50">
+              <div className="relative aspect-[16/8] overflow-hidden bg-[#f1eff6]">
+                {project.mediaType === "video" && project.media ? (
+                  <video className="h-full w-full object-cover" muted playsInline preload="metadata">
+                    <source src={encodeURI(project.media)} type="video/mp4" />
                   </video>
+                ) : project.media ? (
+                  <Image src={encodeURI(project.media)} alt={`${project.title} project preview`} fill sizes="(min-width: 1024px) 36rem, 95vw" className="object-contain p-5" />
                 ) : (
-                  <Image
-                    src={encodeURI(activeProject.media[safeMediaIndex].src)}
-                    alt={`${activeProject.title} media ${safeMediaIndex + 1}`}
-                    fill
-                    sizes="(min-width: 1280px) 980px, (min-width: 1024px) 78vw, (min-width: 640px) 90vw, 96vw"
-                    quality={100}
-                    className="object-contain"
-                  />
+                  <div className="flex h-full items-center justify-center text-sm text-[#413B6C]">{project.title}</div>
                 )}
-                <span className="pointer-events-none absolute right-3 top-3 rounded bg-black/30 px-2 py-1 text-[0.62rem] uppercase tracking-[0.16em] text-white">
-                  Click to expand
-                </span>
-              </button>
-              {activeProject.media.length > 1 && (
-                <div className="flex items-center justify-between gap-2">
-                  <button
-                    type="button"
-                    onClick={showPreviousMedia}
-                    className="rounded-lg border border-[#10363b] px-3 py-1.5 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[#10363b] hover:text-[#e7f4f2]"
-                  >
-                    {copy.prevLabel}
-                  </button>
-                  <p className="text-sm uppercase tracking-[0.2em] text-[#1d555b]">
-                    {safeMediaIndex + 1} / {activeProject.media.length}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={showNextMedia}
-                    className="rounded-lg border border-[#10363b] px-3 py-1.5 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[#10363b] hover:text-[#e7f4f2]"
-                  >
-                    {copy.nextLabel}
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : null}
+              </div>
+              <div className="p-7">
+                <p className="text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#B46781]">{project.subtitle}</p>
+                <h3 className="title-font mt-3 text-3xl">{project.title}</h3>
+                <p className="project-card-summary mt-3 text-sm leading-6 text-white/55">{project.summary}</p>
+                <button type="button" onClick={() => setSelectedTitle(selectedTitle === project.title ? null : project.title)} className="brand-focus-ring mt-6 inline-flex items-center gap-2 text-xs font-semibold text-white transition hover:text-[#B46781]">
+                  {selectedTitle === project.title ? (isSpanish ? "Cerrar detalles" : "Close details") : (isSpanish ? "Ver caso de estudio" : "View case study")}
+                  <span className="text-[#B46781]">→</span>
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
 
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#175f66]">
-            {activeProject.subtitle}
-          </p>
-          <h3 className="title-font mt-2 text-2xl font-semibold text-[#ff5ca8] sm:text-3xl">
-            {activeProject.title}
-          </h3>
-          <p className="description-font mt-4 text-base leading-relaxed text-[#12363b] sm:text-lg">
-            {activeProject.summary}
-          </p>
-          <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-[#1d555b]">
-            {copy.technologiesLabel}
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2.5">
-            {activeProject.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-[#8ab5b2] bg-[#e3f1ef] px-3 py-1.5 text-[0.65rem] uppercase tracking-[0.14em] text-[#1d555b]"
-              >
-                {tag}
-              </span>
+        {selected && (
+          <article className="mt-6 rounded-3xl border border-[#B46781]/35 bg-[#101426] p-7 sm:p-9">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="eyebrow">{selected.subtitle}</p>
+                <h3 className="title-font mt-2 text-3xl sm:text-4xl">{selected.title}</h3>
+              </div>
+              <button type="button" onClick={() => setSelectedTitle(null)} className="brand-focus-ring self-start rounded-full border border-white/15 px-4 py-2 text-xs text-white/65 hover:text-white">{isSpanish ? "Cerrar" : "Close"}</button>
+            </div>
+            <p className="mt-6 max-w-4xl text-sm leading-7 text-white/65 sm:text-base">{selected.summary}</p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {selected.tags.map((tag) => <span key={tag} className="rounded-full border border-[#413B6C]/35 bg-[#413B6C]/15 px-3 py-1.5 text-[0.65rem] text-white/70">{tag}</span>)}
+            </div>
+          </article>
+        )}
+
+        <div className="mt-12 border-t border-white/10 pt-8">
+          <p className="text-[0.65rem] font-bold uppercase tracking-[0.16em] text-white/35">{isSpanish ? "Más proyectos" : "More projects"}</p>
+          <div className="mt-4 flex flex-wrap gap-4">
+            {projects.filter((project) => !featured.some((item) => item.title === project.title)).map((project) => (
+              <button key={project.title} type="button" onClick={() => setSelectedTitle(project.title)} className="brand-focus-ring border-b border-white/15 pb-1 text-left text-sm text-white/60 transition hover:border-[#B46781] hover:text-white">{project.title}</button>
             ))}
           </div>
-        </section>
-
-        <aside className="projects-side-tabs no-scrollbar flex max-h-[48rem] gap-2 overflow-y-auto pb-1 lg:flex-col lg:pt-4">
-          {allProjects.map((project, index) => {
-            const isActive = index === activeProjectIndex;
-            return (
-              <button
-                key={project.title}
-                type="button"
-                onClick={() => setActiveProjectIndex(index)}
-                className={`sticky-tab projects-side-tab group min-w-[11rem] shrink-0 rounded-xl px-3 py-2 text-left transition-all duration-200 ${
-                  isActive
-                    ? "is-active border-[#f29bbd]/65 bg-[rgba(242,155,189,0.72)] shadow-[0_10px_18px_rgba(108,53,83,0.22)]"
-                    : "bg-[rgba(250,196,218,0.45)] hover:bg-[rgba(242,155,189,0.58)]"
-                }`}
-              >
-                <p className="projects-side-tab-title title-font truncate text-sm text-[#1d555b]">
-                  {project.title}
-                </p>
-                <p className="projects-side-tab-subtitle description-font mt-0.5 truncate text-[0.58rem] uppercase tracking-[0.16em] text-[#1d555b]">
-                  {project.subtitle}
-                </p>
-              </button>
-            );
-          })}
-        </aside>
-      </div>
-
-      {isMediaExpanded && hasMedia && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-3 sm:p-6"
-          onClick={() => setIsMediaExpanded(false)}
-        >
-          <div
-            className="relative w-full max-w-[96vw] overflow-hidden rounded-2xl border border-white/25 bg-black shadow-[0_24px_50px_rgba(0,0,0,0.45)]"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div
-              className="relative aspect-[16/9] w-full"
-              onClick={() => setIsMediaExpanded(false)}
-            >
-              {activeProject.media[safeMediaIndex].type === "video" ? (
-                <video
-                  className="h-full w-full"
-                  controls
-                  autoPlay
-                  preload="metadata"
-                  onClick={(event) => event.stopPropagation()}
-                >
-                  <source
-                    src={encodeURI(activeProject.media[safeMediaIndex].src)}
-                    type="video/mp4"
-                  />
-                  {copy.videoFallback}
-                </video>
-              ) : (
-                <Image
-                  src={encodeURI(activeProject.media[safeMediaIndex].src)}
-                  alt={`${activeProject.title} media ${safeMediaIndex + 1}`}
-                  fill
-                  sizes="96vw"
-                  quality={100}
-                  className="object-contain"
-                />
-              )}
-
-              {activeProject.media.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={showPreviousMedia}
-                    aria-label={copy.prevLabel}
-                    onMouseDown={(event) => event.stopPropagation()}
-                    className="absolute left-2 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/20 text-3xl text-white transition-colors hover:bg-black/35"
-                  >
-                    ‹
-                  </button>
-                  <button
-                    type="button"
-                    onClick={showNextMedia}
-                    aria-label={copy.nextLabel}
-                    onMouseDown={(event) => event.stopPropagation()}
-                    className="absolute right-2 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/20 text-3xl text-white transition-colors hover:bg-black/35"
-                  >
-                    ›
-                  </button>
-                </>
-              )}
-
-              <button
-                type="button"
-                onClick={() => setIsMediaExpanded(false)}
-                onMouseDown={(event) => event.stopPropagation()}
-                className="absolute right-3 top-3 rounded bg-black/35 px-3 py-1 text-xs uppercase tracking-[0.16em] text-white transition-colors hover:bg-black/55"
-              >
-                Close
-              </button>
-            </div>
-            <div className="flex items-center justify-between gap-2 border-t border-white/15 bg-black/55 px-4 py-2 text-xs uppercase tracking-[0.18em] text-white/90">
-              <span>{activeProject.title}</span>
-              <span>
-                {safeMediaIndex + 1} / {activeProject.media.length}
-              </span>
-            </div>
-          </div>
         </div>
-      )}
-
-    </div>
+      </div>
+    </section>
   );
 }

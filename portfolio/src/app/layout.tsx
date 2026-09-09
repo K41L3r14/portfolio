@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Bodoni_Moda, Geist_Mono, Inter } from "next/font/google";
 import { COMPANY_NAME, PERSON_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
@@ -8,9 +8,10 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -74,7 +75,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${bodoni.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
