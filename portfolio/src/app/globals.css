@@ -73,7 +73,7 @@ a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
 .brand-logo-crop img {
   object-fit: cover;
-  object-position: center 47%;
+  object-position: center 54%;
 }
 
 .brand-focus-ring:focus-visible {

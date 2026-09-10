@@ -26,8 +26,8 @@ export default function ProjectsPage({ copy, locale }: ProjectsPageProps) {
       subtitle: project.stack,
       summary: project.summary,
       tags: project.technologies,
-      media: project.slideshow?.[0] ?? project.video,
-      mediaType: project.slideshow?.[0] ? "image" as const : "video" as const,
+      media: project.video ?? project.slideshow?.[0],
+      mediaType: project.video ? "video" as const : "image" as const,
       website: project.website,
       status: project.status,
     })),
@@ -36,8 +36,8 @@ export default function ProjectsPage({ copy, locale }: ProjectsPageProps) {
       subtitle: isSpanish ? "Proyecto adicional" : "Additional project",
       summary: project.summary,
       tags: project.skills,
-      media: project.slideshow?.[0] ?? project.video,
-      mediaType: project.slideshow?.[0] ? "image" as const : "video" as const,
+      media: project.video ?? project.slideshow?.[0],
+      mediaType: project.video ? "video" as const : "image" as const,
     })),
   ], [copy.otherProjects, copy.projects, isSpanish]);
 
@@ -81,6 +81,7 @@ export default function ProjectsPage({ copy, locale }: ProjectsPageProps) {
           aria-label={isSpanish ? "Todos los proyectos destacados" : "All featured projects"}
           tabIndex={0}
           onKeyDown={(event) => {
+            if (event.target !== event.currentTarget) return;
             if (event.key === "ArrowLeft") scrollProjects(-1);
             if (event.key === "ArrowRight") scrollProjects(1);
           }}
@@ -95,8 +96,15 @@ export default function ProjectsPage({ copy, locale }: ProjectsPageProps) {
                   </span>
                 )}
                 {project.mediaType === "video" && project.media ? (
-                  <video className="h-full w-full object-cover" muted playsInline preload="metadata">
+                  <video
+                    className="h-full w-full bg-black object-contain"
+                    controls
+                    playsInline
+                    preload="metadata"
+                    aria-label={`${project.title} ${isSpanish ? "demostración" : "demo"}`}
+                  >
                     <source src={encodeURI(project.media)} type="video/mp4" />
+                    {copy.videoFallback}
                   </video>
                 ) : project.media ? (
                   <Image

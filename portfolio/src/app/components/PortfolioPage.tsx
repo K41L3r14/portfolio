@@ -32,7 +32,7 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
         <div className="site-shell flex min-h-20 items-center justify-between gap-5 py-1">
           <a href="#home" className="brand-focus-ring flex items-center" aria-label="Yisel Software Solutions home">
             <span className="brand-logo-crop hidden sm:block">
-              <Image src="/yisel-logo.png" alt="Yisel Software Solutions" fill sizes="176px" priority />
+              <Image src="/bnw-Logo.png" alt="Yisel Software Solutions" fill sizes="192px" priority />
             </span>
             <span className="title-font text-xl text-white sm:hidden">Katia Henrriquez</span>
           </a>
@@ -128,7 +128,7 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
       <footer className="bg-[#080b16] text-white">
         <div className="site-shell grid gap-10 border-b border-white/10 py-14 md:grid-cols-[1fr_auto_auto]">
           <div>
-            <div className="brand-logo-crop"><Image src="/yisel-logo.png" alt="Yisel Software Solutions" fill sizes="176px" /></div>
+            <div className="brand-logo-crop"><Image src="/bnw-Logo.png" alt="Yisel Software Solutions" fill sizes="192px" /></div>
             <p className="mt-2 max-w-xs text-xs leading-5 text-white/45">{isSpanish ? "Software profesional creado con intención." : "Professional software, thoughtfully created."}</p>
           </div>
           <div>
