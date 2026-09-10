@@ -75,7 +75,7 @@ export default function PortfolioPage({ locale }: PortfolioPageProps) {
             <p className="mt-7 break-words text-sm font-medium leading-6 text-[#B46781]">{copy.hero.role}</p>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-white/60 sm:text-base">{copy.hero.intro}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="mailto:henrriquezkatia7@gmail.com" className="brand-focus-ring rounded-full bg-[#B46781] px-6 py-3 text-xs font-semibold text-white transition hover:bg-[#413B6C]">{copy.hero.emailCta}</a>
+              <a href="mailto:yiselsoftwaresolutions@createwithkatia.com" className="brand-focus-ring rounded-full bg-[#B46781] px-6 py-3 text-xs font-semibold text-white transition hover:bg-[#413B6C]">{copy.hero.emailCta}</a>
               <a href="/My_resume.pdf" target="_blank" rel="noreferrer" className="brand-focus-ring rounded-full border border-white/18 px-6 py-3 text-xs font-semibold text-white transition hover:border-[#B46781] hover:text-[#B46781]">{copy.hero.resumeCta}</a>
             </div>
           </div>
