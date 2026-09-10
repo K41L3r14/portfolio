@@ -395,8 +395,8 @@ export const translations: Record<Locale, PortfolioTranslation> = {
       contactMethods: [
         {
           label: "Email",
-          value: "henrriquezkatia7@gmail.com",
-          href: "mailto:henrriquezkatia7@gmail.com",
+          value: "yiselsoftwaresolutions@createwithkatia.com",
+          href: "mailto:yiselsoftwaresolutions@createwithkatia.com",
           icon: "/gmail.png",
         },
         {
@@ -658,8 +658,8 @@ export const translations: Record<Locale, PortfolioTranslation> = {
       contactMethods: [
         {
           label: "Correo",
-          value: "henrriquezkatia7@gmail.com",
-          href: "mailto:henrriquezkatia7@gmail.com",
+          value: "yiselsoftwaresolutions@createwithkatia.com",
+          href: "mailto:yiselsoftwaresolutions@createwithkatia.com",
           icon: "/gmail.png",
         },
         {
