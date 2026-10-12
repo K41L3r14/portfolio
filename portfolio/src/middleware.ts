@@ -4,22 +4,6 @@ import { NextResponse } from "next/server";
 import { defaultLocale } from "@/i18n/config";
 import { DEV_HUB_SESSION_COOKIE } from "@/lib/devHubAuth";
 
-function getPreferredLocale(request: NextRequest) {
-  const acceptLanguage = request.headers.get("accept-language");
-
-  if (!acceptLanguage) {
-    return defaultLocale;
-  }
-
-  const primaryLanguage = acceptLanguage.split(",")[0]?.trim().toLowerCase() ?? "";
-
-  if (primaryLanguage.startsWith("es")) {
-    return "es";
-  }
-
-  return defaultLocale;
-}
-
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
@@ -49,11 +33,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const locale = getPreferredLocale(request);
   const redirectUrl = request.nextUrl.clone();
-  redirectUrl.pathname = `/${locale}`;
+  redirectUrl.pathname = `/${defaultLocale}`;
 
-  return NextResponse.redirect(redirectUrl);
+  // Keep one permanent homepage destination to reinforce the canonical URL.
+  return NextResponse.redirect(redirectUrl, 308);
 }
 
 export const config = {
