@@ -14,7 +14,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#10363b",
     icons: [
       {
-        src: "/icon.png",
+        src: "/Yisel-solo-logo.png",
         sizes: "any",
         type: "image/png",
       },

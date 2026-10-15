@@ -60,9 +60,9 @@ export const metadata: Metadata = {
     images: ["/profile.png"],
   },
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: "/Yisel-solo-logo.png",
+    shortcut: "/Yisel-solo-logo.png",
+    apple: "/Yisel-solo-logo.png",
   },
 };
 
